@@ -3,39 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brand OrbitX Dashboard</title>
+    <title>BrandOrbitX | Ultra-Advanced Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #e5e7eb; }
-        
-        /* Header Adjusted */
-        .header { text-align: center; padding: 40px 20px; background: linear-gradient(135deg, #1e40af, #7c3aed); border-bottom: 3px solid #00d9ff; }
-        
-        /* Updated Video Logo Size (Medium-Large) */
-        .header-logo {
-            width: 280px; 
-            height: 280px; 
-            object-fit: cover; 
-            border-radius: 30px; 
-            border: 4px solid #00d9ff; 
-            box-shadow: 0 15px 40px rgba(0, 217, 255, 0.5); 
-        }
+        :root { --glow: #00d9ff; --bg: #0f172a; --card: rgba(30, 41, 59, 0.5); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: var(--bg); color: #e5e7eb; }
+
+        /* Advanced Header */
+        .header { text-align: center; padding: 40px 20px; background: radial-gradient(circle, #1e3a8a 0%, #0f172a 80%); border-bottom: 2px solid var(--glow); }
+        .header-logo { width: 280px; height: 280px; object-fit: cover; border-radius: 30px; border: 3px solid var(--glow); box-shadow: 0 0 30px rgba(0, 217, 255, 0.4); margin-bottom: 20px; }
 
         /* Menu */
         .menu { display: flex; justify-content: center; gap: 20px; padding: 40px; flex-wrap: wrap; }
-        .menu button { padding: 15px 30px; border: none; cursor: pointer; font-weight: bold; border-radius: 12px; background: #00d9ff; color: #0f172a; transition: 0.3s; text-transform: uppercase; }
-        .menu button:hover { transform: scale(1.05); background: #fff; }
+        .menu button { padding: 15px 30px; border: 1px solid var(--glow); cursor: pointer; font-weight: bold; border-radius: 12px; background: transparent; color: var(--glow); transition: 0.4s; text-transform: uppercase; }
+        .menu button:hover { background: var(--glow); color: var(--bg); box-shadow: 0 0 20px var(--glow); }
 
-        /* Grid */
-        .grid { display: none; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 40px; max-width: 1200px; margin: auto; }
-        .grid.active { display: grid; }
-        .item { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        /* Grid System */
+        .grid { display: none; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; padding: 40px; max-width: 1300px; margin: auto; }
+        .grid.active { display: grid; animation: fadeIn 0.5s ease; }
+        .item { position: relative; background: var(--card); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden; transition: 0.4s; }
+        .item:hover { border-color: var(--glow); transform: translateY(-10px); }
         .item video, .item img { width: 100%; height: 280px; object-fit: cover; display: block; }
-        .badge { position: absolute; top: 10px; right: 10px; background: #00d9ff; color: #000; padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; font-weight: bold; }
-        
-        .contact { text-align: center; padding: 60px; background: #111827; }
-        .contact button { padding: 18px 50px; background: #00d9ff; border: none; font-weight: bold; cursor: pointer; border-radius: 12px; font-size: 1.2rem; }
+        .badge { position: absolute; top: 10px; right: 10px; background: var(--glow); color: #000; padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; font-weight: bold; z-index: 10; }
+
+        /* Contact */
+        .contact { text-align: center; padding: 80px; background: #020617; border-top: 1px solid var(--glow); }
+        .contact button { padding: 20px 60px; background: linear-gradient(135deg, #00d9ff, #0077ff); border: none; font-weight: bold; cursor: pointer; border-radius: 50px; font-size: 1.2rem; transition: 0.4s; }
+        .contact button:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--glow); }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -80,16 +77,15 @@
 </div>
 
 <div class="contact">
-    <h2>Ready to Launch Your Dream Website?</h2>
+    <h2>Ready to launch your dream website?</h2>
+    <br>
     <button onclick="goInsta()"><i class="fas fa-envelope"></i> Contact Now</button>
 </div>
 
 <script>
     function show(type) {
-        document.getElementById("basic").classList.remove("active");
-        document.getElementById("normal").classList.remove("active");
-        document.getElementById("premium").classList.remove("active");
-        document.getElementById(type).classList.add("active");
+        document.querySelectorAll('.grid').forEach(g => g.classList.remove('active'));
+        document.getElementById(type).classList.add('active');
     }
     function goInsta() { window.open("https://www.instagram.com/brand_orbitx", "_blank"); }
 </script>
