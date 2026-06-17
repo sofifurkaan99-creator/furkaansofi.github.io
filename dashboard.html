@@ -10,6 +10,7 @@
 
     /* HEADER */
     .header { text-align:center; padding:30px; background:linear-gradient(135deg,#2563eb,#7c3aed); }
+    .logo { width:120px; height:120px; border-radius:50%; margin-bottom:15px; object-fit:cover; border:3px solid white; }
 
     /* MENU */
     .menu { display:flex; justify-content:center; gap:15px; padding:20px; flex-wrap:wrap; }
@@ -17,14 +18,11 @@
     .menu button:hover { background:white; transform:scale(1.05); }
 
     /* HIDDEN GRID */
-    .grid { display:none; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px; padding:30px; max-width:1100px; margin:auto; opacity:0; transform:scale(0.95); transition:0.4s ease; }
-
-    /* ACTIVE */
-    .active { display:grid; opacity:1; transform:scale(1); }
+    .grid { display:none; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px; padding:30px; max-width:1100px; margin:auto; }
+    .active { display:grid; }
 
     /* IMAGES & VIDEOS */
-    .grid img, .grid video { width:100%; height:260px; object-fit:cover; border-radius:15px; cursor:pointer; transition:0.3s; }
-    .grid img:hover, .grid video:hover { transform:scale(1.05); }
+    .grid img, .grid video { width:100%; height:260px; object-fit:cover; border-radius:15px; }
 
     /* CONTACT */
     .contact { text-align:center; padding:30px; background:#111827; }
@@ -35,54 +33,46 @@
 <body>
 
 <div class="header">
-<h1>OrbitX Dashboard</h1>
-<p>Select your website package</p>
+    <img src="images/logo.png" alt="Brand Logo" class="logo">
+    <h1>OrbitX Dashboard</h1>
+    <p>Select your website package</p>
 </div>
 
 <div class="menu">
-<button onclick="show('basic')">Basic Website</button>
-<button onclick="show('normal')">Normal Website</button>
-<button onclick="show('premium')">Premium Website</button>
+    <button onclick="show('basic')">Basic Website</button>
+    <button onclick="show('normal')">Normal Website</button>
+    <button onclick="show('premium')">Premium Website</button>
 </div>
 
-<div id="basic" class="grid">
+<div id="basic" class="grid active">
     <video controls><source src="images/basic_video.mp4" type="video/mp4"></video>
-    <img src="images/basic1.jpg">
-    <img src="images/basic2.jpg">
-    <img src="images/basic3.jpg">
 </div>
 
 <div id="normal" class="grid">
     <video controls><source src="images/normal_video.mp4" type="video/mp4"></video>
-    <img src="images/normal1.jpg">
-    <img src="images/normal2.jpg">
-    <img src="images/normal3.jpg">
 </div>
 
 <div id="premium" class="grid">
     <video controls><source src="images/premium_video.mp4" type="video/mp4"></video>
-    <img src="images/premium1.jpg">
-    <img src="images/premium2.jpg">
-    <img src="images/premium3.jpg">
 </div>
 
 <div class="contact">
-<h2>Contact to Get Your Website</h2>
-<button onclick="goInsta()">Contact Now</button>
+    <h2>Contact to Get Your Website</h2>
+    <button onclick="goInsta()">Contact Now</button>
 </div>
 
 <script>
-function show(type){
-    document.getElementById("basic").classList.remove("active");
-    document.getElementById("normal").classList.remove("active");
-    document.getElementById("premium").classList.remove("active");
-    document.getElementById(type).classList.add("active");
-}
-
-function goInsta(){
-    window.open("https://www.instagram.com/brand_orbitx?igsh=b24wMzNtNjJhOWNv","_blank");
-}
+    function show(type){
+        document.getElementById("basic").classList.remove("active");
+        document.getElementById("normal").classList.remove("active");
+        document.getElementById("premium").classList.remove("active");
+        document.getElementById(type).classList.add("active");
+    }
+    function goInsta(){
+        window.open("https://www.instagram.com/brand_orbitx","_blank");
+    }
 </script>
 
 </body>
 </html>
+
