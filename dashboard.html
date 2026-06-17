@@ -7,24 +7,18 @@
 
 <style>
     body { margin:0; font-family:Arial; background:#0f172a; color:white; }
-
-    /* HEADER */
     .header { text-align:center; padding:30px; background:linear-gradient(135deg,#2563eb,#7c3aed); }
-    .logo { width:120px; height:120px; border-radius:50%; margin-bottom:15px; object-fit:cover; border:3px solid white; }
-
-    /* MENU */
+    .header img { width:200px; height:auto; border-radius:10px; margin-bottom:10px; }
+    
     .menu { display:flex; justify-content:center; gap:15px; padding:20px; flex-wrap:wrap; }
     .menu button { padding:12px 18px; border:none; cursor:pointer; font-weight:bold; border-radius:8px; background:#00e5ff; transition:0.3s; }
     .menu button:hover { background:white; transform:scale(1.05); }
 
-    /* HIDDEN GRID */
     .grid { display:none; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px; padding:30px; max-width:1100px; margin:auto; }
     .active { display:grid; }
 
-    /* IMAGES & VIDEOS */
     .grid img, .grid video { width:100%; height:260px; object-fit:cover; border-radius:15px; }
 
-    /* CONTACT */
     .contact { text-align:center; padding:30px; background:#111827; }
     .contact button { padding:12px 20px; background:#00e5ff; border:none; font-weight:bold; cursor:pointer; border-radius:8px; }
 </style>
@@ -33,9 +27,7 @@
 <body>
 
 <div class="header">
-    <img src="images/logo.png" alt="Brand Logo" class="logo">
-    <h1>OrbitX Dashboard</h1>
-    <p>Select your website package</p>
+    <img src="images/logo.png" alt="Brand Poster"> <h1>OrbitX Dashboard</h1>
 </div>
 
 <div class="menu">
@@ -45,19 +37,34 @@
 </div>
 
 <div id="basic" class="grid active">
-    <video controls><source src="images/basic_video.mp4" type="video/mp4"></video>
+    <video controls><source src="images/basic_v1.mp4"></video>
+    <video controls><source src="images/basic_v2.mp4"></video>
+    <video controls><source src="images/basic_v3.mp4"></video>
+    <img src="images/basic_p1.jpg">
+    <img src="images/basic_p2.jpg">
+    <img src="images/basic_p3.jpg">
 </div>
 
 <div id="normal" class="grid">
-    <video controls><source src="images/normal_video.mp4" type="video/mp4"></video>
+    <video controls><source src="images/normal_v1.mp4"></video>
+    <video controls><source src="images/normal_v2.mp4"></video>
+    <video controls><source src="images/normal_v3.mp4"></video>
+    <img src="images/normal_p1.jpg">
+    <img src="images/normal_p2.jpg">
+    <img src="images/normal_p3.jpg">
 </div>
 
 <div id="premium" class="grid">
-    <video controls><source src="images/premium_video.mp4" type="video/mp4"></video>
+    <video controls><source src="images/premium_v1.mp4"></video>
+    <video controls><source src="images/premium_v2.mp4"></video>
+    <video controls><source src="images/premium_v3.mp4"></video>
+    <img src="images/premium_p1.jpg">
+    <img src="images/premium_p2.jpg">
+    <img src="images/premium_p3.jpg">
 </div>
 
 <div class="contact">
-    <h2>Contact to Get Your Website</h2>
+    <h2>Contact to Get Your Project Now</h2>
     <button onclick="goInsta()">Contact Now</button>
 </div>
 
@@ -75,4 +82,3 @@
 
 </body>
 </html>
-
