@@ -8,62 +8,68 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        :root { --primary: #2563eb; --accent: #00d9ff; --dark: #0f172a; }
+        :root { --accent: #00d9ff; --dark: #0f172a; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background: var(--dark); color: white; overflow-x: hidden; }
 
-        /* Updated Header (Logo hata diya hai) */
+        /* Modern Header */
         header { 
-            padding: 80px 20px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
+            padding: 100px 20px; 
             text-align: center; 
             background: radial-gradient(circle, #1e3a8a 0%, #0f172a 80%); 
         }
-
-        header h1 { 
-            font-size: 3.5rem; 
-            background: linear-gradient(90deg, #fff, var(--accent)); 
+        
+        .brand-title { 
+            font-size: 3rem; 
+            text-transform: uppercase; 
+            letter-spacing: 4px; 
+            background: linear-gradient(to right, #ffffff, var(--accent)); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
+            font-weight: 700; 
             margin-bottom: 15px; 
+            position: relative; 
         }
-        header p { font-size: 1.2rem; color: #94a3b8; margin-bottom: 30px; max-width: 600px; }
-        .btn { padding: 15px 40px; background: transparent; border: 2px solid var(--accent); color: var(--accent); font-weight: bold; border-radius: 50px; text-decoration: none; transition: 0.4s; }
+        .brand-title::after { 
+            content: ''; 
+            position: absolute; 
+            bottom: -10px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            width: 60px; 
+            height: 3px; 
+            background: var(--accent); 
+            box-shadow: 0 0 10px var(--accent); 
+        }
+        
+        header p { font-size: 1.1rem; color: #94a3b8; margin: 30px 0; }
+        .btn { padding: 12px 35px; background: transparent; border: 2px solid var(--accent); color: var(--accent); font-weight: bold; border-radius: 50px; text-decoration: none; transition: 0.4s; }
         .btn:hover { background: var(--accent); color: var(--dark); box-shadow: 0 0 20px var(--accent); }
 
-        /* Discount Banner */
-        .discount { background: linear-gradient(90deg, #22c55e, #16a34a); padding: 20px; text-align: center; font-size: 1.1rem; font-weight: bold; }
-
-        /* Services Grid */
-        section { padding: 60px 20px; max-width: 1200px; margin: auto; }
-        h2 { text-align: center; font-size: 2rem; margin-bottom: 40px; }
-        .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.4s; }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
-        .card i { font-size: 2rem; color: var(--accent); margin-bottom: 15px; }
-
-        footer { text-align: center; padding: 40px; background: #020617; font-size: 0.9rem; color: #94a3b8; }
+        /* Services Section */
+        section { padding: 80px 20px; max-width: 1200px; margin: auto; }
+        h2 { text-align: center; font-size: 2.2rem; margin-bottom: 50px; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.4s; }
+        .card:hover { border-color: var(--accent); transform: translateY(-10px); }
+        .card i { font-size: 2rem; color: var(--accent); margin-bottom: 20px; }
+        
+        /* Footer */
+        footer { text-align: center; padding: 40px; background: #020617; border-top: 1px solid #1e293b; color: #94a3b8; }
     </style>
 </head>
 
 <body>
 
 <header>
-    <h1>BrandOrbitX</h1>
-    <p>We Architect Digital Experiences That Scale Your Business</p>
+    <h1 class="brand-title">BrandOrbitX</h1>
+    <p>Professional Website Development & Digital Scaling</p>
     <a class="btn" href="dashboard.html">Launch Dashboard <i class="fas fa-arrow-right"></i></a>
 </header>
 
-<div class="discount">
-    🔥 Limited Time Offer - Get 15% OFF On Your Website Project
-</div>
-
 <section>
-    <h2>Our Services</h2>
-    <div class="services">
+    <h2>Our Elite Services</h2>
+    <div class="services-grid">
         <div class="card"><i class="fas fa-briefcase"></i><h3>Business Websites</h3><p>Modern corporate designs.</p></div>
         <div class="card"><i class="fas fa-shopping-cart"></i><h3>E-Commerce</h3><p>Scalable online stores.</p></div>
         <div class="card"><i class="fas fa-laptop-code"></i><h3>Portfolio</h3><p>Professional freelance sites.</p></div>
@@ -87,3 +93,4 @@
 
 </body>
 </html>
+
