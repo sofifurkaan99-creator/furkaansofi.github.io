@@ -1,84 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brand OrbitX - Professional Web Solutions</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand OrbitX - Premium Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #e5e7eb; }
+        
+        /* Header Video Style */
+        .header { text-align: center; padding: 50px 20px; background: linear-gradient(135deg, #1e40af, #7c3aed); border-bottom: 3px solid #00d9ff; }
+        .header-logo { width: 220px; height: 220px; object-fit: cover; border-radius: 25px; border: 4px solid #00d9ff; box-shadow: 0 10px 30px rgba(0, 217, 255, 0.4); margin-bottom: 20px; }
+        .header h1 { font-size: 3.5rem; color: #fff; margin-bottom: 10px; }
+        
+        /* Menu */
+        .menu { display: flex; justify-content: center; gap: 20px; padding: 30px; flex-wrap: wrap; }
+        .menu button { padding: 15px 30px; border: none; cursor: pointer; font-weight: bold; border-radius: 12px; background: #00d9ff; color: #0f172a; transition: 0.3s; text-transform: uppercase; }
+        .menu button:hover { transform: scale(1.05); background: #fff; }
 
-<style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 100%); color: #e5e7eb; line-height: 1.6; }
-
-    .header { text-align: center; padding: 50px 20px; background: linear-gradient(135deg, #1e40af 0%, #6d28d9 50%, #7c3aed 100%); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); border-bottom: 3px solid #00d9ff; }
-    
-    /* Header Video Logo Style */
-    .header-logo {
-        max-width: 280px; width: 100%; aspect-ratio: 1/1;
-        border-radius: 20px; margin-bottom: 25px;
-        box-shadow: 0 15px 35px rgba(0, 217, 255, 0.3);
-        object-fit: cover; border: 3px solid #00d9ff;
-        transition: transform 0.3s ease;
-    }
-
-    .header h1 { font-size: 3.5rem; font-weight: 700; margin: 15px 0; color: #ffffff; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); }
-    .header p { font-size: 1.2rem; color: #e0e7ff; font-weight: 300; }
-
-    .menu { display: flex; justify-content: center; gap: 20px; padding: 40px 20px; flex-wrap: wrap; background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(10px); }
-    .menu button { padding: 14px 28px; border: 2px solid #00d9ff; cursor: pointer; font-weight: 600; border-radius: 12px; background: linear-gradient(135deg, #00d9ff, #00bcd4); color: #0f172a; transition: all 0.3s ease; text-transform: uppercase; }
-    .menu button:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 217, 255, 0.5); }
-
-    .category-title { text-align: center; padding: 30px 20px; font-size: 2rem; font-weight: 700; color: #00d9ff; }
-    .grid { display: none; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding: 40px; max-width: 1400px; margin: 0 auto; }
-    .grid.active { display: grid; }
-
-    .grid-item { position: relative; border-radius: 18px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
-    .grid img, .grid video { width: 100%; height: 300px; object-fit: cover; border-radius: 18px; transition: transform 0.3s ease; }
-    .video-badge { position: absolute; top: 15px; right: 15px; background: rgba(0, 217, 255, 0.9); color: #0f172a; padding: 8px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; z-index: 10; }
-
-    .contact { text-align: center; padding: 60px 20px; background: linear-gradient(135deg, rgba(30, 40, 59, 0.8), rgba(107, 40, 215, 0.2)); border-top: 3px solid #00d9ff; }
-    .contact button { padding: 16px 45px; background: linear-gradient(135deg, #00d9ff, #00bcd4); border: none; font-weight: 700; cursor: pointer; border-radius: 12px; font-size: 1.1rem; color: #0f172a; transition: 0.3s; }
-</style>
+        /* Grid System */
+        .grid { display: none; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 40px; max-width: 1200px; margin: auto; }
+        .grid.active { display: grid; }
+        .item { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .item video, .item img { width: 100%; height: 280px; object-fit: cover; display: block; }
+        .badge { position: absolute; top: 10px; right: 10px; background: #00d9ff; color: #000; padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; font-weight: bold; }
+        
+        .contact { text-align: center; padding: 60px; background: #111827; }
+        .contact button { padding: 18px 50px; background: #00d9ff; border: none; font-weight: bold; cursor: pointer; border-radius: 12px; font-size: 1.2rem; }
+    </style>
 </head>
-
 <body>
 
 <div class="header">
     <video class="header-logo" autoplay loop muted playsinline poster="images/logo.png">
-        <source src="images/logo_video.mp4" type="video/mp4">
+        <source src="images/logo.mp4" type="video/mp4">
     </video>
     <h1>BRAND ORBITX</h1>
     <p>Premium Web Solutions for Professional Brands</p>
 </div>
 
 <div class="menu">
-    <button onclick="show('basic')"><i class="fas fa-rocket"></i> Basic Website</button>
-    <button onclick="show('normal')"><i class="fas fa-star"></i> Normal Website</button>
-    <button onclick="show('premium')"><i class="fas fa-crown"></i> Premium Website</button>
+    <button onclick="show('basic')"><i class="fas fa-rocket"></i> Basic</button>
+    <button onclick="show('normal')"><i class="fas fa-star"></i> Normal</button>
+    <button onclick="show('premium')"><i class="fas fa-crown"></i> Premium</button>
 </div>
 
-<div class="category-title" id="basicTitle" style="display: none;">Basic Website Showcase</div>
 <div id="basic" class="grid active">
-    <div class="grid-item"><div class="video-badge"><i class="fas fa-video"></i> Video</div><video controls><source src="images/basic_v1.mp4"></video></div>
-    <div class="grid-item"><div class="video-badge"><i class="fas fa-video"></i> Video</div><video controls><source src="images/basic_v2.mp4"></video></div>
-    <div class="grid-item"><div class="video-badge"><i class="fas fa-video"></i> Video</div><video controls><source src="images/basic_v3.mp4"></video></div>
-    <img src="images/basic_p1.jpg" alt="Basic 1"><img src="images/basic_p2.jpg" alt="Basic 2"><img src="images/basic_p3.jpg" alt="Basic 3">
+    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/basic_v1.mp4"></video></div>
+    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/basic_v2.mp4"></video></div>
+    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/basic_v3.mp4"></video></div>
+    <div class="item"><img src="images/basic_p1.jpg"></div>
+    <div class="item"><img src="images/basic_p2.jpg"></div>
+    <div class="item"><img src="images/basic_p3.jpg"></div>
 </div>
 
-<div class="category-title" id="normalTitle" style="display: none;">Normal Website Showcase</div>
 <div id="normal" class="grid">
-    <div class="grid-item"><div class="video-badge"><i class="fas fa-video"></i> Video</div><video controls><source src="images/normal_v1.mp4"></video></div>
-    <div class="grid-item"><div class="video-badge"><i class="fas fa-video"></i> Video</div><video controls><source src="images/normal_v2.mp4"></video></div>
-    <div class="grid-item"><div class="video-badge"><i class="fas fa-video"></i> Video</div><video controls><source src="images/normal_v3.mp4"></video></div>
-    <img src="images/normal_p1.jpg" alt="Normal 1"><img src="images/normal_p2.jpg" alt="Normal 2"><img src="images/normal_p3.jpg" alt="Normal 3">
+    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/normal_v1.mp4"></video></div>
+    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/normal_v2.mp4"></video></div>
+    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/normal_v3.mp4"></video></div>
+    <div class="item"><img src="images/normal_p1.jpg"></div>
+    <div class="item"><img src="images/normal_p2.jpg"></div>
+    <div class="item"><img src="images/normal_p3.jpg"></div>
 </div>
 
-<div class="category-title" id="premiumTitle" style="display: none;">Premium Website Showcase</div>
 <div id="premium" class="grid">
-    <div class="grid-item"><div class="video-badge"><i class="fas fa-video"></i> Video</div><video controls><source src="images/premium_v1.mp4"></video></div>
-    <div class="grid-item"><div class="video-badge"><i class="fas fa-video"></i> Video</div><video controls><source src="images/premium_v2.mp4"></video></div>
-    <div class="grid-item"><div class="video-badge"><i class="fas fa-video"></i> Video</div><video controls><source src="images/premium_v3.mp4"></video></div>
-    <img src="images/premium_p1.jpg" alt="Premium 1"><img src="images/premium_p2.jpg" alt="Premium 2"><img src="images/premium_p3.jpg" alt="Premium 3">
+    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/premium_v1.mp4"></video></div>
+    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/premium_v2.mp4"></video></div>
+    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/premium_v3.mp4"></video></div>
+    <div class="item"><img src="images/premium_p1.jpg"></div>
+    <div class="item"><img src="images/premium_p2.jpg"></div>
+    <div class="item"><img src="images/premium_p3.jpg"></div>
 </div>
 
 <div class="contact">
@@ -91,15 +83,11 @@
         document.getElementById("basic").classList.remove("active");
         document.getElementById("normal").classList.remove("active");
         document.getElementById("premium").classList.remove("active");
-        document.getElementById("basicTitle").style.display = "none";
-        document.getElementById("normalTitle").style.display = "none";
-        document.getElementById("premiumTitle").style.display = "none";
         document.getElementById(type).classList.add("active");
-        document.getElementById(type + "Title").style.display = "block";
     }
     function goInsta() { window.open("https://www.instagram.com/brand_orbitx", "_blank"); }
 </script>
-
 </body>
 </html>
+
 
