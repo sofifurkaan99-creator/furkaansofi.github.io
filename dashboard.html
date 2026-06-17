@@ -3,44 +3,310 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brand OrbitX Dashboard</title>
+<title>Brand OrbitX - Professional Web Solutions</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-    body { margin:0; font-family:Arial; background:#0f172a; color:white; }
-    .header { text-align:center; padding:30px; background:linear-gradient(135deg,#2563eb,#7c3aed); }
-    .header img { max-width:100%; height:auto; max-height:250px; border-radius:15px; margin-bottom:20px; box-shadow:0 8px 20px rgba(0,0,0,0.3); object-fit:contain; aspect-ratio:1/1; }
-    
-    .menu { display:flex; justify-content:center; gap:15px; padding:20px; flex-wrap:wrap; }
-    .menu button { padding:12px 18px; border:none; cursor:pointer; font-weight:bold; border-radius:8px; background:#00e5ff; transition:0.3s; }
-    .menu button:hover { background:white; transform:scale(1.05); }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-    .grid { display:none; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px; padding:30px; max-width:1100px; margin:auto; }
-    .active { display:grid; }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 100%);
+        color: #e5e7eb;
+        line-height: 1.6;
+    }
 
-    .grid img, .grid video { width:100%; height:260px; object-fit:cover; border-radius:15px; }
+    .header {
+        text-align: center;
+        padding: 50px 20px;
+        background: linear-gradient(135deg, #1e40af 0%, #6d28d9 50%, #7c3aed 100%);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        border-bottom: 3px solid #00d9ff;
+    }
 
-    .contact { text-align:center; padding:30px; background:#111827; }
-    .contact button { padding:12px 20px; background:#00e5ff; border:none; font-weight:bold; cursor:pointer; border-radius:8px; }
+    .header img {
+        max-width: 100%;
+        height: auto;
+        max-height: 280px;
+        border-radius: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 15px 35px rgba(0, 217, 255, 0.3);
+        object-fit: contain;
+        aspect-ratio: 1/1;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-    /* Mobile responsive */
+    .header img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 20px 50px rgba(0, 217, 255, 0.5);
+    }
+
+    .header h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin: 15px 0;
+        color: #ffffff;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        letter-spacing: 1px;
+    }
+
+    .header p {
+        font-size: 1.2rem;
+        color: #e0e7ff;
+        margin-top: 10px;
+        font-weight: 300;
+    }
+
+    .menu {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 40px 20px;
+        flex-wrap: wrap;
+        background: rgba(30, 41, 59, 0.6);
+        backdrop-filter: blur(10px);
+        box-shadow: inset 0 2px 10px rgba(255, 255, 255, 0.05);
+    }
+
+    .menu button {
+        padding: 14px 28px;
+        border: 2px solid #00d9ff;
+        cursor: pointer;
+        font-weight: 600;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #00d9ff, #00bcd4);
+        color: #0f172a;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        box-shadow: 0 4px 15px rgba(0, 217, 255, 0.2);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .menu button:hover {
+        background: linear-gradient(135deg, #00ffff, #00e5ff);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 217, 255, 0.5);
+    }
+
+    .menu button:active {
+        transform: translateY(-1px);
+    }
+
+    .category-title {
+        text-align: center;
+        padding: 30px 20px;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #00d9ff;
+        text-shadow: 0 2px 10px rgba(0, 217, 255, 0.2);
+    }
+
+    .grid {
+        display: none;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        padding: 40px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .grid.active {
+        display: grid;
+    }
+
+    .grid-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 18px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        transition: all 0.3s ease;
+    }
+
+    .grid-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(0, 217, 255, 0.3);
+    }
+
+    .grid img,
+    .grid video {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 18px;
+        transition: transform 0.3s ease;
+    }
+
+    .grid-item:hover img,
+    .grid-item:hover video {
+        transform: scale(1.05);
+    }
+
+    .video-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(0, 217, 255, 0.9);
+        color: #0f172a;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        z-index: 10;
+    }
+
+    .contact {
+        text-align: center;
+        padding: 60px 20px;
+        background: linear-gradient(135deg, rgba(30, 40, 59, 0.8), rgba(107, 40, 215, 0.2));
+        border-top: 3px solid #00d9ff;
+        backdrop-filter: blur(10px);
+    }
+
+    .contact h2 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        color: #ffffff;
+        font-weight: 700;
+    }
+
+    .contact button {
+        padding: 16px 45px;
+        background: linear-gradient(135deg, #00d9ff, #00bcd4);
+        border: none;
+        font-weight: 700;
+        cursor: pointer;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #0f172a;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(0, 217, 255, 0.3);
+    }
+
+    .contact button:hover {
+        background: linear-gradient(135deg, #00ffff, #00e5ff);
+        transform: scale(1.08);
+        box-shadow: 0 12px 35px rgba(0, 217, 255, 0.5);
+    }
+
+    /* Mobile Responsive */
     @media (max-width: 768px) {
-        .header { padding:20px; }
-        .header img { max-height:180px; margin-bottom:15px; }
-        .header h1 { font-size:1.8rem; }
-        .menu { gap:10px; padding:15px; }
-        .menu button { padding:10px 15px; font-size:0.9rem; }
-        .grid { gap:15px; padding:20px; }
-        .grid img, .grid video { height:200px; }
+        .header {
+            padding: 35px 15px;
+        }
+
+        .header img {
+            max-height: 220px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+        }
+
+        .header p {
+            font-size: 1rem;
+        }
+
+        .menu {
+            gap: 12px;
+            padding: 25px 15px;
+        }
+
+        .menu button {
+            padding: 12px 20px;
+            font-size: 0.9rem;
+        }
+
+        .grid {
+            gap: 20px;
+            padding: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .grid img,
+        .grid video {
+            height: 240px;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            padding: 20px 15px;
+        }
+
+        .contact h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .contact button {
+            padding: 12px 30px;
+            font-size: 0.95rem;
+        }
     }
 
     @media (max-width: 480px) {
-        .header { padding:15px; }
-        .header img { max-height:150px; margin-bottom:10px; }
-        .header h1 { font-size:1.5rem; }
-        .menu { gap:8px; padding:10px; flex-direction:column; }
-        .menu button { width:100%; padding:10px 15px; font-size:0.85rem; }
-        .grid { gap:12px; padding:15px; grid-template-columns:1fr; }
-        .grid img, .grid video { height:auto; aspect-ratio:16/9; }
+        .header {
+            padding: 25px 10px;
+        }
+
+        .header img {
+            max-height: 160px;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+        }
+
+        .header p {
+            font-size: 0.9rem;
+        }
+
+        .menu {
+            flex-direction: column;
+            gap: 10px;
+            padding: 15px 10px;
+        }
+
+        .menu button {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 0.85rem;
+        }
+
+        .grid {
+            gap: 15px;
+            padding: 15px;
+            grid-template-columns: 1fr;
+        }
+
+        .grid img,
+        .grid video {
+            height: auto;
+            aspect-ratio: 16/9;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            padding: 15px 10px;
+        }
+
+        .contact h2 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .contact button {
+            padding: 11px 25px;
+            font-size: 0.85rem;
+        }
     }
 </style>
 </head>
@@ -48,59 +314,97 @@
 <body>
 
 <div class="header">
-    <img src="images/logo.png" alt="Brand OrbitX Logo" class="logo"> 
-    <h1>Brand orbitX</h1>
-</div>
-
+    <img src="images/logo.png" alt="Brand OrbitX Logo" class="logo">
+    <h1>BRAND ORBITX</h1>
+    <p>Premium Web Solutions for Professional Brands</p>
 </div>
 
 <div class="menu">
-    <button onclick="show('basic')">Basic Website</button>
-    <button onclick="show('normal')">Normal Website</button>
-    <button onclick="show('premium')">Premium Website</button>
+    <button onclick="show('basic')"><i class="fas fa-rocket"></i> Basic Website</button>
+    <button onclick="show('normal')"><i class="fas fa-star"></i> Normal Website</button>
+    <button onclick="show('premium')"><i class="fas fa-crown"></i> Premium Website</button>
 </div>
 
+<div class="category-title" id="basicTitle" style="display: none;">Basic Website Showcase</div>
 <div id="basic" class="grid active">
-    <video controls><source src="images/basic_v1.mp4"></video>
-    <video controls><source src="images/basic_v2.mp4"></video>
-    <video controls><source src="images/basic_v3.mp4"></video>
-    <img src="images/basic_p1.jpg">
-    <img src="images/basic_p2.jpg">
-    <img src="images/basic_p3.jpg">
+    <div class="grid-item">
+        <div class="video-badge"><i class="fas fa-video"></i> Video</div>
+        <video controls><source src="images/basic_v1.mp4"></video>
+    </div>
+    <div class="grid-item">
+        <div class="video-badge"><i class="fas fa-video"></i> Video</div>
+        <video controls><source src="images/basic_v2.mp4"></video>
+    </div>
+    <div class="grid-item">
+        <div class="video-badge"><i class="fas fa-video"></i> Video</div>
+        <video controls><source src="images/basic_v3.mp4"></video>
+    </div>
+    <img src="images/basic_p1.jpg" alt="Basic Website Design 1">
+    <img src="images/basic_p2.jpg" alt="Basic Website Design 2">
+    <img src="images/basic_p3.jpg" alt="Basic Website Design 3">
 </div>
 
+<div class="category-title" id="normalTitle" style="display: none;">Normal Website Showcase</div>
 <div id="normal" class="grid">
-    <video controls><source src="images/normal_v1.mp4"></video>
-    <video controls><source src="images/normal_v2.mp4"></video>
-    <video controls><source src="images/normal_v3.mp4"></video>
-    <img src="images/normal_p1.jpg">
-    <img src="images/normal_p2.jpg">
-    <img src="images/normal_p3.jpg">
+    <div class="grid-item">
+        <div class="video-badge"><i class="fas fa-video"></i> Video</div>
+        <video controls><source src="images/normal_v1.mp4"></video>
+    </div>
+    <div class="grid-item">
+        <div class="video-badge"><i class="fas fa-video"></i> Video</div>
+        <video controls><source src="images/normal_v2.mp4"></video>
+    </div>
+    <div class="grid-item">
+        <div class="video-badge"><i class="fas fa-video"></i> Video</div>
+        <video controls><source src="images/normal_v3.mp4"></video>
+    </div>
+    <img src="images/normal_p1.jpg" alt="Normal Website Design 1">
+    <img src="images/normal_p2.jpg" alt="Normal Website Design 2">
+    <img src="images/normal_p3.jpg" alt="Normal Website Design 3">
 </div>
 
+<div class="category-title" id="premiumTitle" style="display: none;">Premium Website Showcase</div>
 <div id="premium" class="grid">
-    <video controls><source src="images/premium_v1.mp4"></video>
-    <video controls><source src="images/premium_v2.mp4"></video>
-    <video controls><source src="images/premium_v3.mp4"></video>
-    <img src="images/premium_p1.jpg">
-    <img src="images/premium_p2.jpg">
-    <img src="images/premium_p3.jpg">
+    <div class="grid-item">
+        <div class="video-badge"><i class="fas fa-video"></i> Video</div>
+        <video controls><source src="images/premium_v1.mp4"></video>
+    </div>
+    <div class="grid-item">
+        <div class="video-badge"><i class="fas fa-video"></i> Video</div>
+        <video controls><source src="images/premium_v2.mp4"></video>
+    </div>
+    <div class="grid-item">
+        <div class="video-badge"><i class="fas fa-video"></i> Video</div>
+        <video controls><source src="images/premium_v3.mp4"></video>
+    </div>
+    <img src="images/premium_p1.jpg" alt="Premium Website Design 1">
+    <img src="images/premium_p2.jpg" alt="Premium Website Design 2">
+    <img src="images/premium_p3.jpg" alt="Premium Website Design 3">
 </div>
 
 <div class="contact">
-    <h2>Contact to Get Your Project Now</h2>
-    <button onclick="goInsta()">Contact Now</button>
+    <h2>Ready to Launch Your Dream Website?</h2>
+    <p style="margin-bottom: 25px; font-size: 1.1rem;">Get professional web solutions delivered in 24 hours</p>
+    <button onclick="goInsta()"><i class="fas fa-envelope"></i> Contact Now</button>
 </div>
 
 <script>
-    function show(type){
+    function show(type) {
+        // Hide all grids and titles
         document.getElementById("basic").classList.remove("active");
         document.getElementById("normal").classList.remove("active");
         document.getElementById("premium").classList.remove("active");
+        document.getElementById("basicTitle").style.display = "none";
+        document.getElementById("normalTitle").style.display = "none";
+        document.getElementById("premiumTitle").style.display = "none";
+
+        // Show selected grid and title
         document.getElementById(type).classList.add("active");
+        document.getElementById(type + "Title").style.display = "block";
     }
-    function goInsta(){
-        window.open("https://www.instagram.com/brand_orbitx","_blank");
+
+    function goInsta() {
+        window.open("https://www.instagram.com/brand_orbitx", "_blank");
     }
 </script>
 
