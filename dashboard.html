@@ -8,7 +8,7 @@
 <style>
     body { margin:0; font-family:Arial; background:#0f172a; color:white; }
     .header { text-align:center; padding:30px; background:linear-gradient(135deg,#2563eb,#7c3aed); }
-    .header img { width:250px; height:250px; border-radius:15px; margin-bottom:20px; box-shadow:0 8px 20px rgba(0,0,0,0.3); object-fit:cover; }
+    .header img { max-width:100%; height:auto; max-height:250px; border-radius:15px; margin-bottom:20px; box-shadow:0 8px 20px rgba(0,0,0,0.3); object-fit:contain; aspect-ratio:1/1; }
     
     .menu { display:flex; justify-content:center; gap:15px; padding:20px; flex-wrap:wrap; }
     .menu button { padding:12px 18px; border:none; cursor:pointer; font-weight:bold; border-radius:8px; background:#00e5ff; transition:0.3s; }
@@ -21,6 +21,27 @@
 
     .contact { text-align:center; padding:30px; background:#111827; }
     .contact button { padding:12px 20px; background:#00e5ff; border:none; font-weight:bold; cursor:pointer; border-radius:8px; }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+        .header { padding:20px; }
+        .header img { max-height:180px; margin-bottom:15px; }
+        .header h1 { font-size:1.8rem; }
+        .menu { gap:10px; padding:15px; }
+        .menu button { padding:10px 15px; font-size:0.9rem; }
+        .grid { gap:15px; padding:20px; }
+        .grid img, .grid video { height:200px; }
+    }
+
+    @media (max-width: 480px) {
+        .header { padding:15px; }
+        .header img { max-height:150px; margin-bottom:10px; }
+        .header h1 { font-size:1.5rem; }
+        .menu { gap:8px; padding:10px; flex-direction:column; }
+        .menu button { width:100%; padding:10px 15px; font-size:0.85rem; }
+        .grid { gap:12px; padding:15px; grid-template-columns:1fr; }
+        .grid img, .grid video { height:auto; aspect-ratio:16/9; }
+    }
 </style>
 </head>
 
