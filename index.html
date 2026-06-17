@@ -1,40 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BrandOrbitX</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrandOrbitX | Elite Web Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-<style>
-    *{ margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
-    body{ background:#0f172a; color:white; }
-    header{ text-align:center; padding:70px 20px; background:linear-gradient(135deg,#2563eb,#7c3aed); }
-    .logo-container{ margin-bottom:20px; }
-    .logo-container img{ max-width:150px; height:auto; }
-    header h1{ font-size:3rem; }
-    header p{ margin-top:10px; font-size:1.1rem; }
-    .btn{ display:inline-block; margin-top:20px; padding:12px 25px; background:white; color:#2563eb; text-decoration:none; font-weight:bold; border-radius:8px; cursor:pointer; transition:0.3s; }
-    .btn:hover{ transform:scale(1.05); }
-    section{ padding:50px 20px; max-width:1100px; margin:auto; }
-    h2{ text-align:center; margin-bottom:30px; }
-    .services{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
-    .card{ background:#1e293b; padding:25px; border-radius:12px; transition:0.3s; }
-    .card:hover{ transform:scale(1.03); }
-    .card h3{ margin-bottom:10px; }
-    .discount{ background:#22c55e; padding:20px; text-align:center; font-size:1.3rem; font-weight:bold; }
-    footer{ text-align:center; padding:20px; background:#111827; margin-top:20px; }
-</style>
+    <style>
+        :root { --primary: #2563eb; --accent: #00d9ff; --dark: #0f172a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: var(--dark); color: white; overflow-x: hidden; }
+
+        /* Modern Header with Video Logo */
+        header { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle, #1e3a8a 0%, #0f172a 80%); padding: 20px; }
+        .logo-container video { width: 200px; height: 200px; border-radius: 20px; border: 3px solid var(--accent); object-fit: cover; box-shadow: 0 0 20px rgba(0, 217, 255, 0.3); margin-bottom: 20px; }
+        header h1 { font-size: 4.5rem; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        header p { font-size: 1.4rem; color: #94a3b8; margin: 20px 0; }
+        .btn { padding: 15px 40px; background: transparent; border: 2px solid var(--accent); color: var(--accent); font-weight: bold; border-radius: 50px; text-decoration: none; transition: 0.4s; }
+        .btn:hover { background: var(--accent); color: var(--dark); box-shadow: 0 0 20px var(--accent); }
+
+        /* Discount Banner */
+        .discount { background: linear-gradient(90deg, #22c55e, #16a34a); padding: 25px; text-align: center; font-size: 1.3rem; font-weight: bold; box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3); }
+
+        /* Services Grid */
+        section { padding: 80px 20px; max-width: 1200px; margin: auto; }
+        h2 { text-align: center; font-size: 2.5rem; margin-bottom: 50px; }
+        .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.4s; }
+        .card:hover { border-color: var(--accent); transform: translateY(-10px); }
+        .card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
+
+        footer { text-align: center; padding: 50px; background: #020617; }
+    </style>
 </head>
 
 <body>
 
 <header>
     <div class="logo-container">
-        
+        <video autoplay loop muted playsinline>
+            <source src="images/logo.mp4" type="video/mp4">
+        </video>
     </div>
     <h1>BrandOrbitX</h1>
-    <p>Professional Website Development Services</p>
-    <a class="btn" href="dashboard.html">View Projects</a>
+    <p>We Architect Digital Experiences That Scale Your Business</p>
+    <a class="btn" href="dashboard.html">Launch Dashboard <i class="fas fa-arrow-right"></i></a>
 </header>
 
 <div class="discount">
@@ -42,48 +53,15 @@
 </div>
 
 <section>
-    <h2>Our Services</h2>
+    <h2>Elite Services</h2>
     <div class="services">
-
-        <div class="card">
-            <h3>Business Websites</h3>
-            <p>Modern business websites with premium design.</p>
-        </div>
-
-        <div class="card">
-            <h3>E-Commerce Stores</h3>
-            <p>Online stores with payment integration.</p>
-        </div>
-
-        <div class="card">
-            <h3>Portfolio Websites</h3>
-            <p>Professional portfolio websites for freelancers.</p>
-        </div>
-
-        <div class="card">
-            <h3>Landing Pages</h3>
-            <p>High-converting landing pages for businesses.</p>
-        </div>
-
-        <div class="card">
-            <h3>Website Redesign</h3>
-            <p>Transform your old website into a modern one.</p>
-        </div>
-
-        <div class="card">
-            <h3>SEO Optimization</h3>
-            <p>Improve website visibility and rankings.</p>
-        </div>
-
+        <div class="card"><i class="fas fa-briefcase"></i><h3>Business Websites</h3><p>Modern business websites with premium design.</p></div>
+        <div class="card"><i class="fas fa-shopping-cart"></i><h3>E-Commerce Stores</h3><p>Online stores with payment integration.</p></div>
+        <div class="card"><i class="fas fa-laptop-code"></i><h3>Portfolio Websites</h3><p>Professional portfolio websites for freelancers.</p></div>
+        <div class="card"><i class="fas fa-rocket"></i><h3>Landing Pages</h3><p>High-converting landing pages for businesses.</p></div>
+        <div class="card"><i class="fas fa-sync"></i><h3>Website Redesign</h3><p>Transform your old website into a modern one.</p></div>
+        <div class="card"><i class="fas fa-search"></i><h3>SEO Optimization</h3><p>Improve website visibility and rankings.</p></div>
     </div>
-</section>
-
-<section>
-    <h2>Why Choose BrandOrbitX?</h2>
-    <p style="text-align:center;max-width:700px;margin:auto;">
-    Fast delivery, modern UI design, mobile responsive websites,
-    admin dashboard integration, and complete client support.
-    </p>
 </section>
 
 <footer>
@@ -92,3 +70,4 @@
 
 </body>
 </html>
+
