@@ -3,22 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrandOrbitX | Project Brief</title>
+    <title>Describe Project | BrandOrbitX</title>
     <style>
-        body { background: #0f172a; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; }
-        .box { background: rgba(30, 41, 59, 0.5); padding: 40px; border-radius: 20px; border: 1px solid #00d9ff; width: 90%; max-width: 400px; text-align: center; }
-        textarea { width: 100%; height: 150px; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 10px; padding: 15px; margin-bottom: 20px; outline: none; }
-        button { width: 100%; padding: 15px; background: #00d9ff; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        body { background: #0f172a; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Poppins', sans-serif; }
+        .box { background: rgba(30, 41, 59, 0.5); padding: 40px; border-radius: 20px; border: 1px solid #00d9ff; width: 90%; max-width: 450px; text-align: center; }
+        h2 { color: #00d9ff; margin-bottom: 20px; }
+        input, textarea { width: 100%; padding: 15px; margin: 10px 0; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 10px; outline: none; }
+        button { width: 100%; padding: 15px; background: #00d9ff; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; color: #0f172a; transition: 0.3s; }
+        button:hover { background: #fff; box-shadow: 0 0 15px #00d9ff; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h2>Describe Your Project</h2>
-        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-            <textarea name="message" placeholder="Project details yahan likhein..." required></textarea>
-            <button type="submit">SEND PROJECT</button>
-        </form>
-    </div>
+
+<div class="box">
+    <h2>Project Brief</h2>
+    <form action="https://formspree.io/f/mvznnpyp" method="POST">
+        <input type="text" name="name" placeholder="Your Full Name" required>
+        <input type="email" name="email" placeholder="Your Email Address" required>
+        <textarea name="message" rows="5" placeholder="Describe your project..." required></textarea>
+        <button type="submit">SUBMIT PROJECT</button>
+    </form>
+</div>
+
 </body>
 </html>
-
