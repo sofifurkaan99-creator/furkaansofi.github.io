@@ -6,7 +6,11 @@
     <title>BrandOrbitX | Elite Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --glow: #00d9ff; --bg: #0f172a; --card: rgba(30, 41, 59, 0.5); }
+        :root { 
+            --glow: #00d9ff; 
+            --bg: #0f172a; 
+            --card: rgba(30, 41, 59, 0.5); 
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background: var(--bg); color: #e5e7eb; }
 
@@ -33,11 +37,37 @@
         .scroll-container::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
         .scroll-container::-webkit-scrollbar-thumb { background: var(--glow); border-radius: 10px; box-shadow: 0 0 10px var(--glow); }
 
-        /* Flex Shrink Zero restricts cards from shrinking horizontally */
-        .item { position: relative; background: var(--card); border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); min-width: 300px; max-width: 300px; flex-shrink: 0; }
+        /* Items styling */
+        .item { position: relative; background: var(--card); border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); min-width: 300px; max-width: 300px; flex-shrink: 0; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .item:hover { transform: scale(1.03); box-shadow: 0 0 15px rgba(0, 217, 255, 0.2); border-color: var(--glow); }
         .item video, .item img { width: 100%; height: 220px; object-fit: cover; display: block; }
         .badge { position: absolute; top: 10px; right: 10px; background: var(--glow); color: #000; padding: 4px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: bold; z-index: 5; }
 
+        /* PREMIUM MODAL VIEW-PORT STYLING */
+        .custom-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(7, 11, 22, 0.95);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .custom-modal.show { display: flex; opacity: 1; }
+        
+        .modal-wrapper { position: relative; max-width: 85%; max-height: 85%; display: flex; justify-content: center; align-items: center; }
+        .modal-wrapper img, .modal-wrapper video { max-width: 100%; max-height: 85vh; object-fit: contain; border-radius: 10px; border: 2px solid rgba(0, 217, 255, 0.3); box-shadow: 0 0 40px rgba(0, 0, 0, 0.8); }
+        
+        .close-btn { position: absolute; top: -50px; right: 0; color: #fff; font-size: 2.5rem; cursor: pointer; transition: 0.3s; }
+        .close-btn:hover { color: var(--glow); transform: rotate(90deg); }
+
+        /* Contact & Footer */
         .contact { text-align: center; padding: 60px 20px; background: #020617; border-top: 1px solid var(--glow); margin-top: 40px; }
         .contact-btns { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
         .btn-action { padding: 18px 30px; border: none; font-weight: bold; cursor: pointer; border-radius: 12px; font-size: 1rem; transition: 0.4s; color: #fff; }
@@ -58,10 +88,8 @@
     <button onclick="show('premium')">Premium</button>
 </div>
 
-<!-- ================= BASIC TIER (4 Categories) ================= -->
 <div id="basic" class="content-section active">
     
-    <!-- 1. Coffee Website -->
     <div class="category-block">
         <h3 class="category-title"><i class="fas fa-coffee"></i> Coffee Website Designs</h3>
         <div class="scroll-container">
@@ -75,182 +103,178 @@
             <div class="item"><img src="images/coffee_8.png"></div>
             <div class="item"><img src="images/coffee_9.png"></div>
             <div class="item"><img src="images/coffee_10.png"></div>
-            <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/coffee_video.mp4"></video></div>
+            <div class="item"><div class="badge">VIDEO</div><video loop muted><source src="images/coffee_video.mp4" type="video/mp4"></video></div>
         </div>
     </div>
 
-    <!-- 2. Hardware Shop -->
     <div class="category-block">
         <h3 class="category-title"><i class="fas fa-tools"></i> Hardware Shop Website Designs</h3>
         <div class="scroll-container">
-            <div class="item"><img src="images/hardware_1.jpg"></div>
-            <div class="item"><img src="images/hardware_2.jpg"></div>
-            <div class="item"><img src="images/hardware_3.jpg"></div>
-            <div class="item"><img src="images/hardware_4.jpg"></div>
-            <div class="item"><img src="images/hardware_5.jpg"></div>
-            <div class="item"><img src="images/hardware_6.jpg"></div>
-            <div class="item"><img src="images/hardware_7.jpg"></div>
-            <div class="item"><img src="images/hardware_8.jpg"></div>
-            <div class="item"><img src="images/hardware_9.jpg"></div>
-            <div class="item"><img src="images/hardware_10.jpg"></div>
-            <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/hardware_video.mp4"></video></div>
+            <div class="item"><img src="images/hardware_1.png"></div>
+            <div class="item"><img src="images/hardware_2.png"></div>
+            <div class="item"><img src="images/hardware_3.png"></div>
+            <div class="item"><img src="images/hardware_4.png"></div>
+            <div class="item"><img src="images/hardware_5.png"></div>
+            <div class="item"><img src="images/hardware_6.png"></div>
+            <div class="item"><img src="images/hardware_7.png"></div>
+            <div class="item"><img src="images/hardware_8.png"></div>
+            <div class="item"><img src="images/hardware_9.png"></div>
+            <div class="item"><img src="images/hardware_10.png"></div>
+            <div class="item"><div class="badge">VIDEO</div><video loop muted><source src="images/hardware_video.mp4" type="video/mp4"></video></div>
         </div>
     </div>
 
-    <!-- 3. Gym & Fitness Website -->
     <div class="category-block">
         <h3 class="category-title"><i class="fas fa-dumbbell"></i> Gym & Fitness Website Designs</h3>
         <div class="scroll-container">
-            <div class="item"><img src="images/gym_1.jpg"></div>
-            <div class="item"><img src="images/gym_2.jpg"></div>
-            <div class="item"><img src="images/gym_3.jpg"></div>
-            <div class="item"><img src="images/gym_4.jpg"></div>
-            <div class="item"><img src="images/gym_5.jpg"></div>
-            <div class="item"><img src="images/gym_6.jpg"></div>
-            <div class="item"><img src="images/gym_7.jpg"></div>
-            <div class="item"><img src="images/gym_8.jpg"></div>
-            <div class="item"><img src="images/gym_9.jpg"></div>
-            <div class="item"><img src="images/gym_10.jpg"></div>
-            <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/gym_video.mp4"></video></div>
+            <div class="item"><img src="images/gym_1.png"></div>
+            <div class="item"><img src="images/gym_2.png"></div>
+            <div class="item"><img src="images/gym_3.png"></div>
+            <div class="item"><img src="images/gym_4.png"></div>
+            <div class="item"><img src="images/gym_5.png"></div>
+            <div class="item"><img src="images/gym_6.png"></div>
+            <div class="item"><img src="images/gym_7.png"></div>
+            <div class="item"><img src="images/gym_8.png"></div>
+            <div class="item"><img src="images/gym_9.png"></div>
+            <div class="item"><img src="images/gym_10.png"></div>
+            <div class="item"><div class="badge">VIDEO</div><video loop muted><source src="images/gym_video.mp4" type="video/mp4"></video></div>
         </div>
     </div>
 
-    <!-- 4. Crockery & Kitchen Appliances -->
     <div class="category-block">
         <h3 class="category-title"><i class="fas fa-blender"></i> Crockery & Kitchen Appliances</h3>
         <div class="scroll-container">
-            <div class="item"><img src="images/kitchen_1.jpg"></div>
-            <div class="item"><img src="images/kitchen_2.jpg"></div>
-            <div class="item"><img src="images/kitchen_3.jpg"></div>
-            <div class="item"><img src="images/kitchen_4.jpg"></div>
-            <div class="item"><img src="images/kitchen_5.jpg"></div>
-            <div class="item"><img src="images/kitchen_6.jpg"></div>
-            <div class="item"><img src="images/kitchen_7.jpg"></div>
-            <div class="item"><img src="images/kitchen_8.jpg"></div>
-            <div class="item"><img src="images/kitchen_9.jpg"></div>
-            <div class="item"><img src="images/kitchen_10.jpg"></div>
-            <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/kitchen_video.mp4"></video></div>
+            <div class="item"><img src="images/kitchen_1.png"></div>
+            <div class="item"><img src="images/kitchen_2.png"></div>
+            <div class="item"><img src="images/kitchen_3.png"></div>
+            <div class="item"><img src="images/kitchen_4.png"></div>
+            <div class="item"><img src="images/kitchen_5.png"></div>
+            <div class="item"><img src="images/kitchen_6.png"></div>
+            <div class="item"><img src="images/kitchen_7.png"></div>
+            <div class="item"><img src="images/kitchen_8.png"></div>
+            <div class="item"><img src="images/kitchen_9.png"></div>
+            <div class="item"><img src="images/kitchen_10.png"></div>
+            <div class="item"><div class="badge">VIDEO</div><video loop muted><source src="images/kitchen_video.mp4" type="video/mp4"></video></div>
         </div>
     </div>
 
 </div>
 
-<!-- ================= NORMAL TIER (3 Categories) ================= -->
 <div id="normal" class="content-section">
     
-    <!-- 5. Shoe Shop -->
     <div class="category-block">
         <h3 class="category-title"><i class="fas fa-shoe-prints"></i> Shoe Shop Website Designs</h3>
         <div class="scroll-container">
-            <div class="item"><img src="images/shoe_1.jpg"></div>
-            <div class="item"><img src="images/shoe_2.jpg"></div>
-            <div class="item"><img src="images/shoe_3.jpg"></div>
-            <div class="item"><img src="images/shoe_4.jpg"></div>
-            <div class="item"><img src="images/shoe_5.jpg"></div>
-            <div class="item"><img src="images/shoe_6.jpg"></div>
-            <div class="item"><img src="images/shoe_7.jpg"></div>
-            <div class="item"><img src="images/shoe_8.jpg"></div>
-            <div class="item"><img src="images/shoe_9.jpg"></div>
-            <div class="item"><img src="images/shoe_10.jpg"></div>
-            <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/shoe_video.mp4"></video></div>
+            <div class="item"><img src="images/shoe_1.png"></div>
+            <div class="item"><img src="images/shoe_2.png"></div>
+            <div class="item"><img src="images/shoe_3.png"></div>
+            <div class="item"><img src="images/shoe_4.png"></div>
+            <div class="item"><img src="images/shoe_5.png"></div>
+            <div class="item"><img src="images/shoe_6.png"></div>
+            <div class="item"><img src="images/shoe_7.png"></div>
+            <div class="item"><img src="images/shoe_8.png"></div>
+            <div class="item"><img src="images/shoe_9.png"></div>
+            <div class="item"><img src="images/shoe_10.png"></div>
+            <div class="item"><div class="badge">VIDEO</div><video loop muted><source src="images/shoe_video.mp4" type="video/mp4"></video></div>
         </div>
     </div>
 
-    <!-- 6. Clothes & Fashion Shop -->
     <div class="category-block">
         <h3 class="category-title"><i class="fas fa-tshirt"></i> Clothes & Fashion Shop</h3>
         <div class="scroll-container">
-            <div class="item"><img src="images/clothes_1.jpg"></div>
-            <div class="item"><img src="images/clothes_2.jpg"></div>
-            <div class="item"><img src="images/clothes_3.jpg"></div>
-            <div class="item"><img src="images/clothes_4.jpg"></div>
-            <div class="item"><img src="images/clothes_5.jpg"></div>
-            <div class="item"><img src="images/clothes_6.jpg"></div>
-            <div class="item"><img src="images/clothes_7.jpg"></div>
-            <div class="item"><img src="images/clothes_8.jpg"></div>
-            <div class="item"><img src="images/clothes_9.jpg"></div>
-            <div class="item"><img src="images/clothes_10.jpg"></div>
-            <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/clothes_video.mp4"></video></div>
+            <div class="item"><img src="images/clothes_1.png"></div>
+            <div class="item"><img src="images/clothes_2.png"></div>
+            <div class="item"><img src="images/clothes_3.png"></div>
+            <div class="item"><img src="images/clothes_4.png"></div>
+            <div class="item"><img src="images/clothes_5.png"></div>
+            <div class="item"><img src="images/clothes_6.png"></div>
+            <div class="item"><img src="images/clothes_7.png"></div>
+            <div class="item"><img src="images/clothes_8.png"></div>
+            <div class="item"><img src="images/clothes_9.png"></div>
+            <div class="item"><img src="images/clothes_10.png"></div>
+            <div class="item"><div class="badge">VIDEO</div><video loop muted><source src="images/clothes_video.mp4" type="video/mp4"></video></div>
         </div>
     </div>
 
-    <!-- 7. Fast Food Website -->
     <div class="category-block">
         <h3 class="category-title"><i class="fas fa-hamburger"></i> Fast Food Website Designs</h3>
         <div class="scroll-container">
-            <div class="item"><img src="images/fastfood_1.jpg"></div>
-            <div class="item"><img src="images/fastfood_2.jpg"></div>
-            <div class="item"><img src="images/fastfood_3.jpg"></div>
-            <div class="item"><img src="images/fastfood_4.jpg"></div>
-            <div class="item"><img src="images/fastfood_5.jpg"></div>
-            <div class="item"><img src="images/fastfood_6.jpg"></div>
-            <div class="item"><img src="images/fastfood_7.jpg"></div>
-            <div class="item"><img src="images/fastfood_8.jpg"></div>
-            <div class="item"><img src="images/fastfood_9.jpg"></div>
-            <div class="item"><img src="images/fastfood_10.jpg"></div>
-            <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/fastfood_video.mp4"></video></div>
+            <div class="item"><img src="images/fastfood_1.png"></div>
+            <div class="item"><img src="images/fastfood_2.png"></div>
+            <div class="item"><img src="images/fastfood_3.png"></div>
+            <div class="item"><img src="images/fastfood_4.png"></div>
+            <div class="item"><img src="images/fastfood_5.png"></div>
+            <div class="item"><img src="images/fastfood_6.png"></div>
+            <div class="item"><img src="images/fastfood_7.png"></div>
+            <div class="item"><img src="images/fastfood_8.png"></div>
+            <div class="item"><img src="images/fastfood_9.png"></div>
+            <div class="item"><img src="images/fastfood_10.png"></div>
+            <div class="item"><div class="badge">VIDEO</div><video loop muted><source src="images/fastfood_video.mp4" type="video/mp4"></video></div>
         </div>
     </div>
 
 </div>
 
-<!-- ================= PREMIUM TIER (3 Categories) ================= -->
 <div id="premium" class="content-section">
     
-    <!-- 8. Real Estate & Luxury Housing -->
     <div class="category-block">
         <h3 class="category-title"><i class="fas fa-building"></i> Real Estate & Luxury Housing</h3>
         <div class="scroll-container">
-            <div class="item"><img src="images/realestate_1.jpg"></div>
-            <div class="item"><img src="images/realestate_2.jpg"></div>
-            <div class="item"><img src="images/realestate_3.jpg"></div>
-            <div class="item"><img src="images/realestate_4.jpg"></div>
-            <div class="item"><img src="images/realestate_5.jpg"></div>
-            <div class="item"><img src="images/realestate_6.jpg"></div>
-            <div class="item"><img src="images/realestate_7.jpg"></div>
-            <div class="item"><img src="images/realestate_8.jpg"></div>
-            <div class="item"><img src="images/realestate_9.jpg"></div>
-            <div class="item"><img src="images/realestate_10.jpg"></div>
-            <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/realestate_video.mp4"></video></div>
+            <div class="item"><img src="images/realestate_1.png"></div>
+            <div class="item"><img src="images/realestate_2.png"></div>
+            <div class="item"><img src="images/realestate_3.png"></div>
+            <div class="item"><img src="images/realestate_4.png"></div>
+            <div class="item"><img src="images/realestate_5.png"></div>
+            <div class="item"><img src="images/realestate_6.png"></div>
+            <div class="item"><img src="images/realestate_7.png"></div>
+            <div class="item"><img src="images/realestate_8.png"></div>
+            <div class="item"><img src="images/realestate_9.png"></div>
+            <div class="item"><img src="images/realestate_10.png"></div>
+            <div class="item"><div class="badge">VIDEO</div><video loop muted><source src="images/realestate_video.mp4" type="video/mp4"></video></div>
         </div>
     </div>
 
-    <!-- 9. Jewelry & Boutique Brand Designs -->
     <div class="category-block">
         <h3 class="category-title"><i class="fas fa-gem"></i> Jewelry & Boutique Brand Designs</h3>
         <div class="scroll-container">
-            <div class="item"><img src="images/jewelry_1.jpg"></div>
-            <div class="item"><img src="images/jewelry_2.jpg"></div>
-            <div class="item"><img src="images/jewelry_3.jpg"></div>
-            <div class="item"><img src="images/jewelry_4.jpg"></div>
-            <div class="item"><img src="images/jewelry_5.jpg"></div>
-            <div class="item"><img src="images/jewelry_6.jpg"></div>
-            <div class="item"><img src="images/jewelry_7.jpg"></div>
-            <div class="item"><img src="images/jewelry_8.jpg"></div>
-            <div class="item"><img src="images/jewelry_9.jpg"></div>
-            <div class="item"><img src="images/jewelry_10.jpg"></div>
-            <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/jewelry_video.mp4"></video></div>
+            <div class="item"><img src="images/jewelry_1.png"></div>
+            <div class="item"><img src="images/jewelry_2.png"></div>
+            <div class="item"><img src="images/jewelry_3.png"></div>
+            <div class="item"><img src="images/jewelry_4.png"></div>
+            <div class="item"><img src="images/jewelry_5.png"></div>
+            <div class="item"><img src="images/jewelry_6.png"></div>
+            <div class="item"><img src="images/jewelry_7.png"></div>
+            <div class="item"><img src="images/jewelry_8.png"></div>
+            <div class="item"><img src="images/jewelry_9.png"></div>
+            <div class="item"><img src="images/jewelry_10.png"></div>
+            <div class="item"><div class="badge">VIDEO</div><video loop muted><source src="images/jewelry_video.mp4" type="video/mp4"></video></div>
         </div>
     </div>
 
-    <!-- 10. Tech Portfolio & Agency Designs -->
     <div class="category-block">
         <h3 class="category-title"><i class="fas fa-laptop-code"></i> Tech Portfolio & Agency Designs</h3>
         <div class="scroll-container">
-            <div class="item"><img src="images/tech_1.jpg"></div>
-            <div class="item"><img src="images/tech_2.jpg"></div>
-            <div class="item"><img src="images/tech_3.jpg"></div>
-            <div class="item"><img src="images/tech_4.jpg"></div>
-            <div class="item"><img src="images/tech_5.jpg"></div>
-            <div class="item"><img src="images/tech_6.jpg"></div>
-            <div class="item"><img src="images/tech_7.jpg"></div>
-            <div class="item"><img src="images/tech_8.jpg"></div>
-            <div class="item"><img src="images/tech_9.jpg"></div>
-            <div class="item"><img src="images/tech_10.jpg"></div>
-            <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/tech_video.mp4"></video></div>
+            <div class="item"><img src="images/tech_1.png"></div>
+            <div class="item"><img src="images/tech_2.png"></div>
+            <div class="item"><img src="images/tech_3.png"></div>
+            <div class="item"><img src="images/tech_4.png"></div>
+            <div class="item"><img src="images/tech_5.png"></div>
+            <div class="item"><img src="images/tech_6.png"></div>
+            <div class="item"><img src="images/tech_7.png"></div>
+            <div class="item"><img src="images/tech_8.png"></div>
+            <div class="item"><img src="images/tech_9.png"></div>
+            <div class="item"><img src="images/tech_10.png"></div>
+            <div class="item"><div class="badge">VIDEO</div><video loop muted><source src="images/tech_video.mp4" type="video/mp4"></video></div>
         </div>
     </div>
 
+</div>
+
+<div id="mediaModal" class="custom-modal" onclick="closeModal()">
+    <div class="modal-wrapper" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div id="modalTarget"></div>
+    </div>
 </div>
 
 <div class="contact">
@@ -268,10 +292,59 @@
 <footer><p>© 2026 BrandOrbitX | All Rights Reserved</p></footer>
 
 <script>
+    // Tab switching function
     function show(type) {
         document.querySelectorAll('.content-section').forEach(g => g.classList.remove('active'));
         document.getElementById(type).classList.add('active');
     }
+
+    // Modal Control logic
+    const modal = document.getElementById('mediaModal');
+    const modalTarget = document.getElementById('modalTarget');
+
+    // Attach click handler to all items dynamically
+    document.querySelectorAll('.item').forEach(item => {
+        item.addEventListener('click', () => {
+            const img = item.querySelector('img');
+            const video = item.querySelector('video');
+
+            modalTarget.innerHTML = ''; // Reset container
+
+            if (img) {
+                // Image layer render
+                const cloneImg = document.createElement('img');
+                cloneImg.src = img.src;
+                modalTarget.appendChild(cloneImg);
+            } else if (video) {
+                // Video layer render with premium controls
+                const cloneVideo = document.createElement('video');
+                cloneVideo.controls = true;
+                cloneVideo.autoplay = true;
+                cloneVideo.loop = true;
+                
+                const source = document.createElement('source');
+                source.src = video.querySelector('source').src;
+                source.type = 'video/mp4';
+                
+                cloneVideo.appendChild(source);
+                modalTarget.appendChild(cloneVideo);
+            }
+
+            modal.classList.add('show');
+        });
+    });
+
+    function closeModal() {
+        modal.classList.remove('show');
+        // Stop any running video instance inside the modal
+        modalTarget.innerHTML = ''; 
+    }
+
+    // Close on hitting 'Escape' key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+    });
 </script>
 </body>
 </html>
+
