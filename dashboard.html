@@ -10,87 +10,41 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background: var(--bg); color: #e5e7eb; }
 
-        /* Advanced Header */
         .header { text-align: center; padding: 40px 20px; background: radial-gradient(circle, #1e3a8a 0%, #0f172a 80%); border-bottom: 2px solid var(--glow); }
-        .header-logo { width: 280px; height: 280px; object-fit: cover; border-radius: 30px; border: 3px solid var(--glow); box-shadow: 0 0 30px rgba(0, 217, 255, 0.4); margin-bottom: 20px; }
+        .header-logo { width: 280px; height: 280px; object-fit: cover; border-radius: 30px; border: 3px solid var(--glow); box-shadow: 0 0 30px rgba(0, 217, 255, 0.4); }
 
-        /* Menu */
-        .menu { display: flex; justify-content: center; gap: 20px; padding: 40px; flex-wrap: wrap; }
-        .menu button { padding: 15px 30px; border: 1px solid var(--glow); cursor: pointer; font-weight: bold; border-radius: 12px; background: transparent; color: var(--glow); transition: 0.4s; text-transform: uppercase; }
-        .menu button:hover { background: var(--glow); color: var(--bg); box-shadow: 0 0 20px var(--glow); }
+        .menu { display: flex; justify-content: center; gap: 15px; padding: 30px; flex-wrap: wrap; }
+        .menu button { padding: 12px 25px; border: 1px solid var(--glow); cursor: pointer; font-weight: bold; border-radius: 10px; background: transparent; color: var(--glow); transition: 0.3s; text-transform: uppercase; }
+        .menu button:hover { background: var(--glow); color: var(--bg); }
 
-        /* Grid System */
-        .grid { display: none; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; padding: 40px; max-width: 1300px; margin: auto; }
-        .grid.active { display: grid; animation: fadeIn 0.5s ease; }
-        .item { position: relative; background: var(--card); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden; transition: 0.4s; }
-        .item:hover { border-color: var(--glow); transform: translateY(-10px); }
-        .item video, .item img { width: 100%; height: 280px; object-fit: cover; display: block; }
-        .badge { position: absolute; top: 10px; right: 10px; background: var(--glow); color: #000; padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; font-weight: bold; z-index: 10; }
-
-        /* Contact */
-        .contact { text-align: center; padding: 80px; background: #020617; border-top: 1px solid var(--glow); }
-        .contact button { padding: 20px 60px; background: linear-gradient(135deg, #00d9ff, #0077ff); border: none; font-weight: bold; cursor: pointer; border-radius: 50px; font-size: 1.2rem; transition: 0.4s; }
-        .contact button:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--glow); }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .grid { display: none; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 20px; max-width: 1200px; margin: auto; }
+        .grid.active { display: grid; }
+        
+        .item { position: relative; background: var(--card); border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .item video, .item img { width: 100%; height: 250px; object-fit: cover; display: block; }
+        .badge { position: absolute; top: 10px; right: 10px; background: var(--glow); color: #000; padding: 4px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: bold; z-index: 5; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <video class="header-logo" autoplay loop muted playsinline poster="images/logo.png">
+    <video class="header-logo" autoplay loop muted playsinline>
         <source src="images/logo.mp4" type="video/mp4">
     </video>
 </div>
 
 <div class="menu">
-    <button onclick="show('basic')"><i class="fas fa-rocket"></i> Basic</button>
-    <button onclick="show('normal')"><i class="fas fa-star"></i> Normal</button>
-    <button onclick="show('premium')"><i class="fas fa-crown"></i> Premium</button>
+    <button onclick="show('basic')">Basic</button>
+    <button onclick="show('normal')">Normal</button>
+    <button onclick="show('premium')">Premium</button>
 </div>
 
 <div id="basic" class="grid active">
-    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/basic_v1.mp4"></video></div>
-    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/basic_v2.mp4"></video></div>
-    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/basic_v3.mp4"></video></div>
-    <div class="item"><img src="images/basic_p1.jpg"></div>
-    <div class="item"><img src="images/basic_p2.jpg"></div>
-    <div class="item"><img src="images/basic_p3.jpg"></div>
-</div>
+    <div class="item"><div class="badge">VIDEO</div><video controls poster="images/basic_p1.jpg"><source src="images/basic_v1.mp4"></video></div>
+    <div class="item"><div class="badge">VIDEO</div><video controls poster="images/basic_p2.jpg"><source src="images/basic_v2.mp4"></video></div>
+    <div class="item"><div class="badge">VIDEO</div><video controls poster="images/basic_p3.jpg"><source src="images/basic_v3.mp4"></video></div>
+    <div class="item"><img src="images/basic_p
 
-<div id="normal" class="grid">
-    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/normal_v1.mp4"></video></div>
-    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/normal_v2.mp4"></video></div>
-    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/normal_v3.mp4"></video></div>
-    <div class="item"><img src="images/normal_p1.jpg"></div>
-    <div class="item"><img src="images/normal_p2.jpg"></div>
-    <div class="item"><img src="images/normal_p3.jpg"></div>
-</div>
-
-<div id="premium" class="grid">
-    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/premium_v1.mp4"></video></div>
-    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/premium_v2.mp4"></video></div>
-    <div class="item"><div class="badge">VIDEO</div><video controls><source src="images/premium_v3.mp4"></video></div>
-    <div class="item"><img src="images/premium_p1.jpg"></div>
-    <div class="item"><img src="images/premium_p2.jpg"></div>
-    <div class="item"><img src="images/premium_p3.jpg"></div>
-</div>
-
-<div class="contact">
-    <h2>Ready to launch your dream website?</h2>
-    <br>
-    <button onclick="goInsta()"><i class="fas fa-envelope"></i> Contact Now</button>
-</div>
-
-<script>
-    function show(type) {
-        document.querySelectorAll('.grid').forEach(g => g.classList.remove('active'));
-        document.getElementById(type).classList.add('active');
-    }
-    function goInsta() { window.open("https://www.instagram.com/brand_orbitx", "_blank"); }
-</script>
-</body>
-</html>
 
 
 
