@@ -6,24 +6,78 @@
     <title>Describe Project | BrandOrbitX</title>
     <style>
         body { background: #0f172a; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Poppins', sans-serif; }
-        .box { background: rgba(30, 41, 59, 0.5); padding: 40px; border-radius: 20px; border: 1px solid #00d9ff; width: 90%; max-width: 450px; text-align: center; }
+        .box { background: rgba(30, 41, 59, 0.5); padding: 40px; border-radius: 20px; border: 1px solid #00d9ff; width: 90%; max-width: 450px; text-align: center; transition: all 0.3s ease; }
         h2 { color: #00d9ff; margin-bottom: 20px; }
-        input, textarea { width: 100%; padding: 15px; margin: 10px 0; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 10px; outline: none; }
-        button { width: 100%; padding: 15px; background: #00d9ff; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; color: #0f172a; transition: 0.3s; }
+        input, textarea { width: 100%; padding: 15px; margin: 10px 0; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 10px; outline: none; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: #00d9ff; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; color: #0f172a; transition: 0.3s; margin-top: 10px; }
         button:hover { background: #fff; box-shadow: 0 0 15px #00d9ff; }
+        
+        /* Thank You Message Styling */
+        .thank-you-msg { display: none; padding: 20px 0; }
+        .thank-you-msg h3 { color: #00d9ff; font-size: 24px; margin-bottom: 10px; }
+        .thank-you-msg p { color: #94a3b8; font-size: 16px; }
     </style>
 </head>
 <body>
 
 <div class="box">
-    <h2>Project Brief</h2>
-    <form action="https://formspree.io/f/mvznnpyp" method="POST">
-        <input type="text" name="name" placeholder="Your Full Name" required>
-        <input type="email" name="email" placeholder="Your Email Address" required>
-        <textarea name="message" rows="5" placeholder="Describe your project..." required></textarea>
-        <button type="submit">SUBMIT PROJECT</button>
-    </form>
+    <!-- Form Section -->
+    <div id="form-container">
+        <h2>Project Brief</h2>
+        <form id="project-form" action="https://formspree.io/f/xlgkqvdv" method="POST">
+            <input type="text" name="name" placeholder="Your Full Name" required>
+            <input type="email" name="email" placeholder="Your Email Address" required>
+            <textarea name="message" rows="5" placeholder="Describe your project..." required></textarea>
+            <button type="submit" id="submit-btn">SUBMIT PROJECT</button>
+        </form>
+    </div>
+
+    <!-- Thank You Section -->
+    <div id="thank-you-container" class="thank-you-msg">
+        <h3>Thank You!</h3>
+        <p>Aapka project brief hamein mil gaya hai. Ham jald hi aap se contact karenge!</p>
+    </div>
 </div>
+
+<script>
+    const form = document.getElementById('project-form');
+    const formContainer = document.getElementById('form-container');
+    const thankYouContainer = document.getElementById('thank-you-container');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault(); // Default page reload ko rokne ke liye
+        
+        submitBtn.innerText = "SENDING...";
+        submitBtn.disabled = true;
+
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                // Form ko hide karke Thank You message dikhane ke liye
+                formContainer.style.display = 'none';
+                thankYouContainer.style.display = 'block';
+            } else {
+                alert("Oops! Kuch error aayi hai. Please dobara try karein.");
+                submitBtn.innerText = "SUBMIT PROJECT";
+                submitBtn.disabled = false;
+            }
+        } catch (error) {
+            alert("Network error! Please apna internet check karein.");
+            submitBtn.innerText = "SUBMIT PROJECT";
+            submitBtn.disabled = false;
+        }
+    });
+</script>
 
 </body>
 </html>
