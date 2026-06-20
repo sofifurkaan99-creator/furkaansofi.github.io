@@ -6,47 +6,55 @@
     <title>BrandOrbitX | Welcome</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { width: 100%; height: 100%; overflow: hidden; background-color: #000; font-family: 'Segoe UI', Roboto, sans-serif; }
-        
-        /* Video background settings */
-        .video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        body, html { width: 100%; height: 100%; overflow: hidden; background-color: #000; font-family: 'Segoe UI', sans-serif; }
+
+        /* Video ka 2:3 ratio setup */
+        .video-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%; 
+            max-width: 400px; /* Adjust based on your preference */
+            aspect-ratio: 2 / 3; 
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        }
         video { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Button placement */
+        /* Next button edge par (right side) */
         .btn-container {
             position: absolute;
-            bottom: 15%;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
-            opacity: 0; 
+            bottom: 50px;
+            right: 30px; /* Edge alignment */
+            z-index: 10;
+            opacity: 0;
             animation: fadeIn 1.5s forwards;
-            animation-delay: 2.5s; /* Video ke 2.5 sec baad button dikhega */
+            animation-delay: 2s;
         }
 
-        /* Glassmorphism button */
+        /* Glassmorphism Design */
         .glass-btn {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
-            padding: 18px 50px;
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            border-radius: 50px;
+            padding: 15px 35px;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 15px;
             cursor: pointer;
             text-decoration: none;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             display: inline-block;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
-
         .glass-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
         }
 
         @keyframes fadeIn { to { opacity: 1; } }
@@ -54,15 +62,14 @@
 </head>
 <body>
 
-    <div class="video-background">
+    <div class="video-wrapper">
         <video autoplay muted playsinline loop>
             <source src="images/intro.mp4" type="video/mp4">
-            Your browser does not support the video tag.
         </video>
     </div>
 
     <div class="btn-container">
-        <a href="home.html" class="glass-btn">ENTER SITE →</a>
+        <a href="home.html" class="glass-btn">Next →</a>
     </div>
 
 </body>
