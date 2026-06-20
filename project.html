@@ -14,8 +14,8 @@
         
         /* Thank You Message Styling */
         .thank-you-msg { display: none; padding: 20px 0; }
-        .thank-you-msg h3 { color: #00d9ff; font-size: 24px; margin-bottom: 10px; }
-        .thank-you-msg p { color: #94a3b8; font-size: 16px; }
+        .thank-you-msg h3 { color: #00d9ff; font-size: 26px; margin-bottom: 12px; }
+        .thank-you-msg p { color: #94a3b8; font-size: 16px; line-height: 1.5; }
     </style>
 </head>
 <body>
@@ -32,10 +32,10 @@
         </form>
     </div>
 
-    <!-- Thank You Section -->
+    <!-- Thank You Section (Now 100% English) -->
     <div id="thank-you-container" class="thank-you-msg">
         <h3>Thank You!</h3>
-        <p>Aapka project brief hamein mil gaya hai. Ham jald hi aap se contact karenge!</p>
+        <p>Your project brief has been successfully submitted. We will get back to you shortly!</p>
     </div>
 </div>
 
@@ -46,7 +46,7 @@
     const submitBtn = document.getElementById('submit-btn');
 
     form.addEventListener('submit', async function(e) {
-        e.preventDefault(); // Default page reload ko rokne ke liye
+        e.preventDefault();
         
         submitBtn.innerText = "SENDING...";
         submitBtn.disabled = true;
@@ -63,16 +63,15 @@
             });
 
             if (response.ok) {
-                // Form ko hide karke Thank You message dikhane ke liye
                 formContainer.style.display = 'none';
                 thankYouContainer.style.display = 'block';
             } else {
-                alert("Oops! Kuch error aayi hai. Please dobara try karein.");
+                alert("Oops! Something went wrong. Please try again.");
                 submitBtn.innerText = "SUBMIT PROJECT";
                 submitBtn.disabled = false;
             }
         } catch (error) {
-            alert("Network error! Please apna internet check karein.");
+            alert("Network error! Please check your internet connection.");
             submitBtn.innerText = "SUBMIT PROJECT";
             submitBtn.disabled = false;
         }
