@@ -208,6 +208,30 @@
     </div>
 
     <div class="category-block">
+        <h3 class="category-title"><i class="fas fa-window-restore"></i> Glassmorphism Login Pages Designs</h3>
+        <div class="scroll-container">
+            <div class="item"><img src="images/glass_login_1.png"></div>
+            <div class="item"><img src="images/glass_login_2.png"></div>
+            <div class="item"><img src="images/glass_login_3.png"></div>
+            <div class="item"><img src="images/glass_login_4.png"></div>
+            <div class="item"><img src="images/glass_login_5.png"></div>
+            <div class="item"><img src="images/glass_login_6.png"></div>
+            <div class="item"><img src="images/glass_login_7.png"></div>
+            <div class="item"><img src="images/glass_login_8.png"></div>
+            <div class="item"><img src="images/glass_login_9.png"></div>
+            <div class="item"><img src="images/glass_login_10.png"></div>
+            <div class="item"><img src="images/glass_login_11.png"></div>
+            <div class="item"><img src="images/glass_login_12.png"></div>
+            <div class="item"><img src="images/glass_login_13.png"></div>
+            <div class="item"><img src="images/glass_login_14.png"></div>
+            <div class="item"><img src="images/glass_login_15.png"></div>
+            <div class="item"><div class="badge">VIDEO</div><video loop muted><source src="images/glass_login_video1.mp4" type="video/mp4"></video></div>
+            <div class="item"><div class="badge">VIDEO</div><video loop muted><source src="images/glass_login_video2.mp4" type="video/mp4"></video></div>
+            <div class="item"><div class="badge">VIDEO</div><video loop muted><source src="images/glass_login_video3.mp4" type="video/mp4"></video></div>
+        </div>
+    </div>
+
+    <div class="category-block">
         <h3 class="category-title"><i class="fas fa-hamburger"></i> Fast Food Website Designs</h3>
         <div class="scroll-container">
             <div class="item"><img src="images/fastfood_1.png"></div>
@@ -303,17 +327,14 @@
 <footer><p>© 2026 BrandOrbitX | All Rights Reserved</p></footer>
 
 <script>
-    // Tab switching function logic
     function show(type) {
         document.querySelectorAll('.content-section').forEach(g => g.classList.remove('active'));
         document.getElementById(type).classList.add('active');
     }
 
-    // Modal Control logic
     const modal = document.getElementById('mediaModal');
     const modalTarget = document.getElementById('modalTarget');
 
-    // Attach click handler to all layout items dynamically
     document.querySelectorAll('.item').forEach(item => {
         item.addEventListener('click', () => {
             const img = item.querySelector('img');
@@ -322,12 +343,10 @@
             modalTarget.innerHTML = ''; 
 
             if (img) {
-                // Image renderer
                 const cloneImg = document.createElement('img');
                 cloneImg.src = img.src;
                 modalTarget.appendChild(cloneImg);
             } else if (video) {
-                // Video renderer with active dynamic controls
                 const cloneVideo = document.createElement('video');
                 cloneVideo.controls = true;
                 cloneVideo.autoplay = true;
@@ -350,12 +369,9 @@
         modalTarget.innerHTML = ''; 
     }
 
-    // Escape listener to wrap modal visibility safely
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeModal();
     });
 </script>
 </body>
 </html>
-
-
