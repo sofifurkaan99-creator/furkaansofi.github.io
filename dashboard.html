@@ -11,14 +11,17 @@
     --void:#06080f;
     --panel:#0d1426;
     --panel-2:#111a32;
+    --panel-3:#16213f;
     --primary:#7c5cff;
     --primary-soft:rgba(124,92,255,.12);
     --accent:#ff6b4a;
+    --cyan:#6fd4ff;
     --text:#e8eaf2;
     --muted:#8088a0;
     --line:rgba(255,255,255,.08);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
     background:var(--void); color:var(--text);
     font-family:'Inter',-apple-system,sans-serif;
@@ -28,146 +31,240 @@
   a:focus-visible, button:focus-visible{ outline:2px solid var(--primary); outline-offset:3px; }
 
   /* ===== Nav ===== */
-  nav{
-    position:sticky; top:0; z-index:60;
+  nav.topnav{
+    position:sticky; top:0; z-index:80;
     display:flex; align-items:center; justify-content:space-between;
     padding:18px 6%;
-    background:rgba(6,8,15,.75);
+    background:rgba(6,8,15,.78);
     backdrop-filter:blur(16px);
     border-bottom:1px solid var(--line);
   }
   .logo{ display:flex; align-items:center; gap:9px; font-weight:700; text-decoration:none; color:var(--text); }
   .logo .dot{ width:8px;height:8px;border-radius:50%;background:var(--accent); box-shadow:0 0 10px var(--accent); }
-  nav a.back{ color:var(--muted); text-decoration:none; font-size:13px; font-weight:600; display:flex; align-items:center; gap:6px; transition:.3s; }
-  nav a.back:hover{ color:var(--text); }
+  nav.topnav a.back{ color:var(--muted); text-decoration:none; font-size:13px; font-weight:600; display:flex; align-items:center; gap:6px; transition:.3s; }
+  nav.topnav a.back:hover{ color:var(--text); }
 
   /* ===== Header ===== */
   .header{
     position:relative;
     text-align:center;
-    padding:64px 20px 50px;
-    background:
-      radial-gradient(ellipse 700px 400px at 50% -10%, rgba(124,92,255,.2), transparent 60%);
-    border-bottom:1px solid var(--line);
+    padding:60px 20px 0;
     overflow:hidden;
+  }
+  .header::before{
+    content:'';
+    position:absolute; top:-100px; left:50%; transform:translateX(-50%);
+    width:600px; height:400px;
+    background:radial-gradient(ellipse, rgba(124,92,255,.22), transparent 65%);
+    pointer-events:none;
   }
   .header-orbit{
-    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-    width:420px; height:420px;
-    z-index:0; pointer-events:none; opacity:.7;
+    position:relative;
+    width:140px; height:140px;
+    margin:0 auto 18px;
+    display:flex; align-items:center; justify-content:center;
   }
-  .header-orbit .ring{ position:absolute; inset:0; border:1px solid rgba(124,92,255,.15); border-radius:50%; animation:spin linear infinite; }
-  .header-orbit .ring:nth-child(2){ inset:40px; animation-duration:30s; animation-direction:reverse; border-color:rgba(255,107,74,.12); }
-  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .header-orbit .sphere{
+    position:absolute; width:96px; height:96px; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, rgba(110,160,255,.4), transparent 55%), radial-gradient(circle at 65% 70%, rgba(20,30,60,.95), #060912 70%);
+    border:1px solid rgba(120,170,255,.3);
+    box-shadow:0 0 30px rgba(94,203,255,.25), inset 0 0 24px rgba(0,0,0,.6);
+  }
+  .header-orbit .ring{
+    position:absolute; width:140px; height:46px; border-radius:50%;
+    border:2px solid var(--cyan);
+    transform:rotate(-18deg);
+    box-shadow:0 0 12px rgba(111,212,255,.8);
+    animation:spin 10s linear infinite;
+  }
+  .header-orbit .ring::after{
+    content:''; position:absolute; top:50%; right:-4px; width:7px; height:7px; border-radius:50%;
+    background:#eafcff; box-shadow:0 0 10px 3px rgba(160,225,255,1); transform:translateY(-50%);
+  }
+  @keyframes spin{ to{ transform:rotate(342deg); } }
 
-  .header-logo{
-    position:relative; z-index:1;
-    width:200px; height:200px; object-fit:cover;
-    border-radius:24px;
-    border:1px solid rgba(124,92,255,.35);
-    box-shadow:0 20px 50px rgba(0,0,0,.5), 0 0 40px rgba(124,92,255,.2);
-  }
   .header h1{
     position:relative; z-index:1;
-    margin-top:24px; font-size:clamp(1.6rem,4vw,2.2rem); font-weight:800; letter-spacing:-.5px;
+    font-size:clamp(1.7rem,4.2vw,2.4rem); font-weight:800; letter-spacing:-1px;
   }
-  .header p{ position:relative; z-index:1; color:var(--muted); margin-top:8px; font-size:.95rem; }
+  .header p{ position:relative; z-index:1; color:var(--muted); margin-top:10px; font-size:.95rem; max-width:440px; margin-inline:auto; }
 
-  /* ===== Tier menu ===== */
+  /* ===== Tier menu (segmented control) ===== */
+  .tier-wrap{
+    position:sticky; top:64px; z-index:70;
+    padding:22px 20px 16px;
+    background:linear-gradient(180deg, var(--void) 60%, transparent);
+  }
   .menu{
-    position:sticky; top:65px; z-index:50;
-    display:flex; justify-content:center; gap:10px;
-    padding:22px 20px;
-    background:rgba(6,8,15,.85);
-    backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--line);
-    flex-wrap:wrap;
+    position:relative;
+    display:flex; justify-content:center;
+    max-width:380px; margin:0 auto;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:50px;
+    padding:5px;
+  }
+  .menu .slider{
+    position:absolute; top:5px; left:5px;
+    width:calc(33.333% - 4px); height:calc(100% - 10px);
+    background:var(--primary);
+    border-radius:50px;
+    transition:transform .4s cubic-bezier(.65,0,.35,1);
+    box-shadow:0 4px 16px rgba(124,92,255,.4);
+    z-index:0;
   }
   .menu button{
-    position:relative;
-    padding:11px 28px;
-    border:1px solid var(--line);
+    position:relative; z-index:1;
+    flex:1;
+    padding:11px 18px;
+    border:none;
     cursor:pointer;
-    font-weight:600; font-size:13px;
-    letter-spacing:1.5px; text-transform:uppercase;
+    font-weight:600; font-size:12.5px;
+    letter-spacing:1.2px; text-transform:uppercase;
     border-radius:50px;
-    background:var(--panel);
+    background:transparent;
     color:var(--muted);
-    transition:.35s cubic-bezier(.16,1,.3,1);
+    transition:color .3s;
     font-family:'Inter',sans-serif;
   }
-  .menu button:hover{ color:var(--text); border-color:rgba(124,92,255,.4); }
-  .menu button.active{
-    background:var(--primary);
-    color:#fff;
-    border-color:var(--primary);
-    box-shadow:0 6px 20px rgba(124,92,255,.4);
+  .menu button.active{ color:#fff; }
+
+  /* jump chips */
+  .chipbar{
+    display:flex; gap:10px; overflow-x:auto;
+    max-width:900px; margin:18px auto 0;
+    padding:2px 20px 6px;
   }
+  .chipbar::-webkit-scrollbar{ display:none; }
+  .chip{
+    display:flex; align-items:center; gap:7px;
+    padding:8px 16px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:50px;
+    color:var(--muted);
+    text-decoration:none;
+    font-size:.78rem; font-weight:600;
+    white-space:nowrap;
+    flex-shrink:0;
+    transition:.25s;
+  }
+  .chip:hover{ color:var(--text); border-color:rgba(124,92,255,.4); background:var(--primary-soft); }
+  .chip i{ color:var(--primary); font-size:.85em; }
 
   /* ===== Content ===== */
-  .content-section{ display:none; max-width:1280px; margin:auto; padding:40px 5% 20px; }
+  .content-section{ display:none; max-width:1180px; margin:auto; padding:36px 5% 20px; }
   .content-section.active{ display:block; animation:fadein .5s ease; }
-  @keyframes fadein{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:translateY(0); } }
+  @keyframes fadein{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
 
-  .category-block{ margin-bottom:56px; }
-  .category-title{
-    font-size:1.15rem; font-weight:700; color:#fff;
-    margin-bottom:18px; display:flex; align-items:center; gap:12px;
-    padding-left:14px;
-    border-left:3px solid var(--primary);
+  /* ===== Module (category) ===== */
+  .module{ margin-bottom:64px; scroll-margin-top:160px; }
+  .module-head{
+    display:flex; align-items:center; gap:16px;
+    margin-bottom:20px;
   }
-  .category-title i{ color:var(--primary); font-size:1rem; }
-  .category-count{ margin-left:auto; font-size:.75rem; color:var(--muted); font-family:'JetBrains Mono',monospace; }
-
-  .scroll-container{
-    display:flex; gap:18px;
-    overflow-x:auto;
-    padding-bottom:18px;
-    scroll-behavior:smooth;
-    scroll-snap-type:x proximity;
+  .module-index{
+    font-size:13px; color:var(--primary);
+    border:1px solid rgba(124,92,255,.35);
+    background:var(--primary-soft);
+    width:34px; height:34px;
+    border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
   }
-  .scroll-container::-webkit-scrollbar{ height:6px; }
-  .scroll-container::-webkit-scrollbar-track{ background:rgba(255,255,255,.04); border-radius:10px; }
-  .scroll-container::-webkit-scrollbar-thumb{ background:var(--primary); border-radius:10px; }
+  .module-titlewrap{ display:flex; flex-direction:column; gap:3px; }
+  .module-title{ font-size:1.2rem; font-weight:700; display:flex; align-items:center; gap:10px; }
+  .module-title i{ color:var(--cyan); font-size:.95rem; }
+  .module-count{ font-size:.72rem; color:var(--muted); }
 
-  .item{
+  .module-body{
+    display:grid;
+    grid-template-columns:1.15fr 1fr;
+    gap:18px;
+  }
+
+  .featured-tile{
     position:relative;
-    background:var(--panel);
-    border-radius:16px;
+    border-radius:20px;
     overflow:hidden;
     border:1px solid var(--line);
-    min-width:280px; max-width:280px;
-    flex-shrink:0;
+    background:var(--panel);
     cursor:pointer;
-    scroll-snap-align:start;
-    transition:.35s cubic-bezier(.16,1,.3,1);
+    min-height:280px;
+    transition:.4s cubic-bezier(.16,1,.3,1);
   }
-  .item:hover{
-    transform:translateY(-4px) scale(1.02);
-    box-shadow:0 16px 36px rgba(0,0,0,.4), 0 0 0 1px rgba(124,92,255,.3);
-    border-color:rgba(124,92,255,.4);
+  .featured-tile img, .featured-tile video{
+    width:100%; height:100%; min-height:280px; object-fit:cover; display:block;
+    position:absolute; inset:0;
   }
-  .item img, .item video{
-    width:100%; height:200px; object-fit:cover; display:block;
-    background:var(--panel-2);
+  .featured-tile:hover{
+    border-color:rgba(124,92,255,.45);
+    box-shadow:0 20px 50px rgba(0,0,0,.45), 0 0 0 1px rgba(124,92,255,.25);
   }
-  .badge{
-    position:absolute; top:10px; right:10px;
-    background:var(--accent); color:#06080f;
-    padding:4px 10px; border-radius:6px;
-    font-size:.65rem; font-weight:700; letter-spacing:.5px;
-    z-index:5;
+  .featured-tag{
+    position:absolute; top:14px; left:14px; z-index:2;
+    background:rgba(6,8,15,.7);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(124,92,255,.4);
+    color:var(--cyan);
+    padding:6px 14px;
+    border-radius:50px;
+    font-size:.68rem; font-weight:700;
+    letter-spacing:1px; text-transform:uppercase;
     font-family:'JetBrains Mono',monospace;
   }
-  .item-overlay{
+
+  .tile-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:12px;
+    align-content:start;
+  }
+  .tile{
+    position:relative;
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:var(--panel);
+    cursor:pointer;
+    aspect-ratio:1/0.82;
+    transition:.35s cubic-bezier(.16,1,.3,1);
+  }
+  .tile img, .tile video{ width:100%; height:100%; object-fit:cover; display:block; }
+  .tile:hover{
+    transform:translateY(-3px);
+    border-color:rgba(124,92,255,.4);
+    box-shadow:0 12px 28px rgba(0,0,0,.4);
+  }
+
+  .vid-badge{
+    position:absolute; top:8px; right:8px; z-index:3;
+    background:var(--accent); color:#06080f;
+    padding:3px 8px; border-radius:5px;
+    font-size:.6rem; font-weight:700; letter-spacing:.4px;
+    font-family:'JetBrains Mono',monospace;
+  }
+
+  .tile-overlay{
     position:absolute; inset:0;
-    background:linear-gradient(to top, rgba(6,8,15,.85), transparent 50%);
+    background:linear-gradient(to top, rgba(6,8,15,.8), transparent 55%);
     display:flex; align-items:flex-end; justify-content:center;
     opacity:0; transition:.3s;
-    padding-bottom:14px;
+    padding-bottom:10px;
+    color:var(--text);
   }
-  .item:hover .item-overlay{ opacity:1; }
-  .item-overlay i{ color:var(--text); font-size:1.1rem; }
+  .featured-tile .tile-overlay{ padding-bottom:16px; font-size:1.2rem; }
+  .featured-tile:hover .tile-overlay, .tile:hover .tile-overlay{ opacity:1; }
+
+  @media (max-width:760px){
+    .module-body{ grid-template-columns:1fr; }
+    .featured-tile{ min-height:220px; }
+    .featured-tile img, .featured-tile video{ min-height:220px; }
+    .tile-grid{ grid-template-columns:repeat(3,1fr); }
+  }
+  @media (max-width:460px){
+    .tile-grid{ grid-template-columns:repeat(2,1fr); }
+  }
 
   /* ===== Modal ===== */
   .custom-modal{
@@ -221,107 +318,179 @@
   @media (prefers-reduced-motion: reduce){
     .ring{ animation:none; }
     .content-section.active{ animation:none; }
+    .menu .slider{ transition:none; }
   }
 </style>
 </head>
 <body>
 
-<nav>
+<nav class="topnav">
   <a href="home.html" class="logo"><span class="dot"></span>BrandOrbitX</a>
   <a href="home.html" class="back"><i class="fas fa-arrow-left"></i> Home</a>
 </nav>
 
 <div class="header">
-  <div class="header-orbit"><div class="ring"></div><div class="ring"></div></div>
-  <video class="header-logo" autoplay loop muted playsinline><source src="images/logo.mp4" type="video/mp4"></video>
+  <div class="header-orbit">
+    <div class="sphere"></div>
+    <div class="ring"></div>
+  </div>
   <h1>Our Design Portfolio</h1>
-  <p>Tap any piece to view full size. Choose a tier to explore.</p>
+  <p>Browse by tier. Tap the featured piece or any tile to view it full size.</p>
 </div>
 
-<div class="menu">
-  <button onclick="show('basic', this)" class="active">Basic</button>
-  <button onclick="show('normal', this)">Normal</button>
-  <button onclick="show('premium', this)">Premium</button>
+<div class="tier-wrap">
+  <div class="menu">
+    <div class="slider" id="slider"></div>
+    <button onclick="show('basic', this)" class="active">Basic</button>
+    <button onclick="show('normal', this)">Normal</button>
+    <button onclick="show('premium', this)">Premium</button>
+  </div>
+
+  <div class="chipbar" id="chipbar-basic">
+      <a href="#cat-1" class="chip"><i class="fas fa-coffee"></i>Coffee</a>
+      <a href="#cat-2" class="chip"><i class="fas fa-tools"></i>Hardware Shop</a>
+      <a href="#cat-3" class="chip"><i class="fas fa-sign-in-alt"></i>Basic Login</a>
+      <a href="#cat-4" class="chip"><i class="fas fa-blender"></i>Crockery & Kitchen Appliances</a>
+  </div>
+  <div class="chipbar" id="chipbar-normal" style="display:none;">
+      <a href="#cat-5" class="chip"><i class="fas fa-shoe-prints"></i>Shoe Shop</a>
+      <a href="#cat-6" class="chip"><i class="fas fa-tshirt"></i>Clothes & Fashion Shop</a>
+      <a href="#cat-7" class="chip"><i class="fas fa-window-restore"></i>Glassmorphism Login</a>
+      <a href="#cat-8" class="chip"><i class="fas fa-hamburger"></i>Fast Food</a>
+  </div>
+  <div class="chipbar" id="chipbar-premium" style="display:none;">
+      <a href="#cat-9" class="chip"><i class="fas fa-building"></i>Real Estate & Luxury Housing</a>
+      <a href="#cat-10" class="chip"><i class="fas fa-gem"></i>Jewelry & Boutique Brand</a>
+      <a href="#cat-11" class="chip"><i class="fas fa-laptop-code"></i>Tech Portfolio & Agency</a>
+  </div>
 </div>
 
 <div id="basic" class="content-section active">
 
-  <div class="category-block">
-    <h3 class="category-title"><i class="fas fa-coffee"></i> Coffee Website Designs<span class="category-count">11 pieces</span></h3>
-    <div class="scroll-container">
-      <div class="item"><img src="images/coffee_1.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/coffee_2.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/coffee_3.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/coffee_4.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/coffee_5.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/coffee_6.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/coffee_7.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/coffee_8.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/coffee_9.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/coffee_10.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><div class="badge">VIDEO</div><video loop muted preload="none"><source src="images/coffee_video.mp4" type="video/mp4"></video></div>
+  <div class="module" id="cat-1">
+    <div class="module-head">
+      <span class="module-index mono">01</span>
+      <div class="module-titlewrap">
+        <h3 class="module-title"><i class="fas fa-coffee"></i> Coffee Website Designs</h3>
+        <span class="module-count mono">11 pieces</span>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="featured-tile">
+        <img src="images/coffee_1.png">
+        <div class="tile-overlay"><i class="fas fa-expand"></i></div>
+        <span class="featured-tag">Featured</span>
+      </div>
+      <div class="tile-grid">
+        <div class="tile"><img src="images/coffee_2.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/coffee_3.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/coffee_4.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/coffee_5.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/coffee_6.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/coffee_7.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/coffee_8.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/coffee_9.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/coffee_10.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><div class="vid-badge">VIDEO</div><video loop muted preload="none"><source src="images/coffee_video.mp4" type="video/mp4"></video><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+      </div>
     </div>
   </div>
 
-  <div class="category-block">
-    <h3 class="category-title"><i class="fas fa-tools"></i> Hardware Shop Website Designs<span class="category-count">11 pieces</span></h3>
-    <div class="scroll-container">
-      <div class="item"><img src="images/hardware_1.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/hardware_2.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/hardware_3.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/hardware_4.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/hardware_5.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/hardware_6.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/hardware_7.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/hardware_8.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/hardware_9.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/hardware_10.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><div class="badge">VIDEO</div><video loop muted preload="none"><source src="images/hardware_video.mp4" type="video/mp4"></video></div>
+  <div class="module" id="cat-2">
+    <div class="module-head">
+      <span class="module-index mono">02</span>
+      <div class="module-titlewrap">
+        <h3 class="module-title"><i class="fas fa-tools"></i> Hardware Shop Website Designs</h3>
+        <span class="module-count mono">11 pieces</span>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="featured-tile">
+        <img src="images/hardware_1.png">
+        <div class="tile-overlay"><i class="fas fa-expand"></i></div>
+        <span class="featured-tag">Featured</span>
+      </div>
+      <div class="tile-grid">
+        <div class="tile"><img src="images/hardware_2.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/hardware_3.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/hardware_4.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/hardware_5.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/hardware_6.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/hardware_7.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/hardware_8.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/hardware_9.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/hardware_10.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><div class="vid-badge">VIDEO</div><video loop muted preload="none"><source src="images/hardware_video.mp4" type="video/mp4"></video><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+      </div>
     </div>
   </div>
 
-  <div class="category-block">
-    <h3 class="category-title"><i class="fas fa-sign-in-alt"></i> Basic Login Pages Designs<span class="category-count">22 pieces</span></h3>
-    <div class="scroll-container">
-      <div class="item"><img src="images/login_1.jpeg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_2.jpeg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_3.jpeg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_4.jpeg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_5.jpeg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_6.jpeg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_7.jpeg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_8.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_9.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_10.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_11.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_12.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_13.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_14.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_15.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_16.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_17.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_18.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_19.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_20.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/login_21.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><div class="badge">VIDEO</div><video loop muted preload="none"><source src="images/login_video.mp4" type="video/mp4"></video></div>
+  <div class="module" id="cat-3">
+    <div class="module-head">
+      <span class="module-index mono">03</span>
+      <div class="module-titlewrap">
+        <h3 class="module-title"><i class="fas fa-sign-in-alt"></i> Basic Login Pages Designs</h3>
+        <span class="module-count mono">22 pieces</span>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="featured-tile">
+        <img src="images/login_1.jpeg">
+        <div class="tile-overlay"><i class="fas fa-expand"></i></div>
+        <span class="featured-tag">Featured</span>
+      </div>
+      <div class="tile-grid">
+        <div class="tile"><img src="images/login_2.jpeg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_3.jpeg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_4.jpeg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_5.jpeg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_6.jpeg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_7.jpeg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_8.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_9.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_10.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_11.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_12.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_13.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_14.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_15.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_16.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_17.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_18.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_19.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_20.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/login_21.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><div class="vid-badge">VIDEO</div><video loop muted preload="none"><source src="images/login_video.mp4" type="video/mp4"></video><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+      </div>
     </div>
   </div>
 
-  <div class="category-block">
-    <h3 class="category-title"><i class="fas fa-blender"></i> Crockery & Kitchen Appliances<span class="category-count">11 pieces</span></h3>
-    <div class="scroll-container">
-      <div class="item"><img src="images/kitchen_1.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/kitchen_2.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/kitchen_3.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/kitchen_4.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/kitchen_5.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/kitchen_6.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/kitchen_7.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/kitchen_8.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/kitchen_9.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/kitchen_10.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><div class="badge">VIDEO</div><video loop muted preload="none"><source src="images/kitchen_video.mp4" type="video/mp4"></video></div>
+  <div class="module" id="cat-4">
+    <div class="module-head">
+      <span class="module-index mono">04</span>
+      <div class="module-titlewrap">
+        <h3 class="module-title"><i class="fas fa-blender"></i> Crockery & Kitchen Appliances</h3>
+        <span class="module-count mono">11 pieces</span>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="featured-tile">
+        <img src="images/kitchen_1.png">
+        <div class="tile-overlay"><i class="fas fa-expand"></i></div>
+        <span class="featured-tag">Featured</span>
+      </div>
+      <div class="tile-grid">
+        <div class="tile"><img src="images/kitchen_2.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/kitchen_3.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/kitchen_4.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/kitchen_5.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/kitchen_6.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/kitchen_7.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/kitchen_8.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/kitchen_9.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/kitchen_10.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><div class="vid-badge">VIDEO</div><video loop muted preload="none"><source src="images/kitchen_video.mp4" type="video/mp4"></video><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+      </div>
     </div>
   </div>
 
@@ -329,78 +498,126 @@
 
 <div id="normal" class="content-section">
 
-  <div class="category-block">
-    <h3 class="category-title"><i class="fas fa-shoe-prints"></i> Shoe Shop Website Designs<span class="category-count">11 pieces</span></h3>
-    <div class="scroll-container">
-      <div class="item"><img src="images/shoe_1.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/shoe_2.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/shoe_3.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/shoe_4.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/shoe_5.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/shoe_6.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/shoe_7.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/shoe_8.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/shoe_9.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/shoe_10.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><div class="badge">VIDEO</div><video loop muted preload="none"><source src="images/shoe_video.mp4" type="video/mp4"></video></div>
+  <div class="module" id="cat-5">
+    <div class="module-head">
+      <span class="module-index mono">05</span>
+      <div class="module-titlewrap">
+        <h3 class="module-title"><i class="fas fa-shoe-prints"></i> Shoe Shop Website Designs</h3>
+        <span class="module-count mono">11 pieces</span>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="featured-tile">
+        <img src="images/shoe_1.png">
+        <div class="tile-overlay"><i class="fas fa-expand"></i></div>
+        <span class="featured-tag">Featured</span>
+      </div>
+      <div class="tile-grid">
+        <div class="tile"><img src="images/shoe_2.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/shoe_3.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/shoe_4.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/shoe_5.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/shoe_6.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/shoe_7.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/shoe_8.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/shoe_9.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/shoe_10.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><div class="vid-badge">VIDEO</div><video loop muted preload="none"><source src="images/shoe_video.mp4" type="video/mp4"></video><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+      </div>
     </div>
   </div>
 
-  <div class="category-block">
-    <h3 class="category-title"><i class="fas fa-tshirt"></i> Clothes & Fashion Shop<span class="category-count">11 pieces</span></h3>
-    <div class="scroll-container">
-      <div class="item"><img src="images/clothes_1.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/clothes_2.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/clothes_3.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/clothes_4.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/clothes_5.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/clothes_6.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/clothes_7.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/clothes_8.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/clothes_9.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/clothes_10.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><div class="badge">VIDEO</div><video loop muted preload="none"><source src="images/clothes_video.mp4" type="video/mp4"></video></div>
+  <div class="module" id="cat-6">
+    <div class="module-head">
+      <span class="module-index mono">06</span>
+      <div class="module-titlewrap">
+        <h3 class="module-title"><i class="fas fa-tshirt"></i> Clothes & Fashion Shop</h3>
+        <span class="module-count mono">11 pieces</span>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="featured-tile">
+        <img src="images/clothes_1.png">
+        <div class="tile-overlay"><i class="fas fa-expand"></i></div>
+        <span class="featured-tag">Featured</span>
+      </div>
+      <div class="tile-grid">
+        <div class="tile"><img src="images/clothes_2.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/clothes_3.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/clothes_4.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/clothes_5.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/clothes_6.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/clothes_7.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/clothes_8.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/clothes_9.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/clothes_10.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><div class="vid-badge">VIDEO</div><video loop muted preload="none"><source src="images/clothes_video.mp4" type="video/mp4"></video><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+      </div>
     </div>
   </div>
 
-  <div class="category-block">
-    <h3 class="category-title"><i class="fas fa-window-restore"></i> Glassmorphism Login Pages Designs<span class="category-count">18 pieces</span></h3>
-    <div class="scroll-container">
-      <div class="item"><img src="images/glass_login_1.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/glass_login_2.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/glass_login_3.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/glass_login_4.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/glass_login_5.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/glass_login_6.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/glass_login_7.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/glass_login_8.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/glass_login_9.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/glass_login_10.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/glass_login_11.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/glass_login_12.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/glass_login_13.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/glass_login_14.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/glass_login_15.jpg" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><div class="badge">VIDEO</div><video loop muted preload="none"><source src="images/glass_login_video1.mp4" type="video/mp4"></video></div>
-      <div class="item"><div class="badge">VIDEO</div><video loop muted preload="none"><source src="images/glass_login_video2.mp4" type="video/mp4"></video></div>
-      <div class="item"><div class="badge">VIDEO</div><video loop muted preload="none"><source src="images/glass_login_video3.mp4" type="video/mp4"></video></div>
+  <div class="module" id="cat-7">
+    <div class="module-head">
+      <span class="module-index mono">07</span>
+      <div class="module-titlewrap">
+        <h3 class="module-title"><i class="fas fa-window-restore"></i> Glassmorphism Login Pages Designs</h3>
+        <span class="module-count mono">18 pieces</span>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="featured-tile">
+        <img src="images/glass_login_1.png">
+        <div class="tile-overlay"><i class="fas fa-expand"></i></div>
+        <span class="featured-tag">Featured</span>
+      </div>
+      <div class="tile-grid">
+        <div class="tile"><img src="images/glass_login_2.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/glass_login_3.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/glass_login_4.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/glass_login_5.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/glass_login_6.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/glass_login_7.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/glass_login_8.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/glass_login_9.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/glass_login_10.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/glass_login_11.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/glass_login_12.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/glass_login_13.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/glass_login_14.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/glass_login_15.jpg" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><div class="vid-badge">VIDEO</div><video loop muted preload="none"><source src="images/glass_login_video1.mp4" type="video/mp4"></video><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><div class="vid-badge">VIDEO</div><video loop muted preload="none"><source src="images/glass_login_video2.mp4" type="video/mp4"></video><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><div class="vid-badge">VIDEO</div><video loop muted preload="none"><source src="images/glass_login_video3.mp4" type="video/mp4"></video><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+      </div>
     </div>
   </div>
 
-  <div class="category-block">
-    <h3 class="category-title"><i class="fas fa-hamburger"></i> Fast Food Website Designs<span class="category-count">11 pieces</span></h3>
-    <div class="scroll-container">
-      <div class="item"><img src="images/fastfood_1.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/fastfood_2.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/fastfood_3.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/fastfood_4.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/fastfood_5.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/fastfood_6.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/fastfood_7.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/fastfood_8.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/fastfood_9.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/fastfood_10.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><div class="badge">VIDEO</div><video loop muted preload="none"><source src="images/fastfood_video.mp4" type="video/mp4"></video></div>
+  <div class="module" id="cat-8">
+    <div class="module-head">
+      <span class="module-index mono">08</span>
+      <div class="module-titlewrap">
+        <h3 class="module-title"><i class="fas fa-hamburger"></i> Fast Food Website Designs</h3>
+        <span class="module-count mono">11 pieces</span>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="featured-tile">
+        <img src="images/fastfood_1.png">
+        <div class="tile-overlay"><i class="fas fa-expand"></i></div>
+        <span class="featured-tag">Featured</span>
+      </div>
+      <div class="tile-grid">
+        <div class="tile"><img src="images/fastfood_2.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/fastfood_3.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/fastfood_4.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/fastfood_5.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/fastfood_6.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/fastfood_7.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/fastfood_8.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/fastfood_9.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/fastfood_10.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><div class="vid-badge">VIDEO</div><video loop muted preload="none"><source src="images/fastfood_video.mp4" type="video/mp4"></video><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+      </div>
     </div>
   </div>
 
@@ -408,54 +625,90 @@
 
 <div id="premium" class="content-section">
 
-  <div class="category-block">
-    <h3 class="category-title"><i class="fas fa-building"></i> Real Estate & Luxury Housing<span class="category-count">11 pieces</span></h3>
-    <div class="scroll-container">
-      <div class="item"><img src="images/realestate_1.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/realestate_2.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/realestate_3.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/realestate_4.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/realestate_5.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/realestate_6.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/realestate_7.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/realestate_8.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/realestate_9.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/realestate_10.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><div class="badge">VIDEO</div><video loop muted preload="none"><source src="images/realestate_video.mp4" type="video/mp4"></video></div>
+  <div class="module" id="cat-9">
+    <div class="module-head">
+      <span class="module-index mono">09</span>
+      <div class="module-titlewrap">
+        <h3 class="module-title"><i class="fas fa-building"></i> Real Estate & Luxury Housing</h3>
+        <span class="module-count mono">11 pieces</span>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="featured-tile">
+        <img src="images/realestate_1.png">
+        <div class="tile-overlay"><i class="fas fa-expand"></i></div>
+        <span class="featured-tag">Featured</span>
+      </div>
+      <div class="tile-grid">
+        <div class="tile"><img src="images/realestate_2.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/realestate_3.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/realestate_4.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/realestate_5.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/realestate_6.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/realestate_7.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/realestate_8.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/realestate_9.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/realestate_10.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><div class="vid-badge">VIDEO</div><video loop muted preload="none"><source src="images/realestate_video.mp4" type="video/mp4"></video><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+      </div>
     </div>
   </div>
 
-  <div class="category-block">
-    <h3 class="category-title"><i class="fas fa-gem"></i> Jewelry & Boutique Brand Designs<span class="category-count">11 pieces</span></h3>
-    <div class="scroll-container">
-      <div class="item"><img src="images/jewelry_1.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/jewelry_2.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/jewelry_3.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/jewelry_4.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/jewelry_5.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/jewelry_6.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/jewelry_7.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/jewelry_8.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/jewelry_9.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/jewelry_10.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><div class="badge">VIDEO</div><video loop muted preload="none"><source src="images/jewelry_video.mp4" type="video/mp4"></video></div>
+  <div class="module" id="cat-10">
+    <div class="module-head">
+      <span class="module-index mono">10</span>
+      <div class="module-titlewrap">
+        <h3 class="module-title"><i class="fas fa-gem"></i> Jewelry & Boutique Brand Designs</h3>
+        <span class="module-count mono">11 pieces</span>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="featured-tile">
+        <img src="images/jewelry_1.png">
+        <div class="tile-overlay"><i class="fas fa-expand"></i></div>
+        <span class="featured-tag">Featured</span>
+      </div>
+      <div class="tile-grid">
+        <div class="tile"><img src="images/jewelry_2.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/jewelry_3.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/jewelry_4.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/jewelry_5.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/jewelry_6.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/jewelry_7.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/jewelry_8.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/jewelry_9.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/jewelry_10.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><div class="vid-badge">VIDEO</div><video loop muted preload="none"><source src="images/jewelry_video.mp4" type="video/mp4"></video><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+      </div>
     </div>
   </div>
 
-  <div class="category-block">
-    <h3 class="category-title"><i class="fas fa-laptop-code"></i> Tech Portfolio & Agency Designs<span class="category-count">11 pieces</span></h3>
-    <div class="scroll-container">
-      <div class="item"><img src="images/tech_1.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/tech_2.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/tech_3.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/tech_4.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/tech_5.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/tech_6.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/tech_7.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/tech_8.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/tech_9.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><img src="images/tech_10.png" loading="lazy"><div class="item-overlay"><i class="fas fa-expand"></i></div></div>
-      <div class="item"><div class="badge">VIDEO</div><video loop muted preload="none"><source src="images/tech_video.mp4" type="video/mp4"></video></div>
+  <div class="module" id="cat-11">
+    <div class="module-head">
+      <span class="module-index mono">11</span>
+      <div class="module-titlewrap">
+        <h3 class="module-title"><i class="fas fa-laptop-code"></i> Tech Portfolio & Agency Designs</h3>
+        <span class="module-count mono">11 pieces</span>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="featured-tile">
+        <img src="images/tech_1.png">
+        <div class="tile-overlay"><i class="fas fa-expand"></i></div>
+        <span class="featured-tag">Featured</span>
+      </div>
+      <div class="tile-grid">
+        <div class="tile"><img src="images/tech_2.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/tech_3.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/tech_4.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/tech_5.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/tech_6.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/tech_7.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/tech_8.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/tech_9.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><img src="images/tech_10.png" loading="lazy"><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+        <div class="tile"><div class="vid-badge">VIDEO</div><video loop muted preload="none"><source src="images/tech_video.mp4" type="video/mp4"></video><div class="tile-overlay"><i class="fas fa-expand"></i></div></div>
+      </div>
     </div>
   </div>
 
@@ -479,45 +732,58 @@
 <footer><p>© 2026 BrandOrbitX | All Rights Reserved</p></footer>
 
 <script>
+  const tierOrder = ['basic','normal','premium'];
+
   function show(type, btn){
     document.querySelectorAll('.content-section').forEach(g => g.classList.remove('active'));
     document.getElementById(type).classList.add('active');
     document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    window.scrollTo({ top: document.querySelector('.menu').offsetTop - 70, behavior:'smooth' });
+
+    const idx = tierOrder.indexOf(type);
+    document.getElementById('slider').style.transform = `translateX(${idx * 100}%)`;
+
+    tierOrder.forEach(t => {
+      document.getElementById('chipbar-' + t).style.display = (t === type) ? 'flex' : 'none';
+    });
+
+    window.scrollTo({ top: document.querySelector('.tier-wrap').offsetTop - 64, behavior:'smooth' });
   }
 
   const modal = document.getElementById('mediaModal');
   const modalTarget = document.getElementById('modalTarget');
 
-  document.querySelectorAll('.item').forEach(item => {
-    item.addEventListener('click', () => {
-      const img = item.querySelector('img');
-      const video = item.querySelector('video');
+  function attachHandlers(){
+    document.querySelectorAll('.featured-tile, .tile').forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        const video = item.querySelector('video');
 
-      modalTarget.innerHTML = '';
+        modalTarget.innerHTML = '';
 
-      if (img) {
-        const cloneImg = document.createElement('img');
-        cloneImg.src = img.src;
-        modalTarget.appendChild(cloneImg);
-      } else if (video) {
-        const cloneVideo = document.createElement('video');
-        cloneVideo.controls = true;
-        cloneVideo.autoplay = true;
-        cloneVideo.loop = true;
+        if (img) {
+          const cloneImg = document.createElement('img');
+          cloneImg.src = img.src;
+          modalTarget.appendChild(cloneImg);
+        } else if (video) {
+          const cloneVideo = document.createElement('video');
+          cloneVideo.controls = true;
+          cloneVideo.autoplay = true;
+          cloneVideo.loop = true;
 
-        const source = document.createElement('source');
-        source.src = video.querySelector('source').src;
-        source.type = 'video/mp4';
+          const source = document.createElement('source');
+          source.src = video.querySelector('source').src;
+          source.type = 'video/mp4';
 
-        cloneVideo.appendChild(source);
-        modalTarget.appendChild(cloneVideo);
-      }
+          cloneVideo.appendChild(source);
+          modalTarget.appendChild(cloneVideo);
+        }
 
-      modal.classList.add('show');
+        modal.classList.add('show');
+      });
     });
-  });
+  }
+  attachHandlers();
 
   function closeModal() {
     modal.classList.remove('show');
