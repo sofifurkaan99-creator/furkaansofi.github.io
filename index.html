@@ -6,27 +6,29 @@
     <title>BrandOrbitX | Welcome</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { width: 100%; height: 100%; overflow: hidden; background-color: #000; font-family: 'Segoe UI', sans-serif; }
+        body, html { width: 100%; height: 100%; overflow: hidden; background-color: #000; font-family: 'Segoe UI', Roboto, sans-serif; }
         
+        /* Video background settings */
         .video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
         video { width: 100%; height: 100%; object-fit: cover; }
 
+        /* Button placement */
         .btn-container {
             position: absolute;
-            bottom: 10%;
+            bottom: 15%;
             left: 50%;
             transform: translateX(-50%);
             z-index: 2;
             opacity: 0; 
             animation: fadeIn 1.5s forwards;
-            animation-delay: 2.5s;
+            animation-delay: 2.5s; /* Video ke 2.5 sec baad button dikhega */
         }
 
-        /* Glassmorphism Effect */
+        /* Glassmorphism button */
         .glass-btn {
-            background: rgba(255, 255, 255, 0.1); /* Transparent white */
-            backdrop-filter: blur(15px);          /* Glass blur */
-            -webkit-backdrop-filter: blur(15px);  /* Safari support */
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
             padding: 18px 50px;
@@ -42,9 +44,9 @@
         }
 
         .glass-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
             transform: scale(1.05);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
         @keyframes fadeIn { to { opacity: 1; } }
@@ -53,13 +55,14 @@
 <body>
 
     <div class="video-background">
-        <video autoplay muted playsinline>
-            <source src="intro.mp4" type="video/mp4">
+        <video autoplay muted playsinline loop>
+            <source src="images/intro.mp4" type="video/mp4">
+            Your browser does not support the video tag.
         </video>
     </div>
 
     <div class="btn-container">
-        <a href="home.html" class="glass-btn"> NEXT→</a>
+        <a href="home.html" class="glass-btn">ENTER SITE →</a>
     </div>
 
 </body>
