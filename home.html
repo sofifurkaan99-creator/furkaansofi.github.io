@@ -1,89 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrandOrbitX | Elite Web Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrandOrbitX | Elite Web Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root{
+    --void:#06080f;
+    --panel:#0d1426;
+    --panel-2:#111a32;
+    --primary:#7c5cff;
+    --primary-soft:rgba(124,92,255,.12);
+    --accent:#ff6b4a;
+    --text:#e8eaf2;
+    --muted:#8088a0;
+    --line:rgba(255,255,255,.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--void);
+    color:var(--text);
+    font-family:'Inter',-apple-system,sans-serif;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{ font-family:'JetBrains Mono',monospace; }
 
-    <style>
-        :root { --primary: #2563eb; --accent: #00d9ff; --dark: #0f172a; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: var(--dark); color: white; overflow-x: hidden; }
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--primary);
+    outline-offset:3px;
+  }
 
-        /* Updated Header (Logo hata diya hai) */
-        header { 
-            padding: 80px 20px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            text-align: center; 
-            background: radial-gradient(circle, #1e3a8a 0%, #0f172a 80%); 
-        }
+  /* ===== Ambient backdrop ===== */
+  .ambient{
+    position:fixed; inset:0;
+    z-index:0;
+    background:
+      radial-gradient(ellipse 800px 500px at 50% -10%, rgba(124,92,255,.18), transparent 60%),
+      radial-gradient(ellipse 600px 400px at 90% 20%, rgba(255,107,74,.08), transparent 60%);
+    pointer-events:none;
+  }
 
-        header h1 { 
-            font-size: 2.5rem; 
-            background: linear-gradient(90deg, #fff, var(--accent)); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            margin-bottom: 15px; 
-        }
-        header p { font-size: 1.2rem; color: #94a3b8; margin-bottom: 30px; max-width: 600px; }
-        .btn { padding: 15px 40px; background: transparent; border: 2px solid var(--accent); color: var(--accent); font-weight: bold; border-radius: 50px; text-decoration: none; transition: 0.4s; }
-        .btn:hover { background: var(--accent); color: var(--dark); box-shadow: 0 0 20px var(--accent); }
+  /* ===== Nav ===== */
+  nav{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 6%;
+    background:rgba(6,8,15,.7);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{ display:flex; align-items:center; gap:9px; font-weight:700; letter-spacing:.3px; }
+  .logo .dot{ width:8px;height:8px;border-radius:50%;background:var(--accent); box-shadow:0 0 10px var(--accent); }
+  nav a.cta{
+    padding:10px 22px;
+    border:1px solid rgba(124,92,255,.4);
+    border-radius:50px;
+    color:var(--text);
+    text-decoration:none;
+    font-size:13px; font-weight:600;
+    transition:.3s;
+  }
+  nav a.cta:hover{ background:var(--primary-soft); border-color:var(--primary); }
 
-        /* Discount Banner */
-        .discount { background: linear-gradient(90deg, #22c55e, #16a34a); padding: 20px; text-align: center; font-size: 1.1rem; font-weight: bold; }
+  /* ===== Hero ===== */
+  header{
+    position:relative;
+    padding:120px 6% 100px;
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    overflow:hidden;
+  }
 
-        /* Services Grid */
-        section { padding: 60px 20px; max-width: 1200px; margin: auto; }
-        h2 { text-align: center; font-size: 2rem; margin-bottom: 40px; }
-        .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.4s; }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
-        .card i { font-size: 2rem; color: var(--accent); margin-bottom: 15px; }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--muted);
+    border:1px solid var(--line);
+    padding:7px 16px; border-radius:50px;
+    margin-bottom:32px;
+    opacity:0; animation:rise .8s cubic-bezier(.16,1,.3,1) .1s forwards;
+  }
+  .eyebrow .dot{ width:6px;height:6px;border-radius:50%;background:var(--accent); }
 
-        footer { text-align: center; padding: 40px; background: #020617; font-size: 0.9rem; color: #94a3b8; }
-    </style>
+  header h1{
+    font-size:clamp(2.6rem, 7vw, 4.6rem);
+    font-weight:800;
+    letter-spacing:-2px;
+    line-height:1.05;
+    max-width:900px;
+    opacity:0; animation:rise .9s cubic-bezier(.16,1,.3,1) .25s forwards;
+  }
+  header h1 span{
+    background:linear-gradient(100deg, var(--primary), #b8a3ff 50%, var(--accent));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  }
+
+  header p.lead{
+    font-size:1.15rem; color:var(--muted);
+    margin-top:24px; max-width:560px; line-height:1.6;
+    opacity:0; animation:rise .9s cubic-bezier(.16,1,.3,1) .4s forwards;
+  }
+
+  .hero-actions{
+    margin-top:40px;
+    display:flex; gap:16px; flex-wrap:wrap; justify-content:center;
+    opacity:0; animation:rise .9s cubic-bezier(.16,1,.3,1) .55s forwards;
+  }
+
+  .btn-primary{
+    position:relative;
+    padding:16px 36px;
+    background:var(--primary);
+    color:#fff;
+    border:none; border-radius:50px;
+    font-weight:600; font-size:15px;
+    text-decoration:none;
+    display:inline-flex; align-items:center; gap:10px;
+    transition:.35s cubic-bezier(.16,1,.3,1);
+    box-shadow:0 0 0 0 rgba(124,92,255,.5);
+  }
+  .btn-primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 30px rgba(124,92,255,.4);
+  }
+  .btn-primary svg{ transition:.3s; }
+  .btn-primary:hover svg{ transform:translateX(4px); }
+
+  .btn-ghost{
+    padding:16px 32px;
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--text);
+    border-radius:50px;
+    font-weight:600; font-size:15px;
+    text-decoration:none;
+    transition:.3s;
+  }
+  .btn-ghost:hover{ border-color:var(--primary); background:var(--primary-soft); }
+
+  @keyframes rise{ to{ opacity:1; transform:translateY(0); } }
+  header .eyebrow, header h1, header p.lead, .hero-actions{ transform:translateY(18px); }
+
+  /* orbit signature graphic behind hero */
+  .hero-orbit{
+    position:absolute; top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:900px; height:900px;
+    pointer-events:none;
+    z-index:-1;
+    opacity:.5;
+  }
+  .hero-orbit .ring{
+    position:absolute; inset:0;
+    border:1px solid rgba(124,92,255,.1);
+    border-radius:50%;
+    animation:spin linear infinite;
+  }
+  .hero-orbit .ring:nth-child(1){ inset:120px; animation-duration:50s; }
+  .hero-orbit .ring:nth-child(2){ inset:60px; animation-duration:70s; animation-direction:reverse; border-color:rgba(255,107,74,.08); }
+  .hero-orbit .ring:nth-child(3){ inset:0; animation-duration:90s; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .hero-orbit .node{ position:absolute; top:-3px; left:50%; width:6px; height:6px; border-radius:50%; background:var(--primary); box-shadow:0 0 14px 3px rgba(124,92,255,.7); }
+  .hero-orbit .ring:nth-child(2) .node{ background:var(--accent); box-shadow:0 0 14px 3px rgba(255,107,74,.6); }
+
+  /* ===== Discount strip ===== */
+  .discount{
+    position:relative;
+    margin:0 6%;
+    padding:18px 24px;
+    border-radius:16px;
+    background:linear-gradient(100deg, rgba(124,92,255,.12), rgba(255,107,74,.1));
+    border:1px solid rgba(124,92,255,.25);
+    text-align:center;
+    font-size:.95rem; font-weight:600;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+  }
+  .discount .mono{ color:var(--accent); }
+
+  /* ===== Sections ===== */
+  section{ padding:90px 6%; max-width:1200px; margin:auto; position:relative; }
+  .section-head{ text-align:center; margin-bottom:56px; }
+  .section-head .eyebrow{ display:inline-flex; opacity:1; animation:none; transform:none; margin-bottom:18px; }
+  .section-head h2{ font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800; letter-spacing:-1px; }
+  .section-head p{ color:var(--muted); margin-top:12px; max-width:520px; margin-inline:auto; }
+
+  /* services grid */
+  .services{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+  .card{
+    position:relative;
+    background:linear-gradient(165deg, var(--panel), var(--panel-2));
+    padding:32px 28px;
+    border-radius:20px;
+    border:1px solid var(--line);
+    transition:.4s cubic-bezier(.16,1,.3,1);
+    opacity:0; transform:translateY(24px);
+  }
+  .card.in-view{ opacity:1; transform:translateY(0); }
+  .card:hover{ border-color:rgba(124,92,255,.4); transform:translateY(-6px); box-shadow:0 16px 40px rgba(0,0,0,.35); }
+  .card .num{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted); letter-spacing:1px; }
+  .card .icon{
+    width:46px; height:46px; border-radius:12px;
+    background:var(--primary-soft);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--primary); font-size:1.2rem;
+    margin:14px 0 18px;
+  }
+  .card h3{ font-size:1.15rem; margin-bottom:8px; font-weight:700; }
+  .card p{ color:var(--muted); font-size:.92rem; line-height:1.55; }
+
+  /* why choose - stat band */
+  .why-wrap{
+    background:linear-gradient(165deg, var(--panel), var(--panel-2));
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:60px 40px;
+  }
+  .why-grid{ display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; }
+  .why-text p{ color:var(--muted); line-height:1.7; font-size:1.02rem; }
+  .stats{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .stat{ border-left:2px solid var(--primary); padding-left:16px; }
+  .stat .n{ font-family:'JetBrains Mono',monospace; font-size:2rem; font-weight:700; color:var(--text); }
+  .stat .l{ font-size:.85rem; color:var(--muted); margin-top:4px; }
+
+  @media (max-width:760px){
+    .why-grid{ grid-template-columns:1fr; }
+  }
+
+  /* footer */
+  footer{
+    text-align:center; padding:50px 20px 40px;
+    color:var(--muted); font-size:.85rem;
+    border-top:1px solid var(--line);
+  }
+  footer .logo{ justify-content:center; margin-bottom:14px; color:var(--text); }
+
+  @media (prefers-reduced-motion: reduce){
+    .ring{ animation:none; }
+    .card, header .eyebrow, header h1, header p.lead, .hero-actions{ animation:none !important; opacity:1 !important; transform:none !important; }
+  }
+</style>
 </head>
-
 <body>
 
+<div class="ambient"></div>
+
+<nav>
+  <div class="logo"><span class="dot"></span>BrandOrbitX</div>
+  <a class="cta" href="dashboard.html">View Work</a>
+</nav>
+
 <header>
-    <h1>BrandOrbitX</h1>
-    <p>We Architect Digital Experiences That Scale Your Business</p>
-    <a class="btn" href="dashboard.html"> Designs <i class="fas fa-arrow-right"></i></a>
+  <div class="hero-orbit">
+    <div class="ring"><span class="node"></span></div>
+    <div class="ring"><span class="node"></span></div>
+    <div class="ring"></div>
+  </div>
+
+  <div class="eyebrow"><span class="dot"></span>Web design studio</div>
+  <h1>We architect digital<br><span>experiences that orbit</span> your business growth</h1>
+  <p class="lead">From first sketch to launch in 24 hours — modern, conversion-ready websites built around what your business actually needs.</p>
+
+  <div class="hero-actions">
+    <a class="btn-primary" href="dashboard.html">
+      Browse Designs
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <a class="btn-ghost" href="project.html">Start a Project</a>
+  </div>
 </header>
 
 <div class="discount">
-    🔥 Limited Time Offer - Get 15% OFF On Your Website Project
+  <i class="fas fa-bolt" style="color:#ff6b4a;"></i>
+  Limited time — <span class="mono">15% OFF</span> every new website project
 </div>
 
 <section>
-    <h2>Our Services</h2>
-    <div class="services">
-        <div class="card"><i class="fas fa-briefcase"></i><h3>Business Websites</h3><p>Modern corporate designs.</p></div>
-        <div class="card"><i class="fas fa-shopping-cart"></i><h3>E-Commerce</h3><p>Scalable online stores.</p></div>
-        <div class="card"><i class="fas fa-laptop-code"></i><h3>Portfolio</h3><p>Professional freelance sites.</p></div>
-        <div class="card"><i class="fas fa-rocket"></i><h3>Landing Pages</h3><p>High-conversion funnels.</p></div>
-        <div class="card"><i class="fas fa-sync"></i><h3>Redesign</h3><p>Modernize your presence.</p></div>
-        <div class="card"><i class="fas fa-search"></i><h3>SEO</h3><p>Google search ranking.</p></div>
-    </div>
+  <div class="section-head">
+    <span class="eyebrow"><span class="dot"></span>Services</span>
+    <h2>Built for every kind of business</h2>
+    <p>Six core offerings, each tuned to a different goal — pick what fits, or let us combine them.</p>
+  </div>
+  <div class="services">
+    <div class="card"><span class="num mono">01</span><div class="icon"><i class="fas fa-briefcase"></i></div><h3>Business Websites</h3><p>Modern corporate designs that build instant credibility.</p></div>
+    <div class="card"><span class="num mono">02</span><div class="icon"><i class="fas fa-shopping-cart"></i></div><h3>E-Commerce</h3><p>Scalable online stores built to convert browsers into buyers.</p></div>
+    <div class="card"><span class="num mono">03</span><div class="icon"><i class="fas fa-laptop-code"></i></div><h3>Portfolio</h3><p>Professional freelance and personal sites that get you hired.</p></div>
+    <div class="card"><span class="num mono">04</span><div class="icon"><i class="fas fa-rocket"></i></div><h3>Landing Pages</h3><p>High-conversion funnels engineered around a single goal.</p></div>
+    <div class="card"><span class="num mono">05</span><div class="icon"><i class="fas fa-sync"></i></div><h3>Redesign</h3><p>Modernize an outdated presence without losing what works.</p></div>
+    <div class="card"><span class="num mono">06</span><div class="icon"><i class="fas fa-search"></i></div><h3>SEO</h3><p>Technical foundations that help you rank where it matters.</p></div>
+  </div>
 </section>
 
-<section style="background: rgba(30, 41, 59, 0.2);">
-    <h2>Why Choose BrandOrbitX?</h2>
-    <p style="text-align:center; max-width:700px; margin:auto; color:#94a3b8; line-height: 1.8;">
-        Fast 24-hour delivery, modern UI/UX design, mobile-responsive architecture, 
-        and dedicated ongoing support for your business growth.
-    </p>
+<section>
+  <div class="why-wrap">
+    <div class="why-grid">
+      <div class="why-text">
+        <span class="eyebrow" style="margin-bottom:16px;"><span class="dot"></span>Why BrandOrbitX</span>
+        <h2 style="font-size:1.8rem; font-weight:800; margin-bottom:14px;">Built fast. Built to last.</h2>
+        <p>Fast 24-hour delivery, modern UI/UX design, mobile-responsive architecture, and dedicated ongoing support — so your site keeps working long after launch.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="n mono">24h</div><div class="l">Average delivery time</div></div>
+        <div class="stat"><div class="n mono">100%</div><div class="l">Mobile responsive</div></div>
+        <div class="stat"><div class="n mono">10+</div><div class="l">Industries covered</div></div>
+        <div class="stat"><div class="n mono">3</div><div class="l">Pricing tiers to fit any budget</div></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer>
-    <p>© 2026 BrandOrbitX | All Rights Reserved</p>
+  <div class="logo"><span class="dot"></span>BrandOrbitX</div>
+  <p>© 2026 BrandOrbitX | All Rights Reserved</p>
 </footer>
+
+<script>
+  // scroll reveal for cards
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        setTimeout(()=>e.target.classList.add('in-view'), i*60);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold:.15 });
+  document.querySelectorAll('.card').forEach(c=>io.observe(c));
+</script>
 
 </body>
 </html>
