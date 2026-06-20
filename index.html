@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrandOrbitX | Welcome</title>
     <style>
-        /* Website ke theme se match karta background */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { 
             width: 100%; height: 100%; 
@@ -14,64 +13,50 @@
             font-family: 'Inter', sans-serif; 
         }
 
-        /* Dynamic Glow jo aapke theme ke color ka hai */
-        .glow {
-            position: absolute;
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(100, 255, 218, 0.1), transparent 70%);
-            filter: blur(100px);
-            animation: move 15s infinite alternate;
-        }
-        @keyframes move { from { transform: translate(-20%, -20%); } to { transform: translate(60%, 60%); } }
-
-        /* Video ka 2:3 vertical ratio */
+        /* 1:1 (Square) Video Ratio */
         .video-wrapper {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 320px;
-            aspect-ratio: 2 / 3;
-            border-radius: 25px;
+            width: 300px;
+            aspect-ratio: 1 / 1; 
+            border-radius: 30px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 20px rgba(100, 255, 218, 0.1);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 20px rgba(100, 255, 218, 0.1);
         }
         video { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Edge par Glass Button */
+        /* Button design */
         .btn-container {
             position: absolute;
-            bottom: 60px; right: 40px;
+            bottom: 50px; left: 50%;
+            transform: translateX(-50%);
             z-index: 10;
         }
 
         .glass-btn {
-            padding: 18px 45px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(100, 255, 218, 0.3);
-            color: #64ffda; /* Aapke theme ka signature color */
-            font-size: 16px;
+            padding: 16px 40px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(100, 255, 218, 0.4);
+            color: #64ffda;
+            font-size: 15px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             border-radius: 50px;
             text-decoration: none;
             transition: 0.4s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         .glass-btn:hover {
             background: rgba(100, 255, 218, 0.1);
-            box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
-            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
         }
     </style>
 </head>
 <body>
-    <div class="glow"></div>
     
     <div class="video-wrapper">
         <video autoplay muted playsinline loop>
@@ -80,7 +65,7 @@
     </div>
 
     <div class="btn-container">
-        <a href="home.html" class="glass-btn">ENTER →</a>
+        <a href="home.html" class="glass-btn">ENTER SITE</a>
     </div>
 </body>
 </html>
