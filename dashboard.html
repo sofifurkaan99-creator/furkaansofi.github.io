@@ -30,7 +30,6 @@
   .mono{ font-family:'JetBrains Mono',monospace; }
   a:focus-visible, button:focus-visible{ outline:2px solid var(--primary); outline-offset:3px; }
 
-  /* ===== Nav ===== */
   nav.topnav{
     position:sticky; top:0; z-index:80;
     display:flex; align-items:center; justify-content:space-between;
@@ -44,7 +43,6 @@
   nav.topnav a.back{ color:var(--muted); text-decoration:none; font-size:13px; font-weight:600; display:flex; align-items:center; gap:6px; transition:.3s; }
   nav.topnav a.back:hover{ color:var(--text); }
 
-  /* ===== Header ===== */
   .header{
     position:relative;
     text-align:center;
@@ -81,6 +79,24 @@
     content:''; position:absolute; top:50%; right:-4px; width:7px; height:7px; border-radius:50%;
     background:#eafcff; box-shadow:0 0 10px 3px rgba(160,225,255,1); transform:translateY(-50%);
   }
+  .header-orbit .letters{
+    position:relative; z-index:2;
+    display:flex; align-items:center; gap:2px;
+    font-family:'Inter',sans-serif;
+    font-weight:800;
+    font-size:30px;
+    letter-spacing:-1px;
+    background:linear-gradient(180deg, #ffffff 0%, #cdd8ea 45%, #8e9bb8 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    filter:drop-shadow(0 1px 4px rgba(0,0,0,.6));
+  }
+  .header-orbit .letters .spark{
+    width:4px; height:4px;
+    background:#7fd8ff;
+    transform:rotate(45deg);
+    box-shadow:0 0 8px 2px rgba(127,216,255,.9);
+    -webkit-text-fill-color:initial;
+  }
   @keyframes spin{ to{ transform:rotate(342deg); } }
 
   .header h1{
@@ -89,7 +105,6 @@
   }
   .header p{ position:relative; z-index:1; color:var(--muted); margin-top:10px; font-size:.95rem; max-width:440px; margin-inline:auto; }
 
-  /* ===== Tier menu (segmented control) ===== */
   .tier-wrap{
     position:sticky; top:64px; z-index:70;
     padding:22px 20px 16px;
@@ -129,7 +144,6 @@
   }
   .menu button.active{ color:#fff; }
 
-  /* jump chips */
   .chipbar{
     display:flex; gap:10px; overflow-x:auto;
     max-width:900px; margin:18px auto 0;
@@ -152,12 +166,10 @@
   .chip:hover{ color:var(--text); border-color:rgba(124,92,255,.4); background:var(--primary-soft); }
   .chip i{ color:var(--primary); font-size:.85em; }
 
-  /* ===== Content ===== */
   .content-section{ display:none; max-width:1180px; margin:auto; padding:36px 5% 20px; }
   .content-section.active{ display:block; animation:fadein .5s ease; }
   @keyframes fadein{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
 
-  /* ===== Module (category) ===== */
   .module{ margin-bottom:64px; scroll-margin-top:160px; }
   .module-head{
     display:flex; align-items:center; gap:16px;
@@ -266,7 +278,6 @@
     .tile-grid{ grid-template-columns:repeat(2,1fr); }
   }
 
-  /* ===== Modal ===== */
   .custom-modal{
     display:none;
     position:fixed; z-index:9999; inset:0;
@@ -292,7 +303,6 @@
   }
   .close-btn:hover{ color:var(--primary); transform:rotate(90deg); background:var(--primary-soft); }
 
-  /* ===== Contact ===== */
   .contact{
     text-align:center; padding:80px 20px 60px;
     background:radial-gradient(ellipse 700px 300px at 50% 0%, rgba(124,92,255,.12), transparent 70%);
@@ -333,6 +343,7 @@
   <div class="header-orbit">
     <div class="sphere"></div>
     <div class="ring"></div>
+    <div class="letters">B<span class="spark"></span>X</div>
   </div>
   <h1>Our Design Portfolio</h1>
   <p>Browse by tier. Tap the featured piece or any tile to view it full size.</p>
