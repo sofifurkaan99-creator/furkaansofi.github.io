@@ -34,7 +34,6 @@
     outline-offset:3px;
   }
 
-  /* ===== Ambient backdrop ===== */
   .ambient{
     position:fixed; inset:0;
     z-index:0;
@@ -44,7 +43,6 @@
     pointer-events:none;
   }
 
-  /* ===== Nav ===== */
   nav{
     position:sticky; top:0; z-index:50;
     display:flex; align-items:center; justify-content:space-between;
@@ -66,7 +64,6 @@
   }
   nav a.cta:hover{ background:var(--primary-soft); border-color:var(--primary); }
 
-  /* ===== Hero ===== */
   header{
     position:relative;
     padding:120px 6% 100px;
@@ -145,7 +142,6 @@
   @keyframes rise{ to{ opacity:1; transform:translateY(0); } }
   header .eyebrow, header h1, header p.lead, .hero-actions{ transform:translateY(18px); }
 
-  /* orbit signature graphic behind hero */
   .hero-orbit{
     position:absolute; top:50%; left:50%;
     transform:translate(-50%,-50%);
@@ -167,7 +163,6 @@
   .hero-orbit .node{ position:absolute; top:-3px; left:50%; width:6px; height:6px; border-radius:50%; background:var(--primary); box-shadow:0 0 14px 3px rgba(124,92,255,.7); }
   .hero-orbit .ring:nth-child(2) .node{ background:var(--accent); box-shadow:0 0 14px 3px rgba(255,107,74,.6); }
 
-  /* ===== Discount strip ===== */
   .discount{
     position:relative;
     margin:0 6%;
@@ -181,14 +176,12 @@
   }
   .discount .mono{ color:var(--accent); }
 
-  /* ===== Sections ===== */
   section{ padding:90px 6%; max-width:1200px; margin:auto; position:relative; }
   .section-head{ text-align:center; margin-bottom:56px; }
   .section-head .eyebrow{ display:inline-flex; opacity:1; animation:none; transform:none; margin-bottom:18px; }
   .section-head h2{ font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800; letter-spacing:-1px; }
   .section-head p{ color:var(--muted); margin-top:12px; max-width:520px; margin-inline:auto; }
 
-  /* services grid */
   .services{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
   .card{
     position:relative;
@@ -212,7 +205,6 @@
   .card h3{ font-size:1.15rem; margin-bottom:8px; font-weight:700; }
   .card p{ color:var(--muted); font-size:.92rem; line-height:1.55; }
 
-  /* why choose - stat band */
   .why-wrap{
     background:linear-gradient(165deg, var(--panel), var(--panel-2));
     border:1px solid var(--line);
@@ -230,7 +222,6 @@
     .why-grid{ grid-template-columns:1fr; }
   }
 
-  /* footer */
   footer{
     text-align:center; padding:50px 20px 40px;
     color:var(--muted); font-size:.85rem;
@@ -282,7 +273,7 @@
   <div class="section-head">
     <span class="eyebrow"><span class="dot"></span>Services</span>
     <h2>Built for every kind of business</h2>
-    <p>Six core offerings, each tuned to a different goal — pick what fits, or let us combine them.</p>
+    <p>Twelve core offerings, each tuned to a different goal — pick what fits, or let us combine them.</p>
   </div>
   <div class="services">
     <div class="card"><span class="num mono">01</span><div class="icon"><i class="fas fa-briefcase"></i></div><h3>Business Websites</h3><p>Modern corporate designs that build instant credibility.</p></div>
@@ -291,6 +282,12 @@
     <div class="card"><span class="num mono">04</span><div class="icon"><i class="fas fa-rocket"></i></div><h3>Landing Pages</h3><p>High-conversion funnels engineered around a single goal.</p></div>
     <div class="card"><span class="num mono">05</span><div class="icon"><i class="fas fa-sync"></i></div><h3>Redesign</h3><p>Modernize an outdated presence without losing what works.</p></div>
     <div class="card"><span class="num mono">06</span><div class="icon"><i class="fas fa-search"></i></div><h3>SEO</h3><p>Technical foundations that help you rank where it matters.</p></div>
+    <div class="card"><span class="num mono">07</span><div class="icon"><i class="fas fa-shield-halved"></i></div><h3>Firewall & Security Setup</h3><p>Hardened configurations that keep attackers and bots out.</p></div>
+    <div class="card"><span class="num mono">08</span><div class="icon"><i class="fas fa-bug"></i></div><h3>Bug Fixing & Maintenance</h3><p>Fast turnaround on issues, plus ongoing upkeep so nothing breaks.</p></div>
+    <div class="card"><span class="num mono">09</span><div class="icon"><i class="fas fa-server"></i></div><h3>Website Hosting Setup</h3><p>Reliable hosting configured and optimized for your site.</p></div>
+    <div class="card"><span class="num mono">10</span><div class="icon"><i class="fas fa-lock"></i></div><h3>Domain & SSL Setup</h3><p>Get your domain connected and secured with HTTPS, done right.</p></div>
+    <div class="card"><span class="num mono">11</span><div class="icon"><i class="fas fa-mobile-screen-button"></i></div><h3>App Development</h3><p>Cross-platform apps that extend your brand beyond the browser.</p></div>
+    <div class="card"><span class="num mono">12</span><div class="icon"><i class="fas fa-database"></i></div><h3>Database Setup</h3><p>Structured, scalable databases built around your actual data.</p></div>
   </div>
 </section>
 
@@ -318,7 +315,6 @@
 </footer>
 
 <script>
-  // scroll reveal for cards
   const io = new IntersectionObserver((entries)=>{
     entries.forEach((e,i)=>{
       if(e.isIntersecting){
