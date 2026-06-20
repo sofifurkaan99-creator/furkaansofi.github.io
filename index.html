@@ -3,61 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrandOrbitX | Welcome</title>
+    <title>BrandOrbitX | Experience Premium</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { width: 100%; height: 100%; overflow: hidden; background-color: #000; font-family: 'Segoe UI', sans-serif; }
+        body, html { width: 100%; height: 100%; overflow: hidden; background: #020205; font-family: 'Inter', sans-serif; }
 
-        /* Video ka 2:3 ratio setup */
+        /* Video Container - Premium Cinematic Look */
         .video-wrapper {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 90%; 
-            max-width: 400px; /* Adjust based on your preference */
-            aspect-ratio: 2 / 3; 
-            border-radius: 20px;
+            width: 320px;
+            aspect-ratio: 2 / 3;
+            border-radius: 30px;
             overflow: hidden;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 198, 255, 0.2);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .video-wrapper:hover { transform: translate(-50%, -52%) scale(1.02); }
         video { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Next button edge par (right side) */
+        /* Next Button - Advanced Glassmorphism */
         .btn-container {
             position: absolute;
-            bottom: 50px;
-            right: 30px; /* Edge alignment */
-            z-index: 10;
+            bottom: 40px;
+            right: 40px;
             opacity: 0;
-            animation: fadeIn 1.5s forwards;
-            animation-delay: 2s;
+            animation: slideInUp 1s ease forwards 2s;
         }
 
-        /* Glassmorphism Design */
         .glass-btn {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 15px 35px;
-            font-size: 16px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            border-radius: 15px;
+            padding: 18px 40px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 14px;
+            border-radius: 50px;
             cursor: pointer;
             text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        .glass-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            transform: scale(1.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes fadeIn { to { opacity: 1; } }
+        .glass-btn::before {
+            content: "";
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .glass-btn:hover {
+            background: rgba(0, 198, 255, 0.2);
+            border-color: #00c6ff;
+            box-shadow: 0 0 20px rgba(0, 198, 255, 0.4);
+        }
+        .glass-btn:hover::before { left: 100%; }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -69,7 +82,7 @@
     </div>
 
     <div class="btn-container">
-        <a href="home.html" class="glass-btn">Next →</a>
+        <a href="home.html" class="glass-btn">Explore Vision →</a>
     </div>
 
 </body>
