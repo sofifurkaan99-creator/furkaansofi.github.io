@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#7c5cff">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BrandOrbitX | Elite Web Solutions</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -38,7 +40,6 @@
     pointer-events:none;
   }
 
-  /* ===== Nav ===== */
   nav{
     position:sticky; top:0; z-index:100;
     display:flex; align-items:center; justify-content:space-between;
@@ -50,7 +51,6 @@
   .logo{ display:flex; align-items:center; gap:9px; font-weight:700; letter-spacing:.3px; text-decoration:none; color:var(--text); }
   .logo .dot{ width:8px;height:8px;border-radius:50%;background:var(--accent); box-shadow:0 0 10px var(--accent); }
 
-  /* Hamburger button */
   .hamburger{
     width:40px; height:40px;
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
@@ -65,16 +65,13 @@
   .hamburger:hover{ background:rgba(124,92,255,.2); border-color:var(--primary); }
   .hamburger span{
     display:block; width:20px; height:2px;
-    background:var(--text);
-    border-radius:2px;
+    background:var(--text); border-radius:2px;
     transition:.4s cubic-bezier(.16,1,.3,1);
   }
-  /* X animation when open */
   .hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
   .hamburger.open span:nth-child(2){ opacity:0; transform:scaleX(0); }
   .hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 
-  /* Dropdown menu */
   .nav-dropdown{
     position:fixed;
     top:0; left:0; right:0;
@@ -91,10 +88,8 @@
 
   .nav-item{
     display:flex; align-items:center; gap:14px;
-    padding:18px 20px;
-    border-radius:14px;
-    text-decoration:none;
-    color:var(--text);
+    padding:18px 20px; border-radius:14px;
+    text-decoration:none; color:var(--text);
     font-size:1.1rem; font-weight:600;
     border:1px solid transparent;
     transition:.3s cubic-bezier(.16,1,.3,1);
@@ -104,28 +99,17 @@
     width:40px; height:40px; border-radius:10px;
     background:var(--primary-soft);
     display:flex; align-items:center; justify-content:center;
-    color:var(--primary); font-size:.95rem;
-    flex-shrink:0;
+    color:var(--primary); font-size:.95rem; flex-shrink:0;
   }
   .nav-item .nav-text{ display:flex; flex-direction:column; gap:2px; }
   .nav-item .nav-text small{ color:var(--muted); font-size:.75rem; font-weight:400; }
-
-  .nav-item.cta-item{
-    background:var(--primary);
-    border-color:var(--primary);
-    margin-top:8px;
-  }
+  .nav-item.cta-item{ background:var(--primary); border-color:var(--primary); margin-top:8px; }
   .nav-item.cta-item:hover{ background:#6b4de0; box-shadow:0 8px 24px rgba(124,92,255,.4); }
   .nav-item.cta-item .nav-icon{ background:rgba(255,255,255,.15); color:#fff; }
 
-  /* overlay to close menu */
-  .nav-overlay{
-    position:fixed; inset:0; z-index:80;
-    display:none;
-  }
+  .nav-overlay{ position:fixed; inset:0; z-index:80; display:none; }
   .nav-overlay.open{ display:block; }
 
-  /* ===== Hero ===== */
   header{
     position:relative;
     padding:120px 6% 100px;
@@ -198,7 +182,6 @@
   .hero-orbit .node{ position:absolute; top:-3px; left:50%; width:6px; height:6px; border-radius:50%; background:var(--primary); box-shadow:0 0 14px 3px rgba(124,92,255,.7); }
   .hero-orbit .ring:nth-child(2) .node{ background:var(--accent); box-shadow:0 0 14px 3px rgba(255,107,74,.6); }
 
-  /* ===== Discount ===== */
   .discount{
     position:relative; margin:0 6%;
     padding:18px 24px; border-radius:16px;
@@ -209,7 +192,6 @@
   }
   .discount .mono{ color:var(--accent); }
 
-  /* ===== Services ===== */
   section{ padding:90px 6%; max-width:1200px; margin:auto; position:relative; }
   .section-head{ text-align:center; margin-bottom:56px; }
   .section-head .eyebrow{ display:inline-flex; opacity:1; animation:none; transform:none; margin-bottom:18px; }
@@ -236,7 +218,6 @@
   .card h3{ font-size:1.15rem; margin-bottom:8px; font-weight:700; }
   .card p{ color:var(--muted); font-size:.92rem; line-height:1.55; }
 
-  /* ===== Why ===== */
   .why-wrap{
     background:linear-gradient(165deg, var(--panel), var(--panel-2));
     border:1px solid var(--line); border-radius:24px; padding:60px 40px;
@@ -250,7 +231,6 @@
 
   @media (max-width:760px){ .why-grid{ grid-template-columns:1fr; } }
 
-  /* ===== Footer ===== */
   footer{
     text-align:center; padding:50px 20px 40px;
     color:var(--muted); font-size:.85rem;
@@ -271,10 +251,8 @@
 
 <div class="ambient"></div>
 
-<!-- Nav overlay (click to close) -->
 <div class="nav-overlay" id="navOverlay" onclick="closeMenu()"></div>
 
-<!-- Dropdown menu -->
 <div class="nav-dropdown" id="navDropdown">
   <a href="about.html" class="nav-item" onclick="closeMenu()">
     <span class="nav-icon"><i class="fas fa-users"></i></span>
@@ -372,7 +350,6 @@
 </footer>
 
 <script>
-  // Hamburger menu
   function toggleMenu(){
     const h = document.getElementById('hamburger');
     const d = document.getElementById('navDropdown');
@@ -390,12 +367,10 @@
     document.body.style.overflow = '';
   }
 
-  // Close on Escape key
   document.addEventListener('keydown', e => {
     if(e.key === 'Escape') closeMenu();
   });
 
-  // Scroll reveal for cards
   const io = new IntersectionObserver((entries)=>{
     entries.forEach((e,i)=>{
       if(e.isIntersecting){
