@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sofifurkaan99-creator.github.io/furkaansofi.github.io/sitemap.xml
+Sitemap: https://sofifurkaan99-creator.github.io/brandorbitX.github.io/sitemap.xml
