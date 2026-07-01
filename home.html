@@ -16,6 +16,7 @@
     --primary:#7c5cff;
     --primary-soft:rgba(124,92,255,.12);
     --accent:#ff6b4a;
+    --cyan:#6fd4ff;
     --text:#e8eaf2;
     --muted:#8088a0;
     --line:rgba(255,255,255,.08);
@@ -88,8 +89,10 @@
 
   .nav-item{
     display:flex; align-items:center; gap:14px;
-    padding:18px 20px; border-radius:14px;
-    text-decoration:none; color:var(--text);
+    padding:18px 20px;
+    border-radius:14px;
+    text-decoration:none;
+    color:var(--text);
     font-size:1.1rem; font-weight:600;
     border:1px solid transparent;
     transition:.3s cubic-bezier(.16,1,.3,1);
@@ -99,15 +102,24 @@
     width:40px; height:40px; border-radius:10px;
     background:var(--primary-soft);
     display:flex; align-items:center; justify-content:center;
-    color:var(--primary); font-size:.95rem; flex-shrink:0;
+    color:var(--primary); font-size:.95rem;
+    flex-shrink:0;
   }
   .nav-item .nav-text{ display:flex; flex-direction:column; gap:2px; }
   .nav-item .nav-text small{ color:var(--muted); font-size:.75rem; font-weight:400; }
-  .nav-item.cta-item{ background:var(--primary); border-color:var(--primary); margin-top:8px; }
+
+  .nav-item.cta-item{
+    background:var(--primary);
+    border-color:var(--primary);
+    margin-top:8px;
+  }
   .nav-item.cta-item:hover{ background:#6b4de0; box-shadow:0 8px 24px rgba(124,92,255,.4); }
   .nav-item.cta-item .nav-icon{ background:rgba(255,255,255,.15); color:#fff; }
 
-  .nav-overlay{ position:fixed; inset:0; z-index:80; display:none; }
+  .nav-overlay{
+    position:fixed; inset:0; z-index:80;
+    display:none;
+  }
   .nav-overlay.open{ display:block; }
 
   header{
@@ -120,8 +132,10 @@
     display:inline-flex; align-items:center; gap:8px;
     font-family:'JetBrains Mono',monospace;
     font-size:12px; letter-spacing:2px; text-transform:uppercase;
-    color:var(--muted); border:1px solid var(--line);
-    padding:7px 16px; border-radius:50px; margin-bottom:32px;
+    color:var(--muted);
+    border:1px solid var(--line);
+    padding:7px 16px; border-radius:50px;
+    margin-bottom:32px;
     opacity:0; animation:rise .8s cubic-bezier(.16,1,.3,1) .1s forwards;
   }
   .eyebrow .dot{ width:6px;height:6px;border-radius:50%;background:var(--accent); }
@@ -135,15 +149,18 @@
     background:linear-gradient(100deg, var(--primary), #b8a3ff 50%, var(--accent));
     -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
   }
+
   header p.lead{
     font-size:1.15rem; color:var(--muted);
     margin-top:24px; max-width:560px; line-height:1.6;
     opacity:0; animation:rise .9s cubic-bezier(.16,1,.3,1) .4s forwards;
   }
+
   .hero-actions{
     margin-top:40px; display:flex; gap:16px; flex-wrap:wrap; justify-content:center;
     opacity:0; animation:rise .9s cubic-bezier(.16,1,.3,1) .55s forwards;
   }
+
   .btn-primary{
     padding:16px 36px; background:var(--primary); color:#fff;
     border:none; border-radius:50px; font-weight:600; font-size:15px;
@@ -153,6 +170,7 @@
   .btn-primary:hover{ transform:translateY(-3px); box-shadow:0 12px 30px rgba(124,92,255,.4); }
   .btn-primary svg{ transition:.3s; }
   .btn-primary:hover svg{ transform:translateX(4px); }
+
   .btn-ghost{
     padding:16px 32px; background:transparent;
     border:1px solid var(--line); color:var(--text);
@@ -231,6 +249,32 @@
 
   @media (max-width:760px){ .why-grid{ grid-template-columns:1fr; } }
 
+  /* 3D Services video cards */
+  .threeD-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:24px; }
+  .threeD-card{
+    position:relative; border-radius:20px; overflow:hidden;
+    border:1px solid var(--line); background:var(--panel);
+    aspect-ratio:9/16;
+    transition:.4s cubic-bezier(.16,1,.3,1);
+    cursor:pointer;
+  }
+  .threeD-card:hover{ transform:translateY(-6px); border-color:rgba(124,92,255,.4); box-shadow:0 20px 50px rgba(0,0,0,.4); }
+  .threeD-card video{ width:100%; height:100%; object-fit:cover; display:block; }
+  .threeD-overlay{
+    position:absolute; bottom:0; left:0; right:0; padding:20px;
+    background:linear-gradient(to top, rgba(6,8,15,.92), transparent);
+  }
+  .threeD-overlay .num{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--cyan); letter-spacing:1px; }
+  .threeD-overlay h3{ color:white; font-size:1.1rem; font-weight:700; margin-top:4px; }
+  .threeD-badge{
+    position:absolute; top:14px; right:14px; z-index:2;
+    background:rgba(6,8,15,.7); backdrop-filter:blur(8px);
+    border:1px solid rgba(124,92,255,.4); color:var(--cyan);
+    padding:5px 12px; border-radius:50px;
+    font-size:.65rem; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+    font-family:'JetBrains Mono',monospace;
+  }
+
   footer{
     text-align:center; padding:50px 20px 40px;
     color:var(--muted); font-size:.85rem;
@@ -257,6 +301,10 @@
   <a href="about.html" class="nav-item" onclick="closeMenu()">
     <span class="nav-icon"><i class="fas fa-users"></i></span>
     <span class="nav-text">About Us<small>Meet the team behind BrandOrbitX</small></span>
+  </a>
+  <a href="services.html" class="nav-item" onclick="closeMenu()">
+    <span class="nav-icon"><i class="fas fa-layer-group"></i></span>
+    <span class="nav-text">Services<small>Everything we offer, in detail</small></span>
   </a>
   <a href="pricing.html" class="nav-item" onclick="closeMenu()">
     <span class="nav-icon"><i class="fas fa-tag"></i></span>
@@ -323,6 +371,73 @@
     <div class="card"><span class="num mono">10</span><div class="icon"><i class="fas fa-lock"></i></div><h3>Domain & SSL Setup</h3><p>Get your domain connected and secured with HTTPS, done right.</p></div>
     <div class="card"><span class="num mono">11</span><div class="icon"><i class="fas fa-mobile-screen-button"></i></div><h3>App Development</h3><p>Cross-platform apps that extend your brand beyond the browser.</p></div>
     <div class="card"><span class="num mono">12</span><div class="icon"><i class="fas fa-database"></i></div><h3>Database Setup</h3><p>Structured, scalable databases built around your actual data.</p></div>
+  </div>
+</section>
+
+<!-- ===== 3D SERVICES SECTION ===== -->
+<section>
+  <div class="section-head">
+    <span class="eyebrow"><span class="dot"></span>3D Visualization</span>
+    <h2>Our Special <span>3D Services</span></h2>
+    <p>Photorealistic 3D renders and walkthroughs that bring your space or product to life before it's even built.</p>
+  </div>
+  <div class="threeD-grid">
+
+    <div class="threeD-card">
+      <span class="threeD-badge">3D</span>
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="images/3d_service_1.mp4" type="video/mp4">
+      </video>
+      <div class="threeD-overlay">
+        <span class="num">01</span>
+        <h3>3D Interior Design</h3>
+      </div>
+    </div>
+
+    <div class="threeD-card">
+      <span class="threeD-badge">3D</span>
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="images/3d_service_2.mp4" type="video/mp4">
+      </video>
+      <div class="threeD-overlay">
+        <span class="num">02</span>
+        <h3>3D Kitchen Visualization</h3>
+      </div>
+    </div>
+
+    <div class="threeD-card">
+      <span class="threeD-badge">3D</span>
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="images/3d_service_3.mp4" type="video/mp4">
+      </video>
+      <div class="threeD-overlay">
+        <span class="num">03</span>
+        <h3>3D Architectural Walkthrough</h3>
+      </div>
+    </div>
+
+    <div class="threeD-card">
+      <span class="threeD-badge">3D</span>
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="images/3d_service_4.mp4" type="video/mp4">
+      </video>
+      <div class="threeD-overlay">
+        <span class="num">04</span>
+        <h3>3D Product Rendering</h3>
+      </div>
+    </div>
+
+    <div class="threeD-card">
+      <span class="threeD-badge">3D</span>
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="images/3d_service_5.mp4" type="video/mp4">
+      </video>
+      <div class="threeD-overlay">
+        <span class="num">05</span>
+        <h3>3D Brand Animation</h3>
+      </div>
+    </div>
+
   </div>
 </section>
 
