@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#7c5cff">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BrandOrbitX | Elite Web Solutions</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
   :root{
@@ -16,6 +16,7 @@
     --primary:#7c5cff;
     --primary-soft:rgba(124,92,255,.12);
     --accent:#ff6b4a;
+    --cyan:#6fd4ff;
     --text:#e8eaf2;
     --muted:#8088a0;
     --line:rgba(255,255,255,.08);
@@ -32,37 +33,50 @@
   .mono{ font-family:'JetBrains Mono',monospace; }
   a:focus-visible, button:focus-visible{ outline:2px solid var(--primary); outline-offset:3px; }
 
-  .ambient{
+  #particles{
     position:fixed; inset:0; z-index:0;
-    background:
-      radial-gradient(ellipse 800px 500px at 50% -10%, rgba(124,92,255,.18), transparent 60%),
-      radial-gradient(ellipse 600px 400px at 90% 20%, rgba(255,107,74,.08), transparent 60%);
     pointer-events:none;
+  }
+
+  .ambient{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(ellipse 900px 600px at 50% -5%, rgba(124,92,255,.22), transparent 60%),
+      radial-gradient(ellipse 600px 400px at 90% 20%, rgba(255,107,74,.1), transparent 60%),
+      radial-gradient(ellipse 500px 500px at 5% 80%, rgba(111,212,255,.06), transparent 60%);
   }
 
   nav{
     position:sticky; top:0; z-index:100;
     display:flex; align-items:center; justify-content:space-between;
     padding:18px 6%;
-    background:rgba(6,8,15,.85);
-    backdrop-filter:blur(16px);
+    background:rgba(6,8,15,.8);
+    backdrop-filter:blur(20px);
     border-bottom:1px solid var(--line);
   }
-  .logo{ display:flex; align-items:center; gap:9px; font-weight:700; letter-spacing:.3px; text-decoration:none; color:var(--text); }
-  .logo .dot{ width:8px;height:8px;border-radius:50%;background:var(--accent); box-shadow:0 0 10px var(--accent); }
+  .logo{
+    display:flex; align-items:center; gap:9px;
+    font-weight:800; letter-spacing:-.3px;
+    text-decoration:none; color:var(--text); font-size:1.05rem;
+  }
+  .logo .dot{
+    width:9px; height:9px; border-radius:50%;
+    background:var(--accent); box-shadow:0 0 14px var(--accent);
+    animation:pulse-dot 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse-dot{
+    0%,100%{ box-shadow:0 0 8px var(--accent); transform:scale(1); }
+    50%{ box-shadow:0 0 20px var(--accent); transform:scale(1.2); }
+  }
 
   .hamburger{
-    width:40px; height:40px;
+    width:42px; height:42px;
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
-    cursor:pointer;
-    background:var(--primary-soft);
-    border:1px solid rgba(124,92,255,.3);
-    border-radius:10px;
-    padding:8px;
-    transition:.3s;
-    z-index:110;
+    cursor:pointer; background:var(--primary-soft);
+    border:1px solid rgba(124,92,255,.35); border-radius:12px; padding:8px;
+    transition:.3s; z-index:110;
   }
-  .hamburger:hover{ background:rgba(124,92,255,.2); border-color:var(--primary); }
+  .hamburger:hover{ background:rgba(124,92,255,.22); border-color:var(--primary); box-shadow:0 0 16px rgba(124,92,255,.3); }
   .hamburger span{
     display:block; width:20px; height:2px;
     background:var(--text); border-radius:2px;
@@ -73,13 +87,10 @@
   .hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 
   .nav-dropdown{
-    position:fixed;
-    top:0; left:0; right:0;
-    background:rgba(6,8,15,.97);
-    backdrop-filter:blur(20px);
+    position:fixed; top:0; left:0; right:0;
+    background:rgba(6,8,15,.97); backdrop-filter:blur(24px);
     border-bottom:1px solid var(--line);
-    z-index:90;
-    padding:90px 6% 36px;
+    z-index:90; padding:90px 6% 36px;
     transform:translateY(-100%);
     transition:transform .45s cubic-bezier(.16,1,.3,1);
     display:flex; flex-direction:column; gap:8px;
@@ -94,7 +105,7 @@
     border:1px solid transparent;
     transition:.3s cubic-bezier(.16,1,.3,1);
   }
-  .nav-item:hover{ background:var(--primary-soft); border-color:rgba(124,92,255,.3); }
+  .nav-item:hover{ background:var(--primary-soft); border-color:rgba(124,92,255,.3); transform:translateX(4px); }
   .nav-item .nav-icon{
     width:40px; height:40px; border-radius:10px;
     background:var(--primary-soft);
@@ -104,159 +115,327 @@
   .nav-item .nav-text{ display:flex; flex-direction:column; gap:2px; }
   .nav-item .nav-text small{ color:var(--muted); font-size:.75rem; font-weight:400; }
   .nav-item.cta-item{ background:var(--primary); border-color:var(--primary); margin-top:8px; }
-  .nav-item.cta-item:hover{ background:#6b4de0; box-shadow:0 8px 24px rgba(124,92,255,.4); }
+  .nav-item.cta-item:hover{ background:#6b4de0; box-shadow:0 8px 24px rgba(124,92,255,.4); transform:translateX(4px); }
   .nav-item.cta-item .nav-icon{ background:rgba(255,255,255,.15); color:#fff; }
 
   .nav-overlay{ position:fixed; inset:0; z-index:80; display:none; }
   .nav-overlay.open{ display:block; }
 
+  /* HERO */
   header{
-    position:relative;
-    padding:120px 6% 100px;
-    display:flex; flex-direction:column; align-items:center; text-align:center;
-    overflow:hidden;
+    position:relative; min-height:100vh;
+    padding:0 6%;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; overflow:hidden;
   }
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:'JetBrains Mono',monospace;
-    font-size:12px; letter-spacing:2px; text-transform:uppercase;
-    color:var(--muted); border:1px solid var(--line);
-    padding:7px 16px; border-radius:50px; margin-bottom:32px;
-    opacity:0; animation:rise .8s cubic-bezier(.16,1,.3,1) .1s forwards;
-  }
-  .eyebrow .dot{ width:6px;height:6px;border-radius:50%;background:var(--accent); }
 
-  header h1{
-    font-size:clamp(2.6rem, 7vw, 4.6rem);
-    font-weight:800; letter-spacing:-2px; line-height:1.05; max-width:900px;
-    opacity:0; animation:rise .9s cubic-bezier(.16,1,.3,1) .25s forwards;
+  .hero-grid{
+    position:absolute; inset:0; z-index:0;
+    background-image:
+      linear-gradient(rgba(124,92,255,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,92,255,.06) 1px, transparent 1px);
+    background-size:60px 60px;
+    mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    animation:grid-move 20s linear infinite;
   }
-  header h1 span{
-    background:linear-gradient(100deg, var(--primary), #b8a3ff 50%, var(--accent));
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-  }
-  header p.lead{
-    font-size:1.15rem; color:var(--muted);
-    margin-top:24px; max-width:560px; line-height:1.6;
-    opacity:0; animation:rise .9s cubic-bezier(.16,1,.3,1) .4s forwards;
-  }
-  .hero-actions{
-    margin-top:40px; display:flex; gap:16px; flex-wrap:wrap; justify-content:center;
-    opacity:0; animation:rise .9s cubic-bezier(.16,1,.3,1) .55s forwards;
-  }
-  .btn-primary{
-    padding:16px 36px; background:var(--primary); color:#fff;
-    border:none; border-radius:50px; font-weight:600; font-size:15px;
-    text-decoration:none; display:inline-flex; align-items:center; gap:10px;
-    transition:.35s cubic-bezier(.16,1,.3,1);
-  }
-  .btn-primary:hover{ transform:translateY(-3px); box-shadow:0 12px 30px rgba(124,92,255,.4); }
-  .btn-primary svg{ transition:.3s; }
-  .btn-primary:hover svg{ transform:translateX(4px); }
-  .btn-ghost{
-    padding:16px 32px; background:transparent;
-    border:1px solid var(--line); color:var(--text);
-    border-radius:50px; font-weight:600; font-size:15px;
-    text-decoration:none; transition:.3s;
-  }
-  .btn-ghost:hover{ border-color:var(--primary); background:var(--primary-soft); }
+  @keyframes grid-move{ to{ background-position:60px 60px; } }
 
-  @keyframes rise{ to{ opacity:1; transform:translateY(0); } }
-  header .eyebrow, header h1, header p.lead, .hero-actions{ transform:translateY(18px); }
+  .hero-orb{ position:absolute; border-radius:50%; filter:blur(80px); pointer-events:none; }
+  .hero-orb-1{
+    width:600px; height:600px;
+    background:radial-gradient(circle, rgba(124,92,255,.35), transparent 70%);
+    top:-200px; left:50%; transform:translateX(-50%);
+    animation:orb-float-center 8s ease-in-out infinite;
+  }
+  .hero-orb-2{
+    width:400px; height:400px;
+    background:radial-gradient(circle, rgba(255,107,74,.2), transparent 70%);
+    bottom:-100px; right:-100px;
+    animation:orb-float-2 10s ease-in-out infinite reverse;
+  }
+  .hero-orb-3{
+    width:300px; height:300px;
+    background:radial-gradient(circle, rgba(111,212,255,.15), transparent 70%);
+    bottom:50px; left:-50px;
+    animation:orb-float-2 12s ease-in-out infinite;
+  }
+  @keyframes orb-float-center{
+    0%,100%{ transform:translateX(-50%) translateY(0); }
+    50%{ transform:translateX(-50%) translateY(-30px); }
+  }
+  @keyframes orb-float-2{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-24px); }
+  }
 
   .hero-orbit{
     position:absolute; top:50%; left:50%;
     transform:translate(-50%,-50%);
-    width:900px; height:900px;
-    pointer-events:none; z-index:-1; opacity:.5;
+    width:800px; height:800px;
+    pointer-events:none; z-index:0;
   }
   .hero-orbit .ring{
     position:absolute; inset:0;
-    border:1px solid rgba(124,92,255,.1);
+    border:1px solid rgba(124,92,255,.08);
     border-radius:50%; animation:spin linear infinite;
   }
-  .hero-orbit .ring:nth-child(1){ inset:120px; animation-duration:50s; }
-  .hero-orbit .ring:nth-child(2){ inset:60px; animation-duration:70s; animation-direction:reverse; border-color:rgba(255,107,74,.08); }
-  .hero-orbit .ring:nth-child(3){ inset:0; animation-duration:90s; }
+  .hero-orbit .ring:nth-child(1){ inset:100px; animation-duration:40s; border-color:rgba(124,92,255,.12); }
+  .hero-orbit .ring:nth-child(2){ inset:50px; animation-duration:60s; animation-direction:reverse; border-color:rgba(255,107,74,.07); }
+  .hero-orbit .ring:nth-child(3){ inset:0; animation-duration:80s; }
   @keyframes spin{ to{ transform:rotate(360deg); } }
-  .hero-orbit .node{ position:absolute; top:-3px; left:50%; width:6px; height:6px; border-radius:50%; background:var(--primary); box-shadow:0 0 14px 3px rgba(124,92,255,.7); }
-  .hero-orbit .ring:nth-child(2) .node{ background:var(--accent); box-shadow:0 0 14px 3px rgba(255,107,74,.6); }
+  .hero-orbit .node{
+    position:absolute; top:-4px; left:50%;
+    width:8px; height:8px; border-radius:50%;
+    background:var(--primary); box-shadow:0 0 16px 4px rgba(124,92,255,.8);
+  }
+  .hero-orbit .ring:nth-child(2) .node{ background:var(--accent); box-shadow:0 0 16px 4px rgba(255,107,74,.7); }
+
+  .hero-content{ position:relative; z-index:2; }
+
+  .hero-eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px; letter-spacing:3px; text-transform:uppercase;
+    color:var(--muted); border:1px solid var(--line);
+    padding:8px 18px; border-radius:50px; margin-bottom:36px;
+    opacity:0; animation:hero-rise .8s cubic-bezier(.16,1,.3,1) .2s forwards;
+    background:rgba(255,255,255,.02);
+  }
+  .hero-eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px var(--accent); }
+
+  header h1{
+    font-size:clamp(3rem, 9vw, 6rem);
+    font-weight:900; letter-spacing:-3px; line-height:1.0;
+    max-width:1000px; margin:0 auto 28px;
+    opacity:0; animation:hero-rise 1s cubic-bezier(.16,1,.3,1) .35s forwards;
+  }
+  header h1 .line-1{ display:block; color:var(--text); }
+  header h1 .line-2{
+    display:block;
+    background:linear-gradient(100deg, var(--primary) 0%, #b8a3ff 40%, var(--accent) 80%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    background-size:200% auto;
+    animation:gradient-shift 4s ease infinite;
+  }
+  @keyframes gradient-shift{
+    0%{ background-position:0% center; }
+    50%{ background-position:100% center; }
+    100%{ background-position:0% center; }
+  }
+
+  header p.lead{
+    font-size:1.2rem; color:var(--muted);
+    margin:0 auto 40px; max-width:580px; line-height:1.7;
+    opacity:0; animation:hero-rise .9s cubic-bezier(.16,1,.3,1) .5s forwards;
+  }
+
+  .hero-actions{
+    display:flex; gap:16px; flex-wrap:wrap; justify-content:center;
+    opacity:0; animation:hero-rise .9s cubic-bezier(.16,1,.3,1) .65s forwards;
+  }
+  @keyframes hero-rise{
+    from{ opacity:0; transform:translateY(28px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .btn-primary{
+    padding:18px 40px; background:var(--primary); color:#fff;
+    border:none; border-radius:50px; font-weight:700; font-size:1rem;
+    text-decoration:none; display:inline-flex; align-items:center; gap:10px;
+    transition:.35s cubic-bezier(.16,1,.3,1);
+    box-shadow:0 8px 32px rgba(124,92,255,.4);
+    position:relative; overflow:hidden;
+  }
+  .btn-primary::before{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
+    transform:translateX(-100%); transition:.5s;
+  }
+  .btn-primary:hover::before{ transform:translateX(100%); }
+  .btn-primary:hover{ transform:translateY(-3px); box-shadow:0 16px 40px rgba(124,92,255,.5); }
+  .btn-primary svg{ transition:.3s; }
+  .btn-primary:hover svg{ transform:translateX(4px); }
+
+  .btn-ghost{
+    padding:18px 36px; background:transparent;
+    border:1px solid rgba(255,255,255,.15); color:var(--text);
+    border-radius:50px; font-weight:600; font-size:1rem;
+    text-decoration:none; transition:.3s; backdrop-filter:blur(8px);
+  }
+  .btn-ghost:hover{ border-color:var(--primary); background:var(--primary-soft); }
+
+  .scroll-indicator{
+    position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    opacity:0; animation:hero-rise .8s ease 1.2s forwards; z-index:2;
+  }
+  .scroll-indicator span{ font-size:.72rem; color:var(--muted); letter-spacing:2px; text-transform:uppercase; font-family:'JetBrains Mono',monospace; }
+  .scroll-mouse{ width:22px; height:36px; border:1.5px solid rgba(255,255,255,.2); border-radius:11px; display:flex; justify-content:center; padding-top:6px; }
+  .scroll-mouse::before{
+    content:''; width:3px; height:8px; background:var(--primary);
+    border-radius:3px; animation:scroll-down 1.5s ease-in-out infinite;
+  }
+  @keyframes scroll-down{
+    0%{ opacity:1; transform:translateY(0); }
+    100%{ opacity:0; transform:translateY(10px); }
+  }
 
   .discount{
-    position:relative; margin:0 6%;
-    padding:18px 24px; border-radius:16px;
+    position:relative; margin:0 6%; padding:18px 24px; border-radius:16px;
     background:linear-gradient(100deg, rgba(124,92,255,.12), rgba(255,107,74,.1));
     border:1px solid rgba(124,92,255,.25);
     text-align:center; font-size:.95rem; font-weight:600;
-    display:flex; align-items:center; justify-content:center; gap:10px;
+    display:flex; align-items:center; justify-content:center; gap:10px; z-index:1;
   }
   .discount .mono{ color:var(--accent); }
 
-  section{ padding:90px 6%; max-width:1200px; margin:auto; position:relative; }
-  .section-head{ text-align:center; margin-bottom:56px; }
-  .section-head .eyebrow{ display:inline-flex; opacity:1; animation:none; transform:none; margin-bottom:18px; }
-  .section-head h2{ font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800; letter-spacing:-1px; }
-  .section-head p{ color:var(--muted); margin-top:12px; max-width:520px; margin-inline:auto; }
-
-  .services{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
-  .card{
-    background:linear-gradient(165deg, var(--panel), var(--panel-2));
-    padding:32px 28px; border-radius:20px;
-    border:1px solid var(--line);
-    transition:.4s cubic-bezier(.16,1,.3,1);
-    opacity:0; transform:translateY(24px);
+  section{ padding:100px 6%; max-width:1200px; margin:auto; position:relative; z-index:1; }
+  .section-head{ text-align:center; margin-bottom:60px; }
+  .section-head .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--muted); border:1px solid var(--line);
+    padding:7px 16px; border-radius:50px; margin-bottom:18px;
   }
-  .card.in-view{ opacity:1; transform:translateY(0); }
-  .card:hover{ border-color:rgba(124,92,255,.4); transform:translateY(-6px); box-shadow:0 16px 40px rgba(0,0,0,.35); }
-  .card .num{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted); letter-spacing:1px; }
-  .card .icon{
-    width:46px; height:46px; border-radius:12px;
+  .section-head .eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); }
+  .section-head h2{ font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; letter-spacing:-1.5px; }
+  .section-head h2 span{
+    background:linear-gradient(100deg, var(--primary), #b8a3ff 50%, var(--accent));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  }
+  .section-head p{ color:var(--muted); margin-top:14px; max-width:520px; margin-inline:auto; line-height:1.7; }
+
+  /* Scroll reveal */
+  .reveal{ opacity:0; transform:translateY(40px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+  .reveal-delay-1{ transition-delay:.1s; }
+  .reveal-delay-2{ transition-delay:.2s; }
+  .reveal-delay-3{ transition-delay:.3s; }
+
+  /* 3D FLIP CARDS */
+  .services{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; }
+  .card-3d{ perspective:1000px; height:220px; }
+  .card-inner{
+    position:relative; width:100%; height:100%;
+    transform-style:preserve-3d;
+    transition:transform .6s cubic-bezier(.16,1,.3,1);
+  }
+  .card-3d:hover .card-inner{ transform:rotateY(180deg); }
+  .card-front, .card-back{
+    position:absolute; inset:0;
+    backface-visibility:hidden; border-radius:20px; padding:28px;
+    border:1px solid var(--line);
+  }
+  .card-front{
+    background:linear-gradient(165deg, var(--panel), var(--panel-2));
+    display:flex; flex-direction:column;
+  }
+  .card-back{
+    background:linear-gradient(135deg, var(--primary), rgba(124,92,255,.7));
+    transform:rotateY(180deg);
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center; border-color:rgba(124,92,255,.5);
+  }
+  .card-front .num{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:1px; }
+  .card-front .icon{
+    width:44px; height:44px; border-radius:12px;
     background:var(--primary-soft);
     display:flex; align-items:center; justify-content:center;
-    color:var(--primary); font-size:1.2rem; margin:14px 0 18px;
+    color:var(--primary); font-size:1.15rem; margin:12px 0 16px;
   }
-  .card h3{ font-size:1.15rem; margin-bottom:8px; font-weight:700; }
-  .card p{ color:var(--muted); font-size:.92rem; line-height:1.55; }
+  .card-front h3{ font-size:1.05rem; font-weight:700; margin-bottom:6px; }
+  .card-front p{ color:var(--muted); font-size:.85rem; line-height:1.5; }
+  .card-back h3{ font-size:1rem; font-weight:700; color:white; margin-bottom:8px; }
+  .card-back p{ color:rgba(255,255,255,.8); font-size:.82rem; line-height:1.55; margin-bottom:16px; }
+  .card-back a{
+    padding:9px 20px; background:white; color:var(--primary);
+    border-radius:50px; font-weight:700; font-size:.82rem;
+    text-decoration:none; transition:.2s;
+  }
+  .card-back a:hover{ background:var(--void); color:white; }
 
+  /* 3D VIDEO SERVICES */
+  .threeD-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:24px; }
+  .threeD-card{
+    position:relative; border-radius:20px; overflow:hidden;
+    border:1px solid var(--line); background:var(--panel);
+    aspect-ratio:9/16; cursor:pointer;
+    transition:.4s cubic-bezier(.16,1,.3,1);
+  }
+  .threeD-card:hover{ transform:translateY(-8px) scale(1.02); box-shadow:0 24px 60px rgba(0,0,0,.5); border-color:rgba(124,92,255,.5); }
+  .threeD-card video{ width:100%; height:100%; object-fit:cover; display:block; }
+  .threeD-overlay{
+    position:absolute; bottom:0; left:0; right:0; padding:24px 20px;
+    background:linear-gradient(to top, rgba(6,8,15,.95) 0%, rgba(6,8,15,.5) 60%, transparent 100%);
+  }
+  .threeD-overlay .num{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--cyan); letter-spacing:1px; }
+  .threeD-overlay h3{ color:white; font-size:1.05rem; font-weight:700; margin-top:4px; }
+  .threeD-badge{
+    position:absolute; top:14px; right:14px; z-index:2;
+    background:rgba(6,8,15,.7); backdrop-filter:blur(8px);
+    border:1px solid rgba(124,92,255,.5); color:var(--primary);
+    padding:5px 12px; border-radius:50px;
+    font-size:.65rem; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+    font-family:'JetBrains Mono',monospace;
+  }
+
+  /* WHY */
   .why-wrap{
     background:linear-gradient(165deg, var(--panel), var(--panel-2));
-    border:1px solid var(--line); border-radius:24px; padding:60px 40px;
+    border:1px solid var(--line); border-radius:28px; padding:64px 48px;
+    position:relative; overflow:hidden;
   }
-  .why-grid{ display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; }
-  .why-text p{ color:var(--muted); line-height:1.7; font-size:1.02rem; }
-  .stats{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-  .stat{ border-left:2px solid var(--primary); padding-left:16px; }
-  .stat .n{ font-family:'JetBrains Mono',monospace; font-size:2rem; font-weight:700; color:var(--text); }
+  .why-wrap::before{
+    content:''; position:absolute; top:-80px; right:-80px;
+    width:300px; height:300px; border-radius:50%;
+    background:radial-gradient(circle, rgba(124,92,255,.12), transparent 70%);
+    pointer-events:none;
+  }
+  .why-grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; position:relative; z-index:1; }
+  .why-text h2{ font-size:clamp(1.6rem,3.5vw,2.2rem); font-weight:800; letter-spacing:-1px; margin-bottom:14px; }
+  .why-text p{ color:var(--muted); line-height:1.8; font-size:1rem; }
+  .stats{ display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+  .stat{ border-left:3px solid var(--primary); padding-left:18px; transition:.3s; }
+  .stat:hover{ border-left-color:var(--accent); }
+  .stat .n{ font-family:'JetBrains Mono',monospace; font-size:2.2rem; font-weight:800; }
   .stat .l{ font-size:.85rem; color:var(--muted); margin-top:4px; }
 
-  @media (max-width:760px){ .why-grid{ grid-template-columns:1fr; } }
+  @media (max-width:760px){
+    .why-grid{ grid-template-columns:1fr; }
+    .why-wrap{ padding:40px 24px; }
+    header h1{ letter-spacing:-2px; }
+  }
 
   footer{
     text-align:center; padding:50px 20px 40px;
     color:var(--muted); font-size:.85rem;
-    border-top:1px solid var(--line);
+    border-top:1px solid var(--line); position:relative; z-index:1;
   }
   footer .logo{ justify-content:center; margin-bottom:14px; color:var(--text); }
 
   @media (prefers-reduced-motion: reduce){
-    .ring{ animation:none; }
+    .ring,.hero-orb-1,.hero-orb-2,.hero-orb-3,.hero-grid,.logo .dot{ animation:none; }
     .nav-dropdown{ transition:none; }
-    .card, header .eyebrow, header h1, header p.lead, .hero-actions{
-      animation:none !important; opacity:1 !important; transform:none !important;
-    }
+    .reveal{ opacity:1; transform:none; transition:none; }
+    header h1 .line-2{ animation:none; }
   }
 </style>
 </head>
 <body>
 
+<canvas id="particles"></canvas>
 <div class="ambient"></div>
 
 <div class="nav-overlay" id="navOverlay" onclick="closeMenu()"></div>
-
 <div class="nav-dropdown" id="navDropdown">
   <a href="about.html" class="nav-item" onclick="closeMenu()">
     <span class="nav-icon"><i class="fas fa-users"></i></span>
     <span class="nav-text">About Us<small>Meet the team behind BrandOrbitX</small></span>
+  </a>
+  <a href="services.html" class="nav-item" onclick="closeMenu()">
+    <span class="nav-icon"><i class="fas fa-layer-group"></i></span>
+    <span class="nav-text">Services<small>Everything we offer, in detail</small></span>
   </a>
   <a href="pricing.html" class="nav-item" onclick="closeMenu()">
     <span class="nav-icon"><i class="fas fa-tag"></i></span>
@@ -275,27 +454,39 @@
 <nav>
   <a href="home.html" class="logo"><span class="dot"></span>BrandOrbitX</a>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span>
   </div>
 </nav>
 
 <header>
+  <div class="hero-grid"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
   <div class="hero-orbit">
     <div class="ring"><span class="node"></span></div>
     <div class="ring"><span class="node"></span></div>
     <div class="ring"></div>
   </div>
-  <div class="eyebrow"><span class="dot"></span>Web design studio</div>
-  <h1>We architect digital<br><span>experiences that orbit</span> your business growth</h1>
-  <p class="lead">From first sketch to launch in 24 hours — modern, conversion-ready websites built around what your business actually needs.</p>
-  <div class="hero-actions">
-    <a class="btn-primary" href="dashboard.html">
-      Browse Designs
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
-    <a class="btn-ghost" href="project.html">Start a Project</a>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span class="dot"></span>Premium Web Design Studio</div>
+    <h1>
+      <span class="line-1">We architect digital</span>
+      <span class="line-2">experiences that orbit</span>
+      <span class="line-1">your business growth</span>
+    </h1>
+    <p class="lead">From first sketch to launch in 24 hours — modern, conversion-ready websites built around what your business actually needs.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="dashboard.html">
+        Browse Designs
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn-ghost" href="project.html">Start a Project</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-mouse"></div>
+    <span>Scroll</span>
   </div>
 </header>
 
@@ -305,40 +496,55 @@
 </div>
 
 <section>
-  <div class="section-head">
+  <div class="section-head reveal">
     <span class="eyebrow"><span class="dot"></span>Services</span>
-    <h2>Built for every kind of business</h2>
-    <p>Twelve core offerings, each tuned to a different goal — pick what fits, or let us combine them.</p>
+    <h2>Built for every kind of <span>business</span></h2>
+    <p>Hover any card to see details. Twelve core offerings — pick what fits, or let us combine them.</p>
   </div>
   <div class="services">
-    <div class="card"><span class="num mono">01</span><div class="icon"><i class="fas fa-briefcase"></i></div><h3>Business Websites</h3><p>Modern corporate designs that build instant credibility.</p></div>
-    <div class="card"><span class="num mono">02</span><div class="icon"><i class="fas fa-shopping-cart"></i></div><h3>E-Commerce</h3><p>Scalable online stores built to convert browsers into buyers.</p></div>
-    <div class="card"><span class="num mono">03</span><div class="icon"><i class="fas fa-laptop-code"></i></div><h3>Portfolio</h3><p>Professional freelance and personal sites that get you hired.</p></div>
-    <div class="card"><span class="num mono">04</span><div class="icon"><i class="fas fa-rocket"></i></div><h3>Landing Pages</h3><p>High-conversion funnels engineered around a single goal.</p></div>
-    <div class="card"><span class="num mono">05</span><div class="icon"><i class="fas fa-sync"></i></div><h3>Redesign</h3><p>Modernize an outdated presence without losing what works.</p></div>
-    <div class="card"><span class="num mono">06</span><div class="icon"><i class="fas fa-search"></i></div><h3>SEO</h3><p>Technical foundations that help you rank where it matters.</p></div>
-    <div class="card"><span class="num mono">07</span><div class="icon"><i class="fas fa-shield-halved"></i></div><h3>Firewall & Security Setup</h3><p>Hardened configurations that keep attackers and bots out.</p></div>
-    <div class="card"><span class="num mono">08</span><div class="icon"><i class="fas fa-bug"></i></div><h3>Bug Fixing & Maintenance</h3><p>Fast turnaround on issues, plus ongoing upkeep so nothing breaks.</p></div>
-    <div class="card"><span class="num mono">09</span><div class="icon"><i class="fas fa-server"></i></div><h3>Website Hosting Setup</h3><p>Reliable hosting configured and optimized for your site.</p></div>
-    <div class="card"><span class="num mono">10</span><div class="icon"><i class="fas fa-lock"></i></div><h3>Domain & SSL Setup</h3><p>Get your domain connected and secured with HTTPS, done right.</p></div>
-    <div class="card"><span class="num mono">11</span><div class="icon"><i class="fas fa-mobile-screen-button"></i></div><h3>App Development</h3><p>Cross-platform apps that extend your brand beyond the browser.</p></div>
-    <div class="card"><span class="num mono">12</span><div class="icon"><i class="fas fa-database"></i></div><h3>Database Setup</h3><p>Structured, scalable databases built around your actual data.</p></div>
+    <div class="card-3d reveal reveal-delay-1"><div class="card-inner"><div class="card-front"><span class="num mono">01</span><div class="icon"><i class="fas fa-briefcase"></i></div><h3>Business Websites</h3><p>Modern corporate designs that build instant credibility.</p></div><div class="card-back"><h3>Business Websites</h3><p>Up to 10 pages, mobile responsive, SEO, contact forms & WhatsApp button.</p><a href="project.html">Start Now</a></div></div></div>
+    <div class="card-3d reveal reveal-delay-2"><div class="card-inner"><div class="card-front"><span class="num mono">02</span><div class="icon"><i class="fas fa-shopping-cart"></i></div><h3>E-Commerce</h3><p>Scalable online stores built to convert browsers into buyers.</p></div><div class="card-back"><h3>E-Commerce Store</h3><p>Cart, wishlist, payment gateway, order management & admin panel.</p><a href="project.html">Start Now</a></div></div></div>
+    <div class="card-3d reveal reveal-delay-3"><div class="card-inner"><div class="card-front"><span class="num mono">03</span><div class="icon"><i class="fas fa-laptop-code"></i></div><h3>Portfolio</h3><p>Professional freelance and personal sites that get you hired.</p></div><div class="card-back"><h3>Portfolio Website</h3><p>Custom branding, project gallery, skills section & CV download option.</p><a href="project.html">Start Now</a></div></div></div>
+    <div class="card-3d reveal reveal-delay-1"><div class="card-inner"><div class="card-front"><span class="num mono">04</span><div class="icon"><i class="fas fa-rocket"></i></div><h3>Landing Pages</h3><p>High-conversion funnels engineered around a single goal.</p></div><div class="card-back"><h3>Landing Pages</h3><p>Single conversion page, CTA design, lead capture & WhatsApp buttons.</p><a href="project.html">Start Now</a></div></div></div>
+    <div class="card-3d reveal reveal-delay-2"><div class="card-inner"><div class="card-front"><span class="num mono">05</span><div class="icon"><i class="fas fa-sync"></i></div><h3>Redesign</h3><p>Modernize an outdated presence without losing what works.</p></div><div class="card-back"><h3>Website Redesign</h3><p>Full UI/UX overhaul, content migration, speed fix & SEO re-setup.</p><a href="project.html">Start Now</a></div></div></div>
+    <div class="card-3d reveal reveal-delay-3"><div class="card-inner"><div class="card-front"><span class="num mono">06</span><div class="icon"><i class="fas fa-search"></i></div><h3>SEO</h3><p>Technical foundations that help you rank where it matters.</p></div><div class="card-back"><h3>SEO Optimization</h3><p>Keyword research, on-page SEO, Google Search Console & monthly reports.</p><a href="project.html">Start Now</a></div></div></div>
+    <div class="card-3d reveal reveal-delay-1"><div class="card-inner"><div class="card-front"><span class="num mono">07</span><div class="icon"><i class="fas fa-shield-halved"></i></div><h3>Firewall & Security</h3><p>Hardened configurations that keep attackers and bots out.</p></div><div class="card-back"><h3>Firewall & Security</h3><p>Firewall rules, brute force protection, SSL install & security audit.</p><a href="project.html">Start Now</a></div></div></div>
+    <div class="card-3d reveal reveal-delay-2"><div class="card-inner"><div class="card-front"><span class="num mono">08</span><div class="icon"><i class="fas fa-bug"></i></div><h3>Bug Fixing</h3><p>Fast turnaround on issues, plus ongoing upkeep so nothing breaks.</p></div><div class="card-back"><h3>Bug Fixing & Maintenance</h3><p>Same-day diagnosis, frontend & backend fixes, testing & maintenance.</p><a href="project.html">Start Now</a></div></div></div>
+    <div class="card-3d reveal reveal-delay-3"><div class="card-inner"><div class="card-front"><span class="num mono">09</span><div class="icon"><i class="fas fa-server"></i></div><h3>Hosting Setup</h3><p>Reliable hosting configured for speed and uptime.</p></div><div class="card-back"><h3>Website Hosting</h3><p>Hosting config, DNS setup, SSL, email hosting & backup configuration.</p><a href="project.html">Start Now</a></div></div></div>
+    <div class="card-3d reveal reveal-delay-1"><div class="card-inner"><div class="card-front"><span class="num mono">10</span><div class="icon"><i class="fas fa-lock"></i></div><h3>Domain & SSL</h3><p>Your domain connected and secured with HTTPS, done right.</p></div><div class="card-back"><h3>Domain & SSL Setup</h3><p>Domain registration, DNS config, free SSL & HTTPS redirect setup.</p><a href="project.html">Start Now</a></div></div></div>
+    <div class="card-3d reveal reveal-delay-2"><div class="card-inner"><div class="card-front"><span class="num mono">11</span><div class="icon"><i class="fas fa-mobile-screen-button"></i></div><h3>App Development</h3><p>Cross-platform apps that extend your brand beyond the browser.</p></div><div class="card-back"><h3>App Development</h3><p>Android app, custom UI/UX, login, push notifications & Play Store help.</p><a href="project.html">Start Now</a></div></div></div>
+    <div class="card-3d reveal reveal-delay-3"><div class="card-inner"><div class="card-front"><span class="num mono">12</span><div class="icon"><i class="fas fa-database"></i></div><h3>Database Setup</h3><p>Structured, scalable databases built around your actual data.</p></div><div class="card-back"><h3>Database Setup</h3><p>MySQL/MongoDB design, secure access, backup, indexing & API connection.</p><a href="project.html">Start Now</a></div></div></div>
   </div>
 </section>
 
 <section>
-  <div class="why-wrap">
+  <div class="section-head reveal">
+    <span class="eyebrow"><span class="dot"></span>3D Visualization</span>
+    <h2>Our Special <span>3D Services</span></h2>
+    <p>Photorealistic 3D renders and walkthroughs that bring your space or product to life.</p>
+  </div>
+  <div class="threeD-grid">
+    <div class="threeD-card reveal reveal-delay-1"><span class="threeD-badge">3D</span><video autoplay muted loop playsinline preload="metadata"><source src="images/3d_service_1.mp4" type="video/mp4"></video><div class="threeD-overlay"><span class="num">01</span><h3>3D Interior Design</h3></div></div>
+    <div class="threeD-card reveal reveal-delay-2"><span class="threeD-badge">3D</span><video autoplay muted loop playsinline preload="metadata"><source src="images/3d_service_2.mp4" type="video/mp4"></video><div class="threeD-overlay"><span class="num">02</span><h3>3D Kitchen Visualization</h3></div></div>
+    <div class="threeD-card reveal reveal-delay-3"><span class="threeD-badge">3D</span><video autoplay muted loop playsinline preload="metadata"><source src="images/3d_service_3.mp4" type="video/mp4"></video><div class="threeD-overlay"><span class="num">03</span><h3>3D Architectural Walkthrough</h3></div></div>
+    <div class="threeD-card reveal reveal-delay-1"><span class="threeD-badge">3D</span><video autoplay muted loop playsinline preload="metadata"><source src="images/3d_service_4.mp4" type="video/mp4"></video><div class="threeD-overlay"><span class="num">04</span><h3>3D Product Rendering</h3></div></div>
+    <div class="threeD-card reveal reveal-delay-2"><span class="threeD-badge">3D</span><video autoplay muted loop playsinline preload="metadata"><source src="images/3d_service_5.mp4" type="video/mp4"></video><div class="threeD-overlay"><span class="num">05</span><h3>3D Brand Animation</h3></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="why-wrap reveal">
     <div class="why-grid">
       <div class="why-text">
-        <span class="eyebrow" style="margin-bottom:16px;"><span class="dot"></span>Why BrandOrbitX</span>
-        <h2 style="font-size:1.8rem; font-weight:800; margin-bottom:14px;">Built fast. Built to last.</h2>
-        <p>Fast 24-hour delivery, modern UI/UX design, mobile-responsive architecture, and dedicated ongoing support — so your site keeps working long after launch.</p>
+        <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:7px 16px;border-radius:50px;margin-bottom:16px;"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent);display:block;"></span>Why BrandOrbitX</span>
+        <h2 style="font-size:1.9rem;font-weight:800;letter-spacing:-1px;margin-bottom:14px;">Built fast.<br>Built to last.</h2>
+        <p style="color:var(--muted);line-height:1.8;font-size:1rem;">Fast 24-hour delivery, modern UI/UX design, mobile-responsive architecture, and dedicated ongoing support — so your site keeps working long after launch.</p>
       </div>
       <div class="stats">
-        <div class="stat"><div class="n mono">24h</div><div class="l">Average delivery time</div></div>
-        <div class="stat"><div class="n mono">100%</div><div class="l">Mobile responsive</div></div>
-        <div class="stat"><div class="n mono">10+</div><div class="l">Industries covered</div></div>
-        <div class="stat"><div class="n mono">3</div><div class="l">Pricing tiers to fit any budget</div></div>
+        <div class="stat reveal reveal-delay-1"><div class="n mono">24h</div><div class="l">Average delivery time</div></div>
+        <div class="stat reveal reveal-delay-2"><div class="n mono">100%</div><div class="l">Mobile responsive</div></div>
+        <div class="stat reveal reveal-delay-1"><div class="n mono">12+</div><div class="l">Industries covered</div></div>
+        <div class="stat reveal reveal-delay-2"><div class="n mono">3</div><div class="l">Pricing tiers available</div></div>
       </div>
     </div>
   </div>
@@ -350,37 +556,63 @@
 </footer>
 
 <script>
-  function toggleMenu(){
-    const h = document.getElementById('hamburger');
-    const d = document.getElementById('navDropdown');
-    const o = document.getElementById('navOverlay');
-    h.classList.toggle('open');
-    d.classList.toggle('open');
-    o.classList.toggle('open');
-    document.body.style.overflow = d.classList.contains('open') ? 'hidden' : '';
+  // PARTICLES
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  class Particle{
+    constructor(){
+      this.x = Math.random()*W; this.y = Math.random()*H;
+      this.size = Math.random()*1.5+0.3;
+      this.vx = (Math.random()-.5)*.3; this.vy = (Math.random()-.5)*.3;
+      this.alpha = Math.random()*.6+.1;
+      const c = ['rgba(124,92,255,','rgba(111,212,255,','rgba(255,107,74,','rgba(232,234,242,'];
+      this.color = c[Math.floor(Math.random()*c.length)];
+    }
+    draw(){ ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fillStyle=this.color+this.alpha+')'; ctx.fill(); }
+    update(){
+      this.x+=this.vx; this.y+=this.vy;
+      if(this.x<0||this.x>W) this.vx*=-1;
+      if(this.y<0||this.y>H) this.vy*=-1;
+    }
   }
+  for(let i=0;i<90;i++) particles.push(new Particle());
+  function drawLines(){
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<120){ ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.strokeStyle=`rgba(124,92,255,${.08*(1-d/120)})`; ctx.lineWidth=.5; ctx.stroke(); }
+      }
+    }
+  }
+  function animate(){ ctx.clearRect(0,0,W,H); particles.forEach(p=>{p.update();p.draw();}); drawLines(); requestAnimationFrame(animate); }
+  animate();
 
+  // MENU
+  function toggleMenu(){
+    const h=document.getElementById('hamburger'), d=document.getElementById('navDropdown'), o=document.getElementById('navOverlay');
+    h.classList.toggle('open'); d.classList.toggle('open'); o.classList.toggle('open');
+    document.body.style.overflow=d.classList.contains('open')?'hidden':'';
+  }
   function closeMenu(){
     document.getElementById('hamburger').classList.remove('open');
     document.getElementById('navDropdown').classList.remove('open');
     document.getElementById('navOverlay').classList.remove('open');
-    document.body.style.overflow = '';
+    document.body.style.overflow='';
   }
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
 
-  document.addEventListener('keydown', e => {
-    if(e.key === 'Escape') closeMenu();
-  });
-
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach((e,i)=>{
-      if(e.isIntersecting){
-        setTimeout(()=>e.target.classList.add('in-view'), i*60);
-        io.unobserve(e.target);
-      }
+  // SCROLL REVEAL
+  const revealIO = new IntersectionObserver((entries)=>{
+    entries.forEach((entry,i)=>{
+      if(entry.isIntersecting){ setTimeout(()=>entry.target.classList.add('in-view'),i*80); revealIO.unobserve(entry.target); }
     });
-  }, { threshold:.15 });
-  document.querySelectorAll('.card').forEach(c=>io.observe(c));
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>revealIO.observe(el));
 </script>
-
 </body>
 </html>
